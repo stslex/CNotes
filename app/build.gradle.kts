@@ -52,6 +52,7 @@ android {
 }
 
 dependencies {
+    implementation("androidx.navigation:navigation-compose:2.4.1")
 
     implementation("androidx.core:core-ktx:1.7.0")
     implementation("androidx.compose.ui:ui:$composeVersion")
