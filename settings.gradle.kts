@@ -14,3 +14,4 @@ dependencyResolutionManagement {
 }
 rootProject.name = "CNotes"
 include(":app")
+include(":core")
