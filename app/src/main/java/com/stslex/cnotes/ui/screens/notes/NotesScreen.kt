@@ -1,9 +1,9 @@
-package com.stslex.cnotes.ui.screens
+package com.stslex.cnotes.ui.screens.notes
 
 import androidx.compose.material.Text
 import androidx.compose.runtime.Composable
 
 @Composable
-fun MainScreen() {
-    Text(text = "MainScreen")
+fun NotesScreen() {
+    Text(text = "NotesScreen")
 }
