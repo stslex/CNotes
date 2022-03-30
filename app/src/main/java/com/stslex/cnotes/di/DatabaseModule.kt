@@ -1,6 +1,6 @@
 package com.stslex.cnotes.di
 
-import android.content.Context
+import android.app.Application
 import com.stslex.cnotes.data.database.NoteDao
 import com.stslex.cnotes.data.database.NoteRoomDatabase
 import dagger.Module
@@ -11,14 +11,14 @@ import kotlinx.coroutines.CoroutineScope
 import kotlinx.coroutines.SupervisorJob
 import javax.inject.Singleton
 
-@Module
 @InstallIn(SingletonComponent::class)
+@Module
 class DatabaseModule {
 
-    @Singleton
     @Provides
-    fun provideNoteDao(context: Context): NoteDao = NoteRoomDatabase.getDatabase(
-        context = context,
+    @Singleton
+    fun provideNoteDao(application: Application): NoteDao = NoteRoomDatabase.getDatabase(
+        context = application,
         scope = CoroutineScope(SupervisorJob())
     ).noteDao()
 }

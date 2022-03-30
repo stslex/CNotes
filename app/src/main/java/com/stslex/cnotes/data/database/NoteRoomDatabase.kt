@@ -22,11 +22,30 @@ abstract class NoteRoomDatabase : RoomDatabase() {
         override fun onCreate(db: SupportSQLiteDatabase) {
             super.onCreate(db)
             INSTANCE?.let { database ->
-                scope.launch(Dispatchers.IO) { populateDatabase(database.noteDao()) }
+                scope.launch(Dispatchers.IO) {
+                    populateDatabase(database.noteDao())
+                    insertItemsToDatabase(database.noteDao())
+                }
             }
         }
 
         suspend fun populateDatabase(noteDao: NoteDao) = noteDao.deleteAllNotes()
+
+        suspend fun insertItemsToDatabase(noteDao: NoteDao) = noteDao.insertAllNotes(listOfItems)
+
+        private val listOfItems: List<NoteEntity> by lazy {
+            val list: MutableList<NoteEntity> = mutableListOf()
+            for (i: Int in 0..500) {
+                list.add(
+                    NoteEntity(
+                        title = "title:$i",
+                        content = "content$i",
+                        timestamp = System.currentTimeMillis()
+                    )
+                )
+            }
+            list
+        }
     }
 
     companion object {

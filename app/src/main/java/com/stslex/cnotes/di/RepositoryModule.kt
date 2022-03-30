@@ -5,11 +5,11 @@ import com.stslex.cnotes.data.repository.NoteRepositoryImpl
 import dagger.Binds
 import dagger.Module
 import dagger.hilt.InstallIn
-import dagger.hilt.android.components.ActivityComponent
+import dagger.hilt.components.SingletonComponent
 import javax.inject.Singleton
 
+@InstallIn(SingletonComponent::class)
 @Module
-@InstallIn(ActivityComponent::class)
 interface RepositoryModule {
 
     @Binds
