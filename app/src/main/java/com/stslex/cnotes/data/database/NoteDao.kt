@@ -10,7 +10,7 @@ import com.stslex.cnotes.data.entity.NoteEntity
 @Dao
 interface NoteDao {
 
-    @Query("SELECT * FROM note_table")
+    @Query("SELECT * FROM note_table ORDER BY timestamp")
     fun getAllNotes(): PagingSource<Int, NoteEntity>
 
     @Insert(onConflict = OnConflictStrategy.REPLACE)

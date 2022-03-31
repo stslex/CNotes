@@ -17,10 +17,11 @@ class NoteRepositoryImpl @Inject constructor(
 ) : NoteRepository {
 
     @ExperimentalCoroutinesApi
-    override fun getAllNotes(): Flow<PagingData<NoteDataModel>> = Pager(
-        config = PagingConfig(PAGE_SIZE),
-        pagingSourceFactory = noteDao::getAllNotes
-    ).flow.mapLatest(mapper::map)
+    override val allNotes: Flow<PagingData<NoteDataModel>>
+        get() = Pager(
+            config = PagingConfig(PAGE_SIZE),
+            pagingSourceFactory = noteDao::getAllNotes
+        ).flow.mapLatest(mapper::map)
 
     companion object {
         private const val PAGE_SIZE: Int = 10

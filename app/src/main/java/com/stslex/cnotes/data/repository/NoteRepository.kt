@@ -8,5 +8,5 @@ import kotlinx.coroutines.flow.Flow
 interface NoteRepository {
 
     @ExperimentalCoroutinesApi
-    fun getAllNotes(): Flow<PagingData<NoteDataModel>>
+    val allNotes: Flow<PagingData<NoteDataModel>>
 }

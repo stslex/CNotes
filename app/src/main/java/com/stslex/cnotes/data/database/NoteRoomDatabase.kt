@@ -39,7 +39,7 @@ abstract class NoteRoomDatabase : RoomDatabase() {
                 list.add(
                     NoteEntity(
                         title = "title:$i",
-                        content = "content$i",
+                        content = "content:$i",
                         timestamp = System.currentTimeMillis()
                     )
                 )
