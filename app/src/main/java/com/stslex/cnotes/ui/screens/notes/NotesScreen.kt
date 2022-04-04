@@ -40,7 +40,7 @@ fun NotesScreen(
                 state = lazyListState
             ) {
                 items(pagingItems) { item ->
-                    item?.let { NotePagingItem(it) }
+                    item?.let { NotePagingItem(it, navController) }
                 }
             }
         }
