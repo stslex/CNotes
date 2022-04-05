@@ -18,4 +18,7 @@ interface NoteDao {
 
     @Query("DELETE FROM note_table")
     suspend fun deleteAllNotes()
+
+    @Query("DELETE FROM note_table WHERE id IN(:ids)")
+    suspend fun deleteNotesById(ids: List<Int>)
 }

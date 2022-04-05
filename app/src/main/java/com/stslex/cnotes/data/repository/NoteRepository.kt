@@ -9,4 +9,6 @@ interface NoteRepository {
 
     @ExperimentalCoroutinesApi
     val allNotes: Flow<PagingData<NoteDataModel>>
+
+    suspend fun deleteNotesById(ids: List<Int>)
 }

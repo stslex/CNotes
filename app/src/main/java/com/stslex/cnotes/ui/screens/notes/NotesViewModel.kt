@@ -1,5 +1,6 @@
 package com.stslex.cnotes.ui.screens.notes
 
+import android.util.Log
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
 import androidx.paging.PagingData
@@ -11,11 +12,12 @@ import dagger.hilt.android.lifecycle.HiltViewModel
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.ExperimentalCoroutinesApi
 import kotlinx.coroutines.flow.*
+import kotlinx.coroutines.launch
 import javax.inject.Inject
 
 @HiltViewModel
 class NotesViewModel @Inject constructor(
-    noteRepository: NoteRepository,
+    private val noteRepository: NoteRepository,
     private val noteMapper: MapperNoteUIPaging
 ) : ViewModel() {
 
@@ -25,4 +27,11 @@ class NotesViewModel @Inject constructor(
         .cachedIn(viewModelScope)
         .flowOn(Dispatchers.IO)
         .stateIn(viewModelScope, SharingStarted.Lazily, PagingData.empty())
+
+    fun deleteNotesById(ids: List<Int>) {
+        Log.i("sjow", ids.toString())
+        viewModelScope.launch(context = Dispatchers.IO) {
+            noteRepository.deleteNotesById(ids)
+        }
+    }
 }

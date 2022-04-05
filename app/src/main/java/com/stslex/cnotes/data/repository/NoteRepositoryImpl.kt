@@ -23,6 +23,10 @@ class NoteRepositoryImpl @Inject constructor(
             pagingSourceFactory = noteDao::getAllNotes
         ).flow.mapLatest(mapper::map)
 
+    override suspend fun deleteNotesById(ids: List<Int>) {
+        noteDao.deleteNotesById(ids)
+    }
+
     companion object {
         private const val PAGE_SIZE: Int = 10
     }

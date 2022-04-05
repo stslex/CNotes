@@ -13,12 +13,13 @@ import androidx.compose.material3.ExperimentalMaterial3Api
 import androidx.compose.material3.MaterialTheme
 import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
-import androidx.compose.runtime.getValue
+import androidx.compose.runtime.snapshots.SnapshotStateList
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.text.style.TextAlign
 import androidx.compose.ui.unit.dp
 import androidx.navigation.NavController
 import com.stslex.cnotes.ui.model.NoteUIModel
+import com.stslex.cnotes.ui.navigation.NavScreen
 import java.text.SimpleDateFormat
 import java.util.*
 
@@ -27,34 +28,62 @@ import java.util.*
 @Composable
 fun NotePagingItem(
     note: NoteUIModel,
-    navController: NavController
+    navController: NavController,
+    selectedNotes: SnapshotStateList<NoteUIModel>
 ) {
     val colorUnselect = MaterialTheme.colorScheme.surface
     val colorSelect = MaterialTheme.colorScheme.primaryContainer
-    val color by animateColorAsState(
+    val color = animateColorAsState(
         targetValue = if (note.isSelect().value) colorSelect else colorUnselect,
         animationSpec = tween(durationMillis = 250)
     )
     ElevatedCard(
-        containerColor = color,
         modifier = Modifier
-            .fillMaxWidth()
-            .padding(16.dp)
             .combinedClickable(
                 onClick = noteItemClick(
                     note = note,
-                    navController = navController
+                    navController = navController,
+                    selectedNotes = selectedNotes
                 ),
-            ),
+                onLongClick = noteItemLongClick(
+                    note = note,
+                    selectedNotes = selectedNotes
+                )
+            )
+            .fillMaxWidth()
+            .padding(16.dp),
+        containerColor = color.value,
         content = noteItemContent(note = note),
     )
 }
 
 fun noteItemClick(
     note: NoteUIModel,
-    navController: NavController
+    navController: NavController,
+    selectedNotes: SnapshotStateList<NoteUIModel>
 ): () -> Unit = {
+    if (selectedNotes.isNotEmpty()) {
+        selectItem(note, selectedNotes)
+    } else {
+        navController.navigate(NavScreen.EditNoteScreen.route)
+    }
+}
+
+fun noteItemLongClick(
+    note: NoteUIModel,
+    selectedNotes: SnapshotStateList<NoteUIModel>
+): () -> Unit = {
+    selectItem(note, selectedNotes)
+}
+
+private fun selectItem(
+    note: NoteUIModel,
+    selectedNotes: SnapshotStateList<NoteUIModel>
+) {
     note.setSelect(!note.isSelect().value)
+    if (selectedNotes.contains(note)) {
+        selectedNotes.remove(note)
+    } else selectedNotes.add(note)
 }
 
 fun noteItemContent(note: NoteUIModel): @Composable ColumnScope.() -> Unit = {
