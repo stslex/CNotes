@@ -18,7 +18,7 @@ import androidx.compose.ui.tooling.preview.Preview
 import androidx.hilt.navigation.compose.hiltViewModel
 import androidx.paging.compose.collectAsLazyPagingItems
 import androidx.paging.compose.items
-import com.stslex.core_model.ui.NoteUIModel
+import com.stslex.core_model.model.NoteDynamicUI
 
 @OptIn(ExperimentalMaterial3Api::class)
 @Composable
@@ -30,7 +30,7 @@ fun NotesScreen(
 ) {
     val pagingItems = viewModel.allNotes.collectAsLazyPagingItems()
     val selectedNotes = remember {
-        mutableStateListOf<NoteUIModel>()
+        mutableStateListOf<NoteDynamicUI>()
     }
     val deleteNotesFunction = viewModel::deleteNotesById
 

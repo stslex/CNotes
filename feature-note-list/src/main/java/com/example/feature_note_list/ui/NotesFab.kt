@@ -12,13 +12,13 @@ import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.snapshots.SnapshotStateList
 import androidx.compose.ui.unit.IntSize
-import com.stslex.core_model.ui.NoteUIModel
+import com.stslex.core_model.model.NoteDynamicUI
 import com.stslex.core_ui.components.fabs.ExtendableFloatingActionButton
 
 @Composable
 fun NotesFab(
     lazyListState: LazyListState,
-    selectedNotes: SnapshotStateList<NoteUIModel>,
+    selectedNotes: SnapshotStateList<NoteDynamicUI>,
     deleteNotesFunction: (List<Int>) -> Unit,
     openSingleNote: (Int) -> Unit
 ) {
@@ -45,14 +45,14 @@ fun NotesFab(
     )
 }
 
-private fun SnapshotStateList<NoteUIModel>.clearAllItems() {
+private fun SnapshotStateList<NoteDynamicUI>.clearAllItems() {
     forEach { it.setSelect(false) }
     clear()
 }
 
-private val transformIds: (NoteUIModel) -> Int
+private val transformIds: (NoteDynamicUI) -> Int
     get() = { note ->
-        note.id()
+        note.id
     }
 
 private fun textDelete(): @Composable () -> Unit = {
@@ -73,7 +73,7 @@ private fun iconCreate(): @Composable () -> Unit = {
 
 @OptIn(ExperimentalAnimationApi::class)
 private inline fun animatedButtonContent(
-    snapshotStateList: SnapshotStateList<NoteUIModel>,
+    snapshotStateList: SnapshotStateList<NoteDynamicUI>,
     crossinline targetContent: @Composable () -> Unit,
     crossinline content: @Composable () -> Unit
 ): @Composable () -> Unit = {

@@ -5,8 +5,9 @@ import androidx.lifecycle.viewModelScope
 import androidx.paging.PagingData
 import androidx.paging.cachedIn
 import com.example.feature_note_list.data.NoteRepository
-import com.stslex.core_model.ui.MapperNoteDataUIPaging
-import com.stslex.core_model.ui.NoteUIModel
+import com.stslex.core.Mapper
+import com.stslex.core_model.model.NoteDynamicUI
+import com.stslex.core_model.model.NoteEntity
 import dagger.hilt.android.lifecycle.HiltViewModel
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.ExperimentalCoroutinesApi
@@ -17,11 +18,11 @@ import javax.inject.Inject
 @HiltViewModel
 class NotesViewModel @Inject constructor(
     private val noteRepository: NoteRepository,
-    private val noteMapper: MapperNoteDataUIPaging
+    private val noteMapper: Mapper.Data<PagingData<NoteEntity>, PagingData<NoteDynamicUI>>
 ) : ViewModel() {
 
     @ExperimentalCoroutinesApi
-    val allNotes: StateFlow<PagingData<NoteUIModel>> = noteRepository.allNotes
+    val allNotes: StateFlow<PagingData<NoteDynamicUI>> = noteRepository.allNotes
         .mapLatest(noteMapper::map)
         .cachedIn(viewModelScope)
         .flowOn(Dispatchers.IO)

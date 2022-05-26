@@ -11,7 +11,7 @@ import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
 import androidx.hilt.navigation.compose.hiltViewModel
 import com.stslex.core.ValueState
-import com.stslex.core_model.ui.NoteUIModel
+import com.stslex.core_model.model.NoteUI
 import com.stslex.core_ui.theme.AppTheme
 
 private val noteId = mutableStateOf(0)
@@ -25,12 +25,12 @@ fun SingleNoteScreen(
     popBackStack: () -> Unit,
     viewModel: SingleNoteViewModel = hiltViewModel()
 ) {
-    val noteState: State<ValueState<NoteUIModel>> = viewModel.note.collectAsState()
+    val noteState: State<ValueState<NoteUI>> = viewModel.note.collectAsState()
     when (val result = noteState.value) {
         is ValueState.Success -> with(result.data) {
-            noteId.value = id()
-            noteTitle.value = title()
-            noteContent.value = content()
+            noteId.value = id
+            noteTitle.value = title
+            noteContent.value = content
         }
         is ValueState.Failure -> Unit
         is ValueState.Loading -> Unit
@@ -40,7 +40,7 @@ fun SingleNoteScreen(
         modifier = modifier,
         floatingActionButton = {
             FloatingActionButton(onClick = {
-                val noteResult = NoteUIModel.Base(
+                val noteResult = NoteUI(
                     id = noteId.value,
                     title = noteTitle.value,
                     content = noteContent.value,
