@@ -1,6 +1,7 @@
 package com.example.feature_note_list.ui
 
 import androidx.compose.animation.animateColorAsState
+import androidx.compose.animation.core.LinearOutSlowInEasing
 import androidx.compose.animation.core.tween
 import androidx.compose.foundation.ExperimentalFoundationApi
 import androidx.compose.foundation.combinedClickable
@@ -26,13 +27,16 @@ fun NotePagingItem(
     selectedNotes: SnapshotStateList<NoteDynamicUI>,
     openSingleNote: (Int) -> Unit
 ) {
-    val colorUnselect = MaterialTheme.colorScheme.onBackground
-    val colorSelect = MaterialTheme.colorScheme.inverseSurface
+    val colorUnselect = MaterialTheme.colorScheme.surface
+    val colorSelect = MaterialTheme.colorScheme.primaryContainer
     val color = animateColorAsState(
         targetValue = if (note.isSelect().value) colorSelect else colorUnselect,
-        animationSpec = tween(durationMillis = 250)
+        animationSpec = tween(
+            durationMillis = 1000,
+            delayMillis = 50,
+            easing = LinearOutSlowInEasing
+        )
     )
-
     ElevatedCard(
         modifier = Modifier
             .combinedClickable(
@@ -48,7 +52,12 @@ fun NotePagingItem(
             )
             .fillMaxWidth()
             .padding(16.dp),
-        colors = CardDefaults.cardColors(contentColor = color.value),
+        colors = CardDefaults.cardColors(
+            contentColor = MaterialTheme.colorScheme.onSurface,
+            disabledContentColor = color.value,
+            containerColor = color.value,
+            disabledContainerColor = color.value
+        ),
         content = noteItemContent(note = note),
     )
 }
