@@ -1,4 +1,6 @@
 pluginManagement {
+    @Suppress("UnstableApiUsage")
+    includeBuild("build-logic")
     repositories {
         gradlePluginPortal()
         google()
@@ -6,7 +8,9 @@ pluginManagement {
     }
 }
 dependencyResolutionManagement {
+    @Suppress("UnstableApiUsage")
     repositoriesMode.set(RepositoriesMode.FAIL_ON_PROJECT_REPOS)
+    @Suppress("UnstableApiUsage")
     repositories {
         google()
         mavenCentral()
@@ -15,3 +19,11 @@ dependencyResolutionManagement {
 rootProject.name = "CNotes"
 include(":app")
 include(":core")
+include(":core-ui")
+include(":core-navigation")
+include(":feature-note-list")
+include(":core-test")
+include(":feature-single-note")
+include(":core-data-source")
+include(":feature-todo")
+include(":core-model")
