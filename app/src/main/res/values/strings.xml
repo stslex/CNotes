@@ -1,6 +1,4 @@
 <resources>
     <string name="app_name">CNotes</string>
-
-    <!--Labels-->
     <string name="lb_create">create</string>
 </resources>
