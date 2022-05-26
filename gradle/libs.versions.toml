@@ -19,6 +19,7 @@ hilt = "2.38.1"
 hiltNavigation = "1.0.0"
 navigation = "2.4.2"
 room = "2.5.0-alpha01"
+accompanist = "0.24.9-beta"
 
 [libraries]
 android-gradlePlugin = { group = "com.android.tools.build", name = "gradle", version.ref = "androidGradlePlugin" }
@@ -55,3 +56,5 @@ androidx-room-runtime = { group = "androidx.room", name = "room-runtime", versio
 androidx-room-compiler = { group = "androidx.room", name = "room-compiler", version.ref = "room" }
 androidx-room-ktx = { group = "androidx.room", name = "room-ktx", version.ref = "room" }
 androidx-room-paging = { group = "androidx.room", name = "room-paging", version.ref = "room" }
+
+accompanist-navigation-animation = { group = "com.google.accompanist", name = "accompanist-navigation-animation", version.ref = "accompanist" }

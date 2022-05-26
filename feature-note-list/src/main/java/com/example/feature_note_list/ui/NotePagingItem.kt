@@ -1,6 +1,7 @@
 package com.example.feature_note_list.ui
 
 import androidx.compose.animation.animateColorAsState
+import androidx.compose.animation.core.LinearOutSlowInEasing
 import androidx.compose.animation.core.tween
 import androidx.compose.foundation.ExperimentalFoundationApi
 import androidx.compose.foundation.combinedClickable
@@ -14,7 +15,7 @@ import androidx.compose.runtime.snapshots.SnapshotStateList
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.text.style.TextAlign
 import androidx.compose.ui.unit.dp
-import com.stslex.core_model.ui.NoteUIModel
+import com.stslex.core_model.model.NoteDynamicUI
 import java.text.SimpleDateFormat
 import java.util.*
 
@@ -22,17 +23,20 @@ import java.util.*
 @OptIn(ExperimentalMaterial3Api::class, ExperimentalFoundationApi::class)
 @Composable
 fun NotePagingItem(
-    note: NoteUIModel,
-    selectedNotes: SnapshotStateList<NoteUIModel>,
+    note: NoteDynamicUI,
+    selectedNotes: SnapshotStateList<NoteDynamicUI>,
     openSingleNote: (Int) -> Unit
 ) {
-    val colorUnselect = MaterialTheme.colorScheme.onBackground
-    val colorSelect = MaterialTheme.colorScheme.inverseSurface
+    val colorUnselect = MaterialTheme.colorScheme.surface
+    val colorSelect = MaterialTheme.colorScheme.primaryContainer
     val color = animateColorAsState(
         targetValue = if (note.isSelect().value) colorSelect else colorUnselect,
-        animationSpec = tween(durationMillis = 250)
+        animationSpec = tween(
+            durationMillis = 1000,
+            delayMillis = 50,
+            easing = LinearOutSlowInEasing
+        )
     )
-
     ElevatedCard(
         modifier = Modifier
             .combinedClickable(
@@ -48,33 +52,38 @@ fun NotePagingItem(
             )
             .fillMaxWidth()
             .padding(16.dp),
-        colors = CardDefaults.cardColors(contentColor = color.value),
+        colors = CardDefaults.cardColors(
+            contentColor = MaterialTheme.colorScheme.onSurface,
+            disabledContentColor = color.value,
+            containerColor = color.value,
+            disabledContainerColor = color.value
+        ),
         content = noteItemContent(note = note),
     )
 }
 
 fun noteItemClick(
-    note: NoteUIModel,
-    selectedNotes: SnapshotStateList<NoteUIModel>,
+    note: NoteDynamicUI,
+    selectedNotes: SnapshotStateList<NoteDynamicUI>,
     openSingleNote: (Int) -> Unit
 ): () -> Unit = {
     if (selectedNotes.isNotEmpty()) {
         selectItem(note, selectedNotes)
     } else {
-        openSingleNote(note.id())
+        openSingleNote(note.id)
     }
 }
 
 fun noteItemLongClick(
-    note: NoteUIModel,
-    selectedNotes: SnapshotStateList<NoteUIModel>
+    note: NoteDynamicUI,
+    selectedNotes: SnapshotStateList<NoteDynamicUI>
 ): () -> Unit = {
     selectItem(note, selectedNotes)
 }
 
 private fun selectItem(
-    note: NoteUIModel,
-    selectedNotes: SnapshotStateList<NoteUIModel>
+    note: NoteDynamicUI,
+    selectedNotes: SnapshotStateList<NoteDynamicUI>
 ) {
     note.setSelect(!note.isSelect().value)
     if (selectedNotes.contains(note)) {
@@ -82,7 +91,7 @@ private fun selectItem(
     } else selectedNotes.add(note)
 }
 
-fun noteItemContent(note: NoteUIModel): @Composable ColumnScope.() -> Unit = {
+fun noteItemContent(note: NoteDynamicUI): @Composable ColumnScope.() -> Unit = {
     Column(
         modifier = Modifier
             .fillMaxWidth()
@@ -92,19 +101,19 @@ fun noteItemContent(note: NoteUIModel): @Composable ColumnScope.() -> Unit = {
             modifier = Modifier
                 .padding(8.dp)
                 .fillMaxWidth(),
-            title = note.title()
+            title = note.title
         )
         NoteContent(
             modifier = Modifier
                 .padding(4.dp)
                 .fillMaxWidth(),
-            content = note.content()
+            content = note.content
         )
         NoteTimestamp(
             modifier = Modifier
                 .padding(4.dp)
                 .fillMaxWidth(),
-            timestamp = note.timestamp()
+            timestamp = note.timestamp
         )
     }
 }

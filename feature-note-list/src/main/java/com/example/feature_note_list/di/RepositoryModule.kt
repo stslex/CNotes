@@ -1,7 +1,6 @@
 package com.example.feature_note_list.di
 
 import com.example.feature_note_list.data.NoteRepository
-import com.example.feature_note_list.data.NoteRepositoryImpl
 import dagger.Binds
 import dagger.Module
 import dagger.hilt.InstallIn
@@ -14,5 +13,5 @@ interface RepositoryModule {
 
     @Binds
     @Singleton
-    fun bindsNoteRepository(repository: NoteRepositoryImpl): NoteRepository
+    fun bindsNoteRepository(repository: NoteRepository.Base): NoteRepository
 }

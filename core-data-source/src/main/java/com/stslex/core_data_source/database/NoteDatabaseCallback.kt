@@ -2,7 +2,7 @@ package com.stslex.core_data_source.database
 
 import com.stslex.core_data_source.base.BaseRoomCallback
 import com.stslex.core_data_source.base.BaseRoomDatabase
-import com.stslex.core_model.entity.NoteEntity
+import com.stslex.core_model.model.NoteEntity
 import dagger.Lazy
 import kotlinx.coroutines.CoroutineScope
 import java.util.*

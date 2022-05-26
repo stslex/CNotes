@@ -6,8 +6,9 @@ plugins {
 dependencies {
     with(libs) {
         api(hilt.navigation.compose)
-        api(libs.androidx.navigation.compose)
-        implementation(libs.hilt.android.core)
+        api(androidx.navigation.compose)
+        api(accompanist.navigation.animation)
+        implementation(hilt.android.core)
         kapt(hilt.android.compiler)
     }
 }

@@ -45,7 +45,7 @@ fun AppCreator(windowSizeClass: WindowSizeClass) {
             bottomBar = {
                 if (
                     windowSizeClass.widthSizeClass == WindowWidthSizeClass.Compact &&
-                    currentDestination?.route != SingleNoteDestination.route
+                    currentDestination?.route?.contains(SingleNoteDestination.route) == false
                 ) {
                     AppBottomBar(
                         onNavigateToTopLevelDestination = niaTopLevelNavigation::navigateTo,
@@ -65,7 +65,7 @@ fun AppCreator(windowSizeClass: WindowSizeClass) {
             ) {
                 if (
                     windowSizeClass.widthSizeClass != WindowWidthSizeClass.Compact &&
-                    currentDestination?.route != SingleNoteDestination.route
+                    currentDestination?.route?.contains(SingleNoteDestination.route) == false
                 ) {
                     AppNavRail(
                         onNavigateToTopLevelDestination = niaTopLevelNavigation::navigateTo,
