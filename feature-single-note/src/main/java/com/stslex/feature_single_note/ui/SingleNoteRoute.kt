@@ -9,9 +9,7 @@ import androidx.compose.ui.Modifier
 @Composable
 fun SingleNoteRoute(popBackStack: () -> Unit) {
     SingleNoteScreen(
-        modifier = Modifier.windowInsetsPadding(
-            WindowInsets.safeDrawing
-        ),
+        modifier = Modifier.windowInsetsPadding(WindowInsets.safeDrawing),
         popBackStack = popBackStack
     )
 }
