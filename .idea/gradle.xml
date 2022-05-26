@@ -27,6 +27,14 @@
             <option value="$PROJECT_DIR$/build-logic" />
             <option value="$PROJECT_DIR$/build-logic/dependencies" />
             <option value="$PROJECT_DIR$/core" />
+            <option value="$PROJECT_DIR$/core-data-source" />
+            <option value="$PROJECT_DIR$/core-model" />
+            <option value="$PROJECT_DIR$/core-navigation" />
+            <option value="$PROJECT_DIR$/core-test" />
+            <option value="$PROJECT_DIR$/core-ui" />
+            <option value="$PROJECT_DIR$/feature-note-list" />
+            <option value="$PROJECT_DIR$/feature-single-note" />
+            <option value="$PROJECT_DIR$/feature-todo" />
           </set>
         </option>
       </GradleProjectSettings>
