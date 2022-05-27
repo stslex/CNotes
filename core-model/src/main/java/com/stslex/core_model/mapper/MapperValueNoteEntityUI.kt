@@ -4,9 +4,8 @@ import com.stslex.core.Mapper
 import com.stslex.core.ValueState
 import com.stslex.core_model.model.NoteEntity
 import com.stslex.core_model.model.NoteUI
-import javax.inject.Inject
 
-class MapperValueNoteEntityUI @Inject constructor(
+class MapperValueNoteEntityUI(
     private val mapper: Mapper.Data<NoteEntity, NoteUI>
 ) : Mapper.ToUI<NoteEntity, ValueState<NoteUI>> {
 

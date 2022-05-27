@@ -1,11 +1,9 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <project version="4">
   <component name="CompilerConfiguration">
-    <bytecodeTargetLevel target="1.7">
-      <module name="build-logic.dependencies" target="1.8" />
-      <module name="build-logic.dependencies.main" target="1.8" />
-      <module name="build-logic.dependencies.test" target="1.8" />
+    <bytecodeTargetLevel target="1.8">
       <module name="CNotes.app" target="11" />
+      <module name="CNotes.core-coroutines" target="11" />
       <module name="CNotes.core-data-source" target="11" />
       <module name="CNotes.core-model" target="11" />
       <module name="CNotes.core-navigation" target="11" />

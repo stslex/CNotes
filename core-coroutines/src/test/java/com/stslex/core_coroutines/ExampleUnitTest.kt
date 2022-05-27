@@ -1,4 +1,4 @@
-package com.stslex.cnotes
+package com.stslex.core_coroutines
 
 import org.junit.Test
 

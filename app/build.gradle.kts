@@ -1,7 +1,6 @@
 plugins {
     id("cnotes.android.application")
     id("cnotes.android.application.compose")
-    id("dagger.hilt.android.plugin")
     kotlin("kapt")
 }
 
@@ -48,18 +47,19 @@ dependencies {
     implementation(project(":core-ui"))
     implementation(project(":core-navigation"))
     implementation(project(":core-test"))
+    implementation(project(":core-model"))
     implementation(project(":core-data-source"))
     implementation(project(":feature-note-list"))
     implementation(project(":feature-single-note"))
     implementation(project(":feature-todo"))
+    implementation(project(":core-coroutines"))
 
     with(libs) {
+        implementation(koin.android)
         annotationProcessor(androidx.room.compiler)
         kapt(androidx.room.compiler)
         implementation(androidx.paging.runtime)
         implementation(androidx.paging.compose)
-        implementation(hilt.android.core)
-        kapt(hilt.android.compiler)
         implementation(androidx.core.kts)
     }
 }

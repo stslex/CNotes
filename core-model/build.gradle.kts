@@ -1,6 +1,5 @@
 plugins {
     id("cnotes.android.library")
-    id("dagger.hilt.android.plugin")
     kotlin("kapt")
 }
 
@@ -13,9 +12,8 @@ dependencies {
     implementation(project(":core-test"))
 
     with(libs) {
+        implementation(koin.android)
         implementation(androidx.core.kts)
-        implementation(hilt.android.core)
-        kapt(hilt.android.compiler)
 
         annotationProcessor(androidx.room.compiler)
         kapt(androidx.room.compiler)

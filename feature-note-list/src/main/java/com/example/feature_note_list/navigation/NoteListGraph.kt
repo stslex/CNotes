@@ -25,7 +25,7 @@ fun NavGraphBuilder.noteListGraph(
     }
 }
 
-val NOTE_LIST_TOP_LEVEL_DESTINATION = TopLevelDestination(
+val screenNoteListTopLevelDestination = TopLevelDestination(
     route = NoteListDestination.route,
     selectedIcon = Icons.Filled.List,
     unselectedIcon = Icons.Outlined.List,

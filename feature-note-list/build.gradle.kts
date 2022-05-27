@@ -1,8 +1,6 @@
 plugins {
     id("cnotes.android.library")
     id("cnotes.android.library.compose")
-    id("dagger.hilt.android.plugin")
-    kotlin("kapt")
 }
 
 dependencies {
@@ -14,8 +12,7 @@ dependencies {
     implementation(project(":core-data-source"))
 
     with(libs) {
-        implementation(hilt.android.core)
-        kapt(hilt.android.compiler)
+        implementation(koin.android)
         implementation(androidx.core.kts)
         implementation(androidx.paging.runtime)
         implementation(androidx.paging.compose)
