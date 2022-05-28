@@ -24,7 +24,7 @@ fun NavigationHost(
         noteListGraph(
             openSingleNote = { navController.navigate("${SingleNoteDestination.route}/$it") }
         ) {
-            singleNoteGraph { navController.popBackStack() }
+            singleNoteGraph()
         }
         todoGraph()
     }

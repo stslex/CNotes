@@ -14,6 +14,7 @@ dependencies {
         api(androidx.compose.ui.tooling.preview)
         api(androidx.lifecycle.runtime)
         api(androidx.activity.compose)
+        api(androidx.compose.constraintlayout)
         debugApi(androidx.compose.ui.tooling)
     }
 }
