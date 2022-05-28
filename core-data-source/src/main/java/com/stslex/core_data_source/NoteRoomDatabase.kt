@@ -4,12 +4,9 @@ import android.content.Context
 import androidx.room.Database
 import androidx.room.Room
 import androidx.room.RoomDatabase
-import androidx.sqlite.db.SupportSQLiteDatabase
 import com.stslex.core_data_source.NoteRoomDatabase.Companion.SCHEMA_VERSION
 import com.stslex.core_model.model.NoteEntity
-import kotlinx.coroutines.CoroutineScope
-import kotlinx.coroutines.Dispatchers
-import kotlinx.coroutines.launch
+import org.koin.java.KoinJavaComponent.inject
 
 @Database(
     entities = [NoteEntity::class],
@@ -20,19 +17,6 @@ abstract class NoteRoomDatabase : RoomDatabase() {
 
     abstract fun noteDao(): NoteDao
 
-    private class NoteDatabaseCallback(
-        private val scope: CoroutineScope
-    ) : Callback() {
-
-        override fun onCreate(db: SupportSQLiteDatabase) {
-            super.onCreate(db)
-            INSTANCE?.let { database ->
-                scope.launch(Dispatchers.IO) { populateDatabase(database.noteDao()) }
-            }
-        }
-
-        suspend fun populateDatabase(noteDao: NoteDao) = noteDao.deleteAllNotes()
-    }
 
     companion object {
 
@@ -41,9 +25,10 @@ abstract class NoteRoomDatabase : RoomDatabase() {
         @Volatile
         private var INSTANCE: NoteRoomDatabase? = null
 
+        private val databaseCallback: Callback by inject(Callback::class.java)
+
         fun getDatabase(
-            context: Context,
-            scope: CoroutineScope
+            context: Context
         ): NoteRoomDatabase {
             return INSTANCE ?: synchronized(this) {
                 val instance = Room.databaseBuilder(
@@ -51,7 +36,7 @@ abstract class NoteRoomDatabase : RoomDatabase() {
                     NoteRoomDatabase::class.java,
                     "note_database"
                 ).fallbackToDestructiveMigration()
-                    .addCallback(NoteDatabaseCallback(scope))
+                    .addCallback(databaseCallback)
                     .build()
                 INSTANCE = instance
                 instance
