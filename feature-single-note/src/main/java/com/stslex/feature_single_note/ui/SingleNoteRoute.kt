@@ -13,13 +13,16 @@ import androidx.compose.ui.Modifier
 import com.stslex.core.ValueState
 import com.stslex.core_model.model.NoteUI
 import com.stslex.feature_single_note.ui.components.SingleNoteSaveFab
-import org.koin.java.KoinJavaComponent.get
 
 @Composable
-fun SingleNoteRoute(popBackStack: () -> Unit) {
+fun SingleNoteRoute(
+    popBackStack: () -> Unit,
+    viewModel: SingleNoteViewModel
+) {
     SingleNoteScreen(
         modifier = Modifier.windowInsetsPadding(WindowInsets.safeDrawing),
-        popBackStack = popBackStack
+        popBackStack = popBackStack,
+        viewModel = viewModel
     )
 }
 
@@ -28,7 +31,7 @@ fun SingleNoteRoute(popBackStack: () -> Unit) {
 fun SingleNoteScreen(
     modifier: Modifier = Modifier,
     popBackStack: () -> Unit,
-    viewModel: SingleNoteViewModel = get(SingleNoteViewModel::class.java)
+    viewModel: SingleNoteViewModel
 ) {
     val noteState: State<ValueState<NoteUI>> = viewModel.note.collectAsState()
     Scaffold(

@@ -55,7 +55,9 @@ dependencies {
     implementation(project(":core-coroutines"))
 
     with(libs) {
+        implementation(koin.core)
         implementation(koin.android)
+        implementation(koin.androidx.compose)
         annotationProcessor(androidx.room.compiler)
         kapt(androidx.room.compiler)
         implementation(androidx.paging.runtime)

@@ -12,7 +12,9 @@ dependencies {
     implementation(project(":core-test"))
 
     with(libs) {
+        implementation(koin.core)
         implementation(koin.android)
+
         implementation(androidx.core.kts)
 
         annotationProcessor(androidx.room.compiler)

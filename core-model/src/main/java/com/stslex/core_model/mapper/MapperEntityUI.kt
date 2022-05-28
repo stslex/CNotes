@@ -5,13 +5,16 @@ import com.stslex.core.Mapper
 import com.stslex.core_model.model.NoteEntity
 import com.stslex.core_model.model.NoteUI
 
-class MapperEntityUI : Mapper.Data<NoteEntity, NoteUI> {
+interface MapperEntityUI : Mapper.Data<NoteEntity, NoteUI> {
 
-    override fun map(data: NoteEntity): NoteUI = with(data) {
-        NoteUI(
-            id = id,
-            title = mutableStateOf(title), mutableStateOf(content),
-            timestamp
-        )
+    class Base : MapperEntityUI {
+
+        override fun map(data: NoteEntity): NoteUI = with(data) {
+            NoteUI(
+                id = id,
+                title = mutableStateOf(title), mutableStateOf(content),
+                timestamp
+            )
+        }
     }
 }

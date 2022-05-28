@@ -13,6 +13,7 @@ dependencies {
         api(androidx.compose.ui.test.junit4)
         api(koin.test)
         api(koin.test.junit4)
+        api(robolectric)
         debugApi(leakcanary)
     }
 }

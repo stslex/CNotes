@@ -3,6 +3,7 @@ plugins {
 }
 
 dependencies {
+    implementation(project(":core-test"))
     with(libs) {
         api(androidx.navigation.compose)
     }

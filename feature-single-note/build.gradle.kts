@@ -13,7 +13,9 @@ dependencies {
     implementation(project(":core-coroutines"))
 
     with(libs) {
+        implementation(koin.core)
         implementation(koin.android)
+        implementation(koin.androidx.compose)
         implementation(androidx.core.kts)
     }
 }

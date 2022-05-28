@@ -1,10 +1,5 @@
-package com.stslex.cnotes
+package com.stslex.core_data_source
 
-import com.example.feature_note_list.di.noteListModule
-import com.stslex.core_coroutines.coroutinesModule
-import com.stslex.core_data_source.roomDatabaseModule
-import com.stslex.core_model.di.mapperModule
-import com.stslex.feature_single_note.di.singleNoteModule
 import org.junit.Rule
 import org.junit.Test
 import org.junit.runner.RunWith
@@ -18,7 +13,7 @@ import org.robolectric.RobolectricTestRunner
 import org.robolectric.RuntimeEnvironment
 
 @RunWith(RobolectricTestRunner::class)
-class CheckModulesTest : KoinTest {
+class CheckModuleTest : KoinTest {
 
     @get:Rule
     val mockProvider = MockProviderRule.create { clazz ->
@@ -30,9 +25,5 @@ class CheckModulesTest : KoinTest {
         androidContext(RuntimeEnvironment.getApplication())
     }.checkModules {
         roomDatabaseModule
-        coroutinesModule
-        mapperModule
-        singleNoteModule
-        noteListModule
     }
 }

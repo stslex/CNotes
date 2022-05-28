@@ -7,10 +7,12 @@ import com.stslex.core_model.model.NoteDynamicUI
 import com.stslex.core_model.model.NoteEntity
 import java.util.concurrent.Executors
 
-class MapperPagingEntityDynamicUI(
-    private val mapper: Mapper.Data<NoteEntity, NoteDynamicUI>
-) : Mapper.Data<PagingData<NoteEntity>, PagingData<NoteDynamicUI>> {
-
-    override fun map(data: PagingData<NoteEntity>): PagingData<NoteDynamicUI> =
-        data.map(Executors.newSingleThreadExecutor(), mapper::map)
+interface MapperPagingEntityDynamicUI :
+    Mapper.Data<PagingData<NoteEntity>, PagingData<NoteDynamicUI>> {
+    class Base(
+        private val mapper: MapperEntityDynamicUI
+    ) : MapperPagingEntityDynamicUI {
+        override fun map(data: PagingData<NoteEntity>): PagingData<NoteDynamicUI> =
+            data.map(Executors.newSingleThreadExecutor(), mapper::map)
+    }
 }

@@ -18,14 +18,14 @@ import androidx.compose.ui.tooling.preview.Preview
 import androidx.paging.compose.collectAsLazyPagingItems
 import androidx.paging.compose.items
 import com.stslex.core_model.model.NoteDynamicUI
-import org.koin.java.KoinJavaComponent.get
+import org.koin.androidx.compose.getViewModel
 
 @OptIn(ExperimentalMaterial3Api::class)
 @Composable
 fun NotesScreen(
     openSingleNote: (Int) -> Unit,
     modifier: Modifier = Modifier,
-    viewModel: NotesViewModel = get(NotesViewModel::class.java),
+    viewModel: NotesViewModel = getViewModel(),
     lazyListState: LazyListState = rememberLazyListState()
 ) {
     val pagingItems = viewModel.allNotes.collectAsLazyPagingItems()
