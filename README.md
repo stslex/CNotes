@@ -11,4 +11,4 @@ The simple Android Application - Notes on compose
 - Room
 - Jetpack paging library
 
-CI - [![Android CI](https://github.com/stslex/CNotes/actions/workflows/android_build.yml/badge.svg)](https://github.com/stslex/CNotes/actions/workflows/android_build.yml)
+[![Android CI](https://github.com/stslex/CNotes/actions/workflows/android_build.yml/badge.svg)](https://github.com/stslex/CNotes/actions/workflows/android_build.yml)
