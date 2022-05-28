@@ -15,17 +15,17 @@ import androidx.compose.runtime.remember
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.input.nestedscroll.nestedScroll
 import androidx.compose.ui.tooling.preview.Preview
-import androidx.hilt.navigation.compose.hiltViewModel
 import androidx.paging.compose.collectAsLazyPagingItems
 import androidx.paging.compose.items
 import com.stslex.core_model.model.NoteDynamicUI
+import org.koin.androidx.compose.getViewModel
 
 @OptIn(ExperimentalMaterial3Api::class)
 @Composable
 fun NotesScreen(
     openSingleNote: (Int) -> Unit,
     modifier: Modifier = Modifier,
-    viewModel: NotesViewModel = hiltViewModel(),
+    viewModel: NotesViewModel = getViewModel(),
     lazyListState: LazyListState = rememberLazyListState()
 ) {
     val pagingItems = viewModel.allNotes.collectAsLazyPagingItems()
@@ -55,7 +55,7 @@ fun NotesScreen(
             LazyColumn(
                 state = lazyListState
             ) {
-                items(pagingItems) { item ->
+                items(pagingItems, key = { it.id }) { item ->
                     item?.let {
                         NotePagingItem(
                             note = item,

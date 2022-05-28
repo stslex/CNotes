@@ -1,15 +1,11 @@
 plugins {
     id("cnotes.android.library")
-    kotlin("kapt")
 }
 
 dependencies {
+    implementation(project(":core-test"))
     with(libs) {
-        api(hilt.navigation.compose)
         api(androidx.navigation.compose)
-        api(accompanist.navigation.animation)
-        implementation(hilt.android.core)
-        kapt(hilt.android.compiler)
     }
 }
 

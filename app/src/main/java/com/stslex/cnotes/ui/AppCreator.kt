@@ -17,7 +17,7 @@ import androidx.navigation.NavDestination
 import androidx.navigation.NavDestination.Companion.hierarchy
 import androidx.navigation.compose.currentBackStackEntryAsState
 import androidx.navigation.compose.rememberNavController
-import com.example.feature_note_list.navigation.NOTE_LIST_TOP_LEVEL_DESTINATION
+import com.example.feature_note_list.navigation.screenNoteListTopLevelDestination
 import com.stslex.cnotes.navigation.AppTopLevelNavigation
 import com.stslex.cnotes.navigation.NavigationHost
 import com.stslex.core_navigation.TopLevelDestination
@@ -27,7 +27,7 @@ import com.stslex.feature_single_note.navigation.SingleNoteDestination
 import com.stslex.feature_todo.navigation.TODO_TOP_LEVEL_DESTINATION
 
 private val topLevelDestinationList =
-    listOf(NOTE_LIST_TOP_LEVEL_DESTINATION, TODO_TOP_LEVEL_DESTINATION)
+    listOf(screenNoteListTopLevelDestination, TODO_TOP_LEVEL_DESTINATION)
 
 @OptIn(ExperimentalMaterial3Api::class, ExperimentalLayoutApi::class)
 @Composable

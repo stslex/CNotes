@@ -7,10 +7,9 @@ buildscript {
     dependencies {
         classpath(libs.android.gradlePlugin)
         classpath(libs.kotlin.gradlePlugin)
-        classpath(libs.hilt.gradlePlugin)
     }
 }
 
-tasks.register(name = "type", type = Delete::class){
+tasks.register(name = "type", type = Delete::class) {
     delete(rootProject.buildDir)
 }

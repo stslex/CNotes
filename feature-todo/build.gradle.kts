@@ -1,20 +1,13 @@
 plugins {
     id("cnotes.android.library")
     id("cnotes.android.library.compose")
-    id("dagger.hilt.android.plugin")
-    kotlin("kapt")
 }
 
 dependencies {
     implementation(project(":core-ui"))
     implementation(project(":core-test"))
     implementation(project(":core-navigation"))
-
-    with(libs) {
-        implementation(hilt.android.core)
-        kapt(hilt.android.compiler)
-        implementation(androidx.core.kts)
-    }
+    implementation(libs.androidx.core.kts)
 }
 
 android {

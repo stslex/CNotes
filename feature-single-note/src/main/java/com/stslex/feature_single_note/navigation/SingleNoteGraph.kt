@@ -5,6 +5,8 @@ import androidx.navigation.NavType
 import androidx.navigation.compose.composable
 import androidx.navigation.navArgument
 import com.stslex.feature_single_note.ui.SingleNoteRoute
+import org.koin.androidx.compose.getViewModel
+import org.koin.core.parameter.parametersOf
 
 fun NavGraphBuilder.singleNoteGraph(popBackStack: () -> Unit) {
     composable(
@@ -15,6 +17,10 @@ fun NavGraphBuilder.singleNoteGraph(popBackStack: () -> Unit) {
             }
         )
     ) {
-        SingleNoteRoute(popBackStack = popBackStack)
+        val noteId: Int = it.arguments?.getInt(SingleNoteDestination.noteIdArg) ?: -1
+        SingleNoteRoute(
+            popBackStack = popBackStack,
+            viewModel = getViewModel(parameters = { parametersOf(noteId) })
+        )
     }
 }
