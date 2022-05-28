@@ -14,6 +14,7 @@ import androidx.compose.runtime.Composable
 import androidx.compose.runtime.snapshots.SnapshotStateList
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.text.style.TextAlign
+import androidx.compose.ui.text.style.TextOverflow
 import androidx.compose.ui.unit.dp
 import com.stslex.core_model.model.NoteDynamicUI
 import java.text.SimpleDateFormat
@@ -119,12 +120,16 @@ fun noteItemContent(note: NoteDynamicUI): @Composable ColumnScope.() -> Unit = {
 }
 
 @Composable
-fun NoteTitle(modifier: Modifier, title: String) {
+fun NoteTitle(
+    modifier: Modifier = Modifier,
+    title: String
+) {
     Text(
         modifier = modifier,
         text = title,
         maxLines = 1,
-        style = MaterialTheme.typography.titleLarge
+        style = MaterialTheme.typography.titleLarge,
+        overflow = TextOverflow.Ellipsis
     )
 }
 
@@ -132,9 +137,10 @@ fun NoteTitle(modifier: Modifier, title: String) {
 fun NoteContent(modifier: Modifier, content: String) {
     Text(
         modifier = modifier,
-        text = content.take(100),
+        text = content,
         maxLines = 5,
         style = MaterialTheme.typography.bodyLarge,
+        overflow = TextOverflow.Ellipsis
     )
 }
 
