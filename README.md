@@ -1,4 +1,7 @@
 # CNotes
+
+## More information about technologies and what this project is going to be is in Wiki
+
 The simple Android Application - Notes on compose
 
 - Jetpack Compose
