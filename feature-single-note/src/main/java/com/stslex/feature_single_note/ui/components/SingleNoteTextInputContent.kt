@@ -3,6 +3,8 @@ package com.stslex.feature_single_note.ui.components
 import androidx.compose.foundation.layout.fillMaxHeight
 import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.padding
+import androidx.compose.foundation.text.KeyboardOptions
+import androidx.compose.material3.MaterialTheme
 import androidx.compose.material3.TextField
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.State
@@ -21,6 +23,8 @@ fun SingleNoteTextInputContent(
             .fillMaxHeight()
             .padding(20.dp),
         value = note.value.getContent().value,
-        onValueChange = (note.value::setContent)
+        onValueChange = (note.value::setContent),
+        textStyle = MaterialTheme.typography.bodyLarge,
+        keyboardOptions = KeyboardOptions(autoCorrect = true)
     )
 }

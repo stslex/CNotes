@@ -1,0 +1,6 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string name="database_initial_title">Modern Android Development at Google I/O ‘22</string>
+    <string name="database_initial_content"> Our goal is to make developing beautiful and engaging Android apps as fast and easy as possible. We want to take on the complex parts of building apps so that you can focus on your app’s features and deliver high quality experiences to your users. We call this approach Modern Android Development (or MAD for short!) and deliver it through a suite of tools, libraries and guidance. At Google I/O we announced a number of updates and additions to our MAD offerings; here’s a recap of the three largest announcements.
+    Jetpack Compose 1.2 reaches the first Beta, which means the API is stable. We continue to build out our roadmap, bringing the APIs you need to support more advanced use cases like downloadable fonts, LazyGrids, window insets, nested scrolling interop, and more tooling support with features like LiveEdit, Recomposition counts in the Layout Inspector and Animation Preview. Learn more about how developers like Airbnb are improving their productivity with Jetpack Compose, and check out what else is new in Compose. </string>
+</resources>
