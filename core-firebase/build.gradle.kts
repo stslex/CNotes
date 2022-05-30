@@ -1,5 +1,6 @@
 plugins {
     id("cnotes.android.library")
+    id("com.google.devtools.ksp")
 }
 
 dependencies {
@@ -9,6 +10,8 @@ dependencies {
     with(libs) {
         implementation(koin.core)
         implementation(koin.android)
+        implementation(koin.annotations)
+        ksp(koin.ksp)
         implementation(androidx.core.kts)
         api(google.firebase.auth)
         api(google.firebase.firestore)

@@ -1,6 +1,7 @@
 plugins {
     id("cnotes.android.library")
     id("cnotes.android.library.compose")
+    id("com.google.devtools.ksp")
 }
 
 dependencies {
@@ -14,6 +15,8 @@ dependencies {
     with(libs) {
         implementation(koin.core)
         implementation(koin.android)
+        implementation(koin.annotations)
+        ksp(koin.ksp)
         implementation(koin.androidx.compose)
         implementation(androidx.core.kts)
     }

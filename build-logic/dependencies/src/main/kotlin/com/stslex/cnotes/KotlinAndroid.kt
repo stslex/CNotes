@@ -52,7 +52,9 @@ fun Project.configureKotlinAndroid(
             targetCompatibility = JavaVersion.VERSION_1_8
             isCoreLibraryDesugaringEnabled = true
         }
-
+        sourceSets.all {
+            java.srcDirs("build/generated/ksp/main/kotlin")
+        }
         kotlinOptions {
             // Treat all Kotlin warnings as errors (disabled by default)
             // allWarningsAsErrors = properties["warningsAsErrors"] as? Boolean ?: false
@@ -69,6 +71,10 @@ fun Project.configureKotlinAndroid(
 
             // Set JVM target to 1.8
             jvmTarget = JavaVersion.VERSION_1_8.toString()
+
+            sourceSets.all {
+                kotlin.srcDir("build/generated/ksp/$name/kotlin")
+            }
         }
     }
 

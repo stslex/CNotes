@@ -31,7 +31,7 @@ fun NavigationHost(
             openSingleNote = { navController.navigate("${SingleNoteDestination.route}/$it") },
             openProfile = { navController.navigate(ProfileDestination.route) }
         ) {
-            singleNoteGraph()
+            singleNoteGraph(popBackStack = { navController.popBackStack() })
         }
         todoGraph()
         profileGraph(

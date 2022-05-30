@@ -1,7 +1,7 @@
 plugins {
     id("cnotes.android.application")
     id("cnotes.android.application.compose")
-    kotlin("kapt")
+    id("com.google.devtools.ksp")
 }
 
 android {
@@ -37,9 +37,6 @@ android {
             excludes += "/META-INF/{AL2.0,LGPL2.1}"
         }
     }
-    kapt {
-        correctErrorTypes = true
-    }
 }
 
 dependencies {
@@ -62,8 +59,8 @@ dependencies {
         implementation(koin.core)
         implementation(koin.android)
         implementation(koin.androidx.compose)
-        annotationProcessor(androidx.room.compiler)
-        kapt(androidx.room.compiler)
+        implementation(koin.annotations)
+        ksp(koin.ksp)
         implementation(androidx.paging.runtime)
         implementation(androidx.paging.compose)
         implementation(androidx.core.kts)

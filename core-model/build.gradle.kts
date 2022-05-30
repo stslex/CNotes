@@ -1,6 +1,6 @@
 plugins {
     id("cnotes.android.library")
-    kotlin("kapt")
+    id("com.google.devtools.ksp")
 }
 
 android {
@@ -14,9 +14,11 @@ dependencies {
     with(libs) {
         implementation(koin.core)
         implementation(koin.android)
+        implementation(koin.annotations)
+        ksp(koin.ksp)
         implementation(androidx.core.kts)
         annotationProcessor(androidx.room.compiler)
-        kapt(androidx.room.compiler)
+        ksp(androidx.room.compiler)
         api(androidx.room.ktx)
         api(androidx.room.paging)
     }
