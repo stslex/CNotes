@@ -1,6 +1,7 @@
 plugins {
     id("cnotes.android.library")
     id("cnotes.android.library.compose")
+    id("com.google.devtools.ksp")
 }
 
 dependencies {
@@ -10,11 +11,14 @@ dependencies {
     implementation(project(":core-navigation"))
     implementation(project(":core-model"))
     implementation(project(":core-data-source"))
+    implementation(project(":core-coroutines"))
 
     with(libs) {
         implementation(koin.core)
         implementation(koin.android)
         implementation(koin.androidx.compose)
+        implementation(koin.annotations)
+        ksp(koin.ksp)
         implementation(androidx.core.kts)
         implementation(androidx.paging.runtime)
         implementation(androidx.paging.compose)

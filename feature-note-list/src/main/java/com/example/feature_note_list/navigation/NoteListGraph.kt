@@ -12,6 +12,7 @@ import com.stslex.core_navigation.TopLevelDestination
 
 fun NavGraphBuilder.noteListGraph(
     openSingleNote: (Int) -> Unit,
+    openProfile: () -> Unit,
     nestedGraphs: NavGraphBuilder.() -> Unit
 ) {
     navigation(
@@ -19,13 +20,13 @@ fun NavGraphBuilder.noteListGraph(
         startDestination = NoteListDestination.destination
     ) {
         composable(route = NoteListDestination.destination) {
-            NoteListRoute(openSingleNote = openSingleNote)
+            NoteListRoute(openSingleNote = openSingleNote, openProfile = openProfile)
         }
         nestedGraphs()
     }
 }
 
-val screenNoteListTopLevelDestination = TopLevelDestination(
+val noteListTopLevelDestination = TopLevelDestination(
     route = NoteListDestination.route,
     selectedIcon = Icons.Filled.List,
     unselectedIcon = Icons.Outlined.List,

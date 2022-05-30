@@ -29,11 +29,15 @@
             <option value="$PROJECT_DIR$/core" />
             <option value="$PROJECT_DIR$/core-coroutines" />
             <option value="$PROJECT_DIR$/core-data-source" />
+            <option value="$PROJECT_DIR$/core-firebase" />
             <option value="$PROJECT_DIR$/core-model" />
             <option value="$PROJECT_DIR$/core-navigation" />
             <option value="$PROJECT_DIR$/core-test" />
             <option value="$PROJECT_DIR$/core-ui" />
+            <option value="$PROJECT_DIR$/feature-auth-code" />
+            <option value="$PROJECT_DIR$/feature-auth-phonenumber" />
             <option value="$PROJECT_DIR$/feature-note-list" />
+            <option value="$PROJECT_DIR$/feature-profile" />
             <option value="$PROJECT_DIR$/feature-single-note" />
             <option value="$PROJECT_DIR$/feature-todo" />
           </set>

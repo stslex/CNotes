@@ -1,3 +1,6 @@
+enableFeaturePreview("TYPESAFE_PROJECT_ACCESSORS")
+enableFeaturePreview("VERSION_CATALOGS")
+
 pluginManagement {
     @Suppress("UnstableApiUsage")
     includeBuild("build-logic")
@@ -28,3 +31,7 @@ include(":core-data-source")
 include(":feature-todo")
 include(":core-model")
 include(":core-coroutines")
+include(":feature-profile")
+include(":core-firebase")
+include(":feature-auth-phonenumber")
+include(":feature-auth-code")

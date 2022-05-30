@@ -10,16 +10,18 @@ import com.stslex.core.ValueState
 import com.stslex.core_model.model.NoteUI
 
 @Composable
-fun SingleNoteRoute(viewModel: SingleNoteViewModel) {
+fun SingleNoteRoute(popBackStack: () -> Unit, viewModel: SingleNoteViewModel) {
     SingleNoteScreen(
         modifier = Modifier.windowInsetsPadding(WindowInsets.safeDrawing),
-        viewModel = viewModel
+        viewModel = viewModel,
+        popBackStack = popBackStack
     )
 }
 
 @Composable
 fun SingleNoteScreen(
     modifier: Modifier = Modifier,
+    popBackStack: () -> Unit,
     viewModel: SingleNoteViewModel
 ) {
     val noteState: State<ValueState<NoteUI>> = viewModel.note.collectAsState()
@@ -33,26 +35,21 @@ fun SingleNoteScreen(
                 modifier = modifier,
                 noteState = note
             )
-            BackHandler {
-                with(note.value) {
-                    if (getContent().value.isNotEmpty() || getTitle().value.isNotEmpty()) {
-                        val createdNote = copy(timestamp = System.currentTimeMillis())
-                        viewModel.updateNote(createdNote)
-                    }
-                }
-            }
+            BackHandler(onBack = onBackHandler(note.value, viewModel::updateNote, popBackStack))
         }
         is ValueState.Failure -> Unit
         is ValueState.Loading -> Unit
     }
 }
 
-fun State<NoteUI>.onClickSave(
-    updateNote: (NoteUI) -> Unit,
-    popBackStack: () -> Unit
+private inline fun onBackHandler(
+    noteUI: NoteUI,
+    crossinline updateNote: (noteUI: NoteUI) -> Unit,
+    crossinline popBackStack: () -> Unit
 ): () -> Unit = {
-    if (value.getContent().value.isNotEmpty() || value.getTitle().value.isNotEmpty()) {
-        updateNote(value.copy(timestamp = System.currentTimeMillis()))
-        popBackStack()
+    if (noteUI.getContent().value.isNotEmpty() || noteUI.getTitle().value.isNotEmpty()) {
+        val createdNote = noteUI.copy(timestamp = System.currentTimeMillis())
+        updateNote(createdNote)
     }
+    popBackStack()
 }

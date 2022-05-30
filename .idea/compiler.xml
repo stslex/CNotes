@@ -5,11 +5,15 @@
       <module name="CNotes.app" target="11" />
       <module name="CNotes.core-coroutines" target="11" />
       <module name="CNotes.core-data-source" target="11" />
+      <module name="CNotes.core-firebase" target="11" />
       <module name="CNotes.core-model" target="11" />
       <module name="CNotes.core-navigation" target="11" />
       <module name="CNotes.core-test" target="11" />
       <module name="CNotes.core-ui" target="11" />
+      <module name="CNotes.feature-auth-code" target="11" />
+      <module name="CNotes.feature-auth-phonenumber" target="11" />
       <module name="CNotes.feature-note-list" target="11" />
+      <module name="CNotes.feature-profile" target="11" />
       <module name="CNotes.feature-single-note" target="11" />
       <module name="CNotes.feature-todo" target="11" />
       <module name="CNotes.main" target="11" />

@@ -7,9 +7,13 @@ import androidx.compose.runtime.Composable
 import androidx.compose.ui.Modifier
 
 @Composable
-fun NoteListRoute(openSingleNote: (Int) -> Unit) {
+fun NoteListRoute(
+    openSingleNote: (Int) -> Unit,
+    openProfile: () -> Unit,
+) {
     NotesScreen(
         openSingleNote = openSingleNote,
+        openProfile = openProfile,
         modifier = Modifier.windowInsetsPadding(
             WindowInsets.safeDrawing
         )

@@ -14,6 +14,7 @@ dependencies {
         api(koin.test)
         api(koin.test.junit4)
         api(robolectric)
+        api(kotlinx.coroutines.test)
         debugApi(leakcanary)
     }
 }

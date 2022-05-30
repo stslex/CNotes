@@ -44,6 +44,14 @@ jobs:
           restore-keys: |
             ${{ runner.os }}-gradle
 
+      - name: Set up Local properties keys
+        run: |
+          echo FIREBASE_API_KEY=\"${{ secrets.FIREBASE_API_KEY }}\" >> ./local.properties
+          echo FIREBASE_APPLICATION_ID=\"${{ secrets.FIREBASE_APPLICATION_ID }}\" >> ./local.properties
+          echo FIREBASE_CLIENT_ID=\"${{ secrets.FIREBASE_CLIENT_ID }}\" >> ./local.properties
+          echo FIREBASE_DATABASE_URL=\"${{ secrets.FIREBASE_DATABASE_URL }}\" >> ./local.properties
+          echo FIREBASE_PROJECT_ID=\"${{ secrets.FIREBASE_PROJECT_ID }}\" >> ./local.properties
+
       - name: Check lint
         run: ./gradlew lintDebug --stacktrace
 

@@ -8,6 +8,7 @@ import org.gradle.api.plugins.ExtensionAware
 import org.gradle.kotlin.dsl.dependencies
 import org.gradle.kotlin.dsl.getByType
 import org.jetbrains.kotlin.gradle.dsl.KotlinJvmOptions
+import org.jetbrains.kotlin.konan.properties.Properties
 
 @Suppress("UnstableApiUsage")
 fun Project.configureKotlinAndroid(
@@ -18,14 +19,42 @@ fun Project.configureKotlinAndroid(
 
         defaultConfig {
             minSdk = 23
+            val properties = Properties()
+            properties.load(project.rootProject.file("local.properties").inputStream())
+            buildConfigField(
+                "String",
+                "FIREBASE_PROJECT_ID",
+                properties.getProperty("FIREBASE_PROJECT_ID")
+            )
+            buildConfigField(
+                "String",
+                "FIREBASE_APPLICATION_ID",
+                properties.getProperty("FIREBASE_APPLICATION_ID")
+            )
+            buildConfigField(
+                "String",
+                "FIREBASE_CLIENT_ID",
+                properties.getProperty("FIREBASE_CLIENT_ID")
+            )
+            buildConfigField(
+                "String",
+                "FIREBASE_API_KEY",
+                properties.getProperty("FIREBASE_API_KEY")
+            )
+            buildConfigField(
+                "String",
+                "FIREBASE_DATABASE_URL",
+                properties.getProperty("FIREBASE_DATABASE_URL")
+            )
         }
-
         compileOptions {
             sourceCompatibility = JavaVersion.VERSION_1_8
             targetCompatibility = JavaVersion.VERSION_1_8
             isCoreLibraryDesugaringEnabled = true
         }
-
+        sourceSets.all {
+            java.srcDirs("build/generated/ksp/main/kotlin")
+        }
         kotlinOptions {
             // Treat all Kotlin warnings as errors (disabled by default)
             // allWarningsAsErrors = properties["warningsAsErrors"] as? Boolean ?: false
@@ -42,6 +71,10 @@ fun Project.configureKotlinAndroid(
 
             // Set JVM target to 1.8
             jvmTarget = JavaVersion.VERSION_1_8.toString()
+
+            sourceSets.all {
+                kotlin.srcDir("build/generated/ksp/$name/kotlin")
+            }
         }
     }
 

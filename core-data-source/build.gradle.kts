@@ -1,11 +1,15 @@
 plugins {
     id("cnotes.android.library")
     id("cnotes.android.library.compose")
-    kotlin("kapt")
+    id("com.google.devtools.ksp")
 }
 
 android {
     namespace = "com.stslex.core_data_source"
+
+    ksp {
+        arg("room.schemaLocation", "$projectDir/schemas")
+    }
 }
 
 dependencies {
@@ -17,9 +21,11 @@ dependencies {
     with(libs) {
         implementation(koin.core)
         implementation(koin.android)
+        implementation(koin.annotations)
+        ksp(koin.ksp)
         implementation(androidx.core.kts)
         annotationProcessor(androidx.room.compiler)
-        kapt(androidx.room.compiler)
+        ksp(androidx.room.compiler)
         api(androidx.room.runtime)
     }
 }

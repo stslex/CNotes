@@ -3,6 +3,8 @@
   <component name="DesignSurface">
     <option name="filePathToZoomLevelMap">
       <map>
+        <entry key="feature-profile/src/main/java/com/stslex/feature_profile/ui/ProfileRoute.kt" value="0.25" />
+        <entry key="feature-profile/src/main/java/com/stslex/feature_profile/ui/SingInScreen.kt" value="0.2824074074074074" />
         <entry key="feature-single-note/src/main/java/com/stslex/feature_single_note/ui/SingleNoteContent.kt" value="0.34767932489451475" />
         <entry key="feature-single-note/src/main/java/com/stslex/feature_single_note/ui/SingleNoteScreen.kt" value="0.335" />
       </map>

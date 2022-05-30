@@ -1,3 +1,7 @@
+plugins {
+    id("com.google.devtools.ksp") version "1.6.21-1.0.5"
+}
+
 buildscript {
     repositories {
         google()
