@@ -21,6 +21,10 @@ leakcanary = "2.9.1"
 koin = "3.2.0"
 robolectric = "4.8"
 constraintlayout = "1.0.0-beta02"
+googleServices = "4.3.10"
+firebaseAuth = "21.0.2"
+firestore = "24.1.2"
+database = "20.0.5"
 
 [libraries]
 android-gradlePlugin = { group = "com.android.tools.build", name = "gradle", version.ref = "androidGradlePlugin" }
@@ -65,3 +69,8 @@ koin-android = { group = "io.insert-koin", name = "koin-android", version.ref = 
 koin-androidx-compose = { group = "io.insert-koin", name = "koin-androidx-compose", version.ref = "koin" }
 koin-core = { group = "io.insert-koin", name = "koin-core", version.ref = "koin" }
 
+google-services = { group = "com.google.gms", name = "google-services", version.ref = "googleServices" }
+
+google-firebase-auth = { group = "com.google.firebase", name = "firebase-auth-ktx", version.ref = "firebaseAuth" }
+google-firebase-firestore = { group = "com.google.firebase", name = "firebase-firestore-ktx", version.ref = "firestore" }
+google-firebase-database = { group = "com.google.firebase", name = "firebase-database-ktx", version.ref = "database" }

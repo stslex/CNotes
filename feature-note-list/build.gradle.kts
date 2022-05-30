@@ -10,6 +10,7 @@ dependencies {
     implementation(project(":core-navigation"))
     implementation(project(":core-model"))
     implementation(project(":core-data-source"))
+    implementation(project(":core-coroutines"))
 
     with(libs) {
         implementation(koin.core)

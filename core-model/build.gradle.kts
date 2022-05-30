@@ -14,12 +14,9 @@ dependencies {
     with(libs) {
         implementation(koin.core)
         implementation(koin.android)
-
         implementation(androidx.core.kts)
-
         annotationProcessor(androidx.room.compiler)
         kapt(androidx.room.compiler)
-
         api(androidx.room.ktx)
         api(androidx.room.paging)
     }

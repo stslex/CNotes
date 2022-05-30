@@ -15,7 +15,7 @@ fun NavGraphBuilder.todoGraph() {
     }
 }
 
-val TODO_TOP_LEVEL_DESTINATION = TopLevelDestination(
+val todoTopLevelDestination = TopLevelDestination(
     route = TodoDestination.route,
     selectedIcon = Icons.Filled.Notifications,
     unselectedIcon = Icons.Outlined.Notifications,

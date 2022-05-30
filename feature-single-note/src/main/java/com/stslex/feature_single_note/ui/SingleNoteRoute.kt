@@ -33,26 +33,19 @@ fun SingleNoteScreen(
                 modifier = modifier,
                 noteState = note
             )
-            BackHandler {
-                with(note.value) {
-                    if (getContent().value.isNotEmpty() || getTitle().value.isNotEmpty()) {
-                        val createdNote = copy(timestamp = System.currentTimeMillis())
-                        viewModel.updateNote(createdNote)
-                    }
-                }
-            }
+            BackHandler(onBack = onBackHandler(note.value, viewModel::updateNote))
         }
         is ValueState.Failure -> Unit
         is ValueState.Loading -> Unit
     }
 }
 
-fun State<NoteUI>.onClickSave(
-    updateNote: (NoteUI) -> Unit,
-    popBackStack: () -> Unit
+private inline fun onBackHandler(
+    noteUI: NoteUI,
+    crossinline updateNote: (noteUI: NoteUI) -> Unit
 ): () -> Unit = {
-    if (value.getContent().value.isNotEmpty() || value.getTitle().value.isNotEmpty()) {
-        updateNote(value.copy(timestamp = System.currentTimeMillis()))
-        popBackStack()
+    if (noteUI.getContent().value.isNotEmpty() || noteUI.getTitle().value.isNotEmpty()) {
+        val createdNote = noteUI.copy(timestamp = System.currentTimeMillis())
+        updateNote(createdNote)
     }
 }
