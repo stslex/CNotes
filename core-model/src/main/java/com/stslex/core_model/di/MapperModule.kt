@@ -11,4 +11,6 @@ val mapperModule = module {
     singleOf(MapperNoteUIEntity::Base) { bind<MapperNoteUIEntity>() }
     singleOf(MapperPagingEntityDynamicUI::Base) { bind<MapperPagingEntityDynamicUI>() }
     singleOf(MapperValueNoteEntityUI::Base) { bind<MapperValueNoteEntityUI>() }
+    singleOf(MapperNoteRemote::Base) { bind<MapperNoteRemote>() }
+    singleOf(MapperNoteListRemote::Base) { bind<MapperNoteListRemote>() }
 }

@@ -8,6 +8,7 @@ dependencies {
     implementation(project(":core"))
     implementation(project(":core-ui"))
     implementation(project(":core-test"))
+    implementation(project(":core-model"))
     implementation(project(":core-navigation"))
     implementation(project(":core-coroutines"))
     implementation(project(":core-firebase"))
