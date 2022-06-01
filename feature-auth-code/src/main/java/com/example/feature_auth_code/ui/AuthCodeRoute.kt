@@ -4,11 +4,9 @@ import android.app.Activity
 import androidx.compose.foundation.layout.*
 import androidx.compose.material3.Button
 import androidx.compose.material3.CircularProgressIndicator
+import androidx.compose.material3.Snackbar
 import androidx.compose.material3.Text
-import androidx.compose.runtime.Composable
-import androidx.compose.runtime.collectAsState
-import androidx.compose.runtime.mutableStateOf
-import androidx.compose.runtime.remember
+import androidx.compose.runtime.*
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.platform.LocalContext
@@ -39,21 +37,14 @@ fun AuthCodeScreen(
 ) {
     val codeNumber = remember { mutableStateOf("") }
     val activity: Activity = LocalContext.current as Activity
-    val stateAuth = viewModel.stateAuth.collectAsState(initial = ValueState.Loading)
-
+    val stateAuth by viewModel.stateAuth.collectAsState(initial = ValueState.Loading)
+    var clicked by remember { mutableStateOf(false) }
     Box(modifier = modifier.fillMaxSize()) {
-        when (val authResult = stateAuth.value) {
-            is ValueState.Success -> {
-                Text(text = "Success")
-                openProfile()
-            }
-            is ValueState.Failure -> {
-                Text(text = authResult.exception.message ?: "")
-
-                authResult.exception.fillInStackTrace()
-            }
-            is ValueState.Loading -> {
-                CircularProgressIndicator(modifier = Modifier.align(Alignment.TopCenter))
+        if (clicked) {
+            when (val authResult = stateAuth) {
+                is ValueState.Success -> result(openProfile = openProfile).invoke(this)
+                is ValueState.Failure -> result(valueState = authResult).invoke(this)
+                is ValueState.Loading -> result().invoke(this)
             }
         }
 
@@ -69,6 +60,7 @@ fun AuthCodeScreen(
             .align(Alignment.BottomEnd),
             onClick = {
                 if (codeNumber.value.length == 6) {
+                    clicked = true
                     viewModel.signIn(activity, codeNumber.value)
                 }
             }, content = {
@@ -81,5 +73,51 @@ fun AuthCodeScreen(
             onClick = popBackStack, content = {
                 Text(text = "previous")
             })
+    }
+}
+
+private fun result(
+    modifier: Modifier = Modifier,
+    valueState: ValueState.Failure
+): @Composable BoxScope.() -> Unit = {
+    Snackbar(
+        modifier = modifier
+            .padding(top = 32.dp)
+            .align(Alignment.TopCenter)
+    ) {
+        Text(
+            modifier = Modifier.padding(16.dp),
+            text = valueState.exception.message ?: ""
+        )
+    }
+    valueState.exception.fillInStackTrace()
+}
+
+private fun result(
+    modifier: Modifier = Modifier
+): @Composable BoxScope.() -> Unit = {
+    CircularProgressIndicator(
+        modifier = modifier
+            .padding(top = 32.dp)
+            .align(Alignment.TopCenter)
+    )
+}
+
+private fun result(
+    modifier: Modifier = Modifier,
+    openProfile: () -> Unit
+): @Composable BoxScope.() -> Unit = {
+    Snackbar(
+        modifier = modifier
+            .padding(top = 32.dp)
+            .align(Alignment.TopCenter),
+        action = {
+            openProfile()
+        }
+    ) {
+        Text(
+            modifier = Modifier.padding(16.dp),
+            text = "Success"
+        )
     }
 }
