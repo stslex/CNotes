@@ -2,77 +2,64 @@ package com.stslex.feature_profile.ui
 
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
+import com.stslex.core.ValueState
 import com.stslex.core_coroutines.AppDispatchers
-import com.stslex.feature_profile.data.ProfileRepository
+import com.stslex.feature_profile.domain.abstraction.*
 import kotlinx.coroutines.Job
+import kotlinx.coroutines.channels.awaitClose
+import kotlinx.coroutines.channels.trySendBlocking
 import kotlinx.coroutines.flow.*
 import kotlinx.coroutines.launch
 
 class ProfileViewModel(
-    private val repository: ProfileRepository,
+    private val getRemoteNotesSizeInteractor: GetRemoteNotesSizeInteractor,
+    private val getSyncNotesSizeInteractor: GetSyncNotesSizeInteractor,
+    private val signOutInteractor: SignOutInteractor,
+    private val synchronizeNotesInteractor: SynchronizeNotesInteractor,
+    private val getLocalNotesSizeInteractor: GetLocalNotesSizeInteractor,
     private val dispatchers: AppDispatchers
 ) : ViewModel() {
 
-    private var syncNotesSizeJob: Job = Job()
-    private var remoteNotesSizeJob: Job = Job()
-    private var syncNotesJob: Job = Job()
+    val syncNoteSize: StateFlow<ValueState<Int>> = channelFlow {
+        getSyncNotesSizeInteractor.invoke().collectLatest(::trySendBlocking)
+        awaitClose { }
+    }.flowOn(dispatchers.io)
+        .stateIn(
+            scope = viewModelScope,
+            started = SharingStarted.Lazily,
+            initialValue = ValueState.Loading
+        )
 
-    private var _syncNoteSize: MutableSharedFlow<Int> = MutableSharedFlow(1)
-    val syncNoteSize: SharedFlow<Int>
-        get() = _syncNoteSize
-            .asSharedFlow()
-            .shareIn(
-                scope = viewModelScope,
-                started = SharingStarted.WhileSubscribed(),
-                replay = 1
-            )
+    val remoteNoteSize: StateFlow<ValueState<Int>> = channelFlow {
+        getRemoteNotesSizeInteractor.invoke().collectLatest(::trySendBlocking)
+        awaitClose { }
+    }.flowOn(dispatchers.io)
+        .stateIn(
+            scope = viewModelScope,
+            started = SharingStarted.Lazily,
+            initialValue = ValueState.Loading
+        )
 
-    private var _remoteNoteSize: MutableSharedFlow<Int> = MutableSharedFlow(1)
-    val remoteNoteSize: SharedFlow<Int>
-        get() = _remoteNoteSize
-            .asSharedFlow()
-            .shareIn(
-                scope = viewModelScope,
-                started = SharingStarted.WhileSubscribed(),
-                replay = 1
-            )
-
-    fun signOut() {
-        viewModelScope.launch(dispatchers.io) {
-            repository.signOut()
-        }
-    }
-
-    fun getSyncNotesSize() {
-        syncNotesSizeJob.cancel()
-        syncNotesSizeJob = viewModelScope.launch(dispatchers.io) {
-            repository.getSyncNotesSize().collectLatest { notesSize ->
-                _syncNoteSize.emit(notesSize)
-            }
-        }
-    }
-
-    fun synchronizeNotes() {
-        syncNotesJob.cancel()
-        syncNotesJob = viewModelScope.launch(dispatchers.io) {
-            repository.synchronizeNotes()
-        }
-    }
-
-    fun getRemoteNotesSize() {
-        remoteNotesSizeJob.cancel()
-        remoteNotesSizeJob = viewModelScope.launch(dispatchers.io) {
-            repository.getRemoteNotesSize().collectLatest { notesSize ->
-                _remoteNoteSize.emit(notesSize)
-            }
-        }
-    }
-
-    val localNotesSize: StateFlow<Int> = repository.getLocalNotesSize()
+    val localNotesSize: StateFlow<ValueState<Int>> = getLocalNotesSizeInteractor.invoke()
         .flowOn(dispatchers.io)
         .stateIn(
             scope = viewModelScope,
             started = SharingStarted.WhileSubscribed(),
-            initialValue = 0
+            initialValue = ValueState.Loading
         )
+
+    fun signOut() {
+        viewModelScope.launch(dispatchers.io) {
+            signOutInteractor.invoke()
+        }
+    }
+
+    private var syncNotesJob: Job = Job()
+
+    fun synchronizeNotes() {
+        syncNotesJob.cancel()
+        syncNotesJob = viewModelScope.launch(dispatchers.io) {
+            synchronizeNotesInteractor.invoke().collect()
+        }
+    }
 }
