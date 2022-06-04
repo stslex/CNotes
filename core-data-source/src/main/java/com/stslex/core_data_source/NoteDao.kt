@@ -17,9 +17,6 @@ interface NoteDao {
     @Query("SELECT * FROM note_table")
     fun getAllNotesRow(): List<NoteEntity>
 
-    @Query("SELECT * FROM note_table")
-    fun getAllNotesFlow(): Flow<List<NoteEntity>>
-
     @Query("SELECT COUNT(*) FROM note_table")
     fun getNotesSize(): Flow<Int>
 

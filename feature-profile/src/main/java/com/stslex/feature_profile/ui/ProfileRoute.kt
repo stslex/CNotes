@@ -1,24 +1,25 @@
 package com.stslex.feature_profile.ui
 
 import androidx.compose.foundation.layout.*
-import androidx.compose.material.icons.Icons
-import androidx.compose.material.icons.filled.KeyboardArrowDown
-import androidx.compose.material.icons.filled.KeyboardArrowUp
-import androidx.compose.material3.*
+import androidx.compose.material3.Button
+import androidx.compose.material3.ElevatedCard
+import androidx.compose.material3.ExperimentalMaterial3Api
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.State
 import androidx.compose.runtime.collectAsState
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
-import androidx.compose.ui.graphics.vector.ImageVector
 import androidx.compose.ui.platform.LocalContext
-import androidx.compose.ui.text.style.TextOverflow
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
 import com.google.firebase.FirebaseApp
 import com.google.firebase.auth.FirebaseAuth
+import com.stslex.core.ValueState
 import com.stslex.core_ui.theme.AppTheme
 import com.stslex.feature_profile.navigation.ProfileDestination
+import com.stslex.feature_profile.ui.components.ButtonLabel
+import com.stslex.feature_profile.ui.components.NotesSizeStateLabel
+import com.stslex.feature_profile.ui.components.ProfileActionButtons
 import org.koin.androidx.compose.get
 
 @Composable
@@ -42,16 +43,14 @@ fun ProfileScreen(
     relaunchProfile: () -> Unit,
     viewModel: ProfileViewModel = get()
 ) {
-    viewModel.getSyncNotesSize()
-    viewModel.getRemoteNotesSize()
     ProfileScreenContent(
         modifier = modifier,
         relaunchProfile = relaunchProfile,
         signOut = viewModel::signOut,
         syncNotes = viewModel::synchronizeNotes,
-        syncNoteSize = viewModel.syncNoteSize.collectAsState(initial = 0),
-        localNotesSize = viewModel.localNotesSize.collectAsState(initial = 0),
-        remoteNotesSize = viewModel.remoteNoteSize.collectAsState(initial = 0)
+        syncNoteSize = viewModel.syncNoteSize.collectAsState(initial = ValueState.Loading),
+        localNotesSize = viewModel.localNotesSize.collectAsState(initial = ValueState.Loading),
+        remoteNotesSize = viewModel.remoteNoteSize.collectAsState(initial = ValueState.Loading)
     )
 }
 
@@ -62,9 +61,9 @@ fun ProfileScreenContent(
     relaunchProfile: () -> Unit,
     signOut: () -> Unit,
     syncNotes: () -> Unit,
-    syncNoteSize: State<Int>,
-    localNotesSize: State<Int>,
-    remoteNotesSize: State<Int>
+    syncNoteSize: State<ValueState<Int>>,
+    localNotesSize: State<ValueState<Int>>,
+    remoteNotesSize: State<ValueState<Int>>
 ) {
     Box(modifier = modifier.fillMaxSize()) {
         ElevatedCard(
@@ -77,20 +76,9 @@ fun ProfileScreenContent(
                 modifier = Modifier
                     .padding(32.dp)
             ) {
-                Text(
-                    modifier = Modifier.padding(16.dp),
-                    text = "Local Notes: ${localNotesSize.value}"
-                )
-
-                Text(
-                    modifier = Modifier.padding(16.dp),
-                    text = "Remote Notes: ${remoteNotesSize.value}"
-                )
-
-                Text(
-                    modifier = Modifier.padding(16.dp),
-                    text = "Synced Notes: ${syncNoteSize.value}"
-                )
+                NotesSizeStateLabel(label = "Local Notes", notesState = localNotesSize)
+                NotesSizeStateLabel(label = "Remote notes", notesState = remoteNotesSize)
+                NotesSizeStateLabel(label = "Synced Notes", notesState = syncNoteSize)
 
                 ProfileActionButtons(
                     actionDownload = {},
@@ -111,72 +99,6 @@ fun ProfileScreenContent(
             ButtonLabel(label = "sign out")
         }
     }
-}
-
-@Composable
-fun ProfileActionButtons(
-    modifier: Modifier = Modifier,
-    actionDownload: () -> Unit,
-    actionUpload: () -> Unit
-) {
-    Row(
-        modifier = modifier
-            .fillMaxWidth()
-            .padding(top = 16.dp)
-    ) {
-
-        ButtonProfileAction(
-            modifier = Modifier
-                .weight(1f)
-                .padding(end = 8.dp),
-            label = "Download",
-            imageVector = Icons.Filled.KeyboardArrowDown,
-            onClick = actionDownload
-        )
-
-        ButtonProfileAction(
-            modifier = Modifier
-                .weight(1f)
-                .padding(start = 8.dp),
-            label = "Upload",
-            imageVector = Icons.Filled.KeyboardArrowUp,
-            onClick = actionUpload
-        )
-    }
-}
-
-@Composable
-fun ButtonProfileAction(
-    modifier: Modifier = Modifier,
-    label: String,
-    imageVector: ImageVector,
-    onClick: () -> Unit
-) {
-    Button(
-        modifier = modifier,
-        onClick = onClick
-    ) {
-        ButtonLabel(
-            modifier = Modifier.weight(4f),
-            label = label
-        )
-        Icon(
-            modifier = Modifier.weight(1f),
-            imageVector = imageVector,
-            contentDescription = label
-        )
-    }
-}
-
-@Composable
-fun ButtonLabel(modifier: Modifier = Modifier, label: String) {
-    Text(
-        modifier = modifier,
-        maxLines = 1,
-        text = label,
-        style = MaterialTheme.typography.titleMedium,
-        overflow = TextOverflow.Ellipsis
-    )
 }
 
 @Preview(showSystemUi = true, showBackground = true)
