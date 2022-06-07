@@ -1,4 +1,10 @@
 <resources>
     <string name="app_name">CNotes</string>
     <string name="lb_create">create</string>
+    <string name="lb_short_shortcut_create">create</string>
+    <string name="lb_long_shortcut_create">create new note</string>
+    <string name="lb_shortcut_disabled_message">shortcut disabled</string>
+
+    <string name="lb_short_shortcut_profile">profile</string>
+    <string name="lb_long_shortcut_profile">open user profile</string>
 </resources>

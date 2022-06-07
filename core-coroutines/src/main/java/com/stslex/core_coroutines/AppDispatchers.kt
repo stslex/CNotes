@@ -11,7 +11,7 @@ interface AppDispatchers {
     val default: CoroutineDispatcher
     val unconfined: CoroutineDispatcher
 
-    class Base(
+    data class Base(
         override val main: MainCoroutineDispatcher = Dispatchers.Main,
         override val io: CoroutineDispatcher = Dispatchers.IO,
         override val default: CoroutineDispatcher = Dispatchers.Default,

@@ -2,4 +2,12 @@
 <resources>
     <string name="lb_create">создать</string>
     <string name="app_name">Заметки</string>
+
+    <string name="lb_shortcut_disabled_message">ссылка отключена</string>
+
+    <string name="lb_short_shortcut_create">создать</string>
+    <string name="lb_long_shortcut_create">создать новую заметку</string>
+
+    <string name="lb_short_shortcut_profile">профиль</string>
+    <string name="lb_long_shortcut_profile">открыть профиль пользователя</string>
 </resources>

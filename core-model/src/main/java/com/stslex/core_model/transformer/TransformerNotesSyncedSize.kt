@@ -8,15 +8,15 @@ interface TransformerNotesSyncedSize : Transformer.ToUI<List<NoteEntity>, List<N
 
     class Base : TransformerNotesSyncedSize {
 
-        override fun map(
+        override fun transform(
             firstData: List<NoteEntity>,
             secondData: List<NoteEntity>
         ): ValueState<Int> = ValueState.Success(firstData.filter { localNote ->
             secondData.contains(localNote)
         }.size)
 
-        override fun map(exception: Exception): ValueState<Int> = ValueState.Failure(exception)
+        override fun transform(exception: Exception): ValueState<Int> = ValueState.Failure(exception)
 
-        override fun map(): ValueState<Int> = ValueState.Loading
+        override fun transform(): ValueState<Int> = ValueState.Loading
     }
 }
