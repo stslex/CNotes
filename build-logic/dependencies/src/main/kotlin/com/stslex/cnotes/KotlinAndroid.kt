@@ -18,7 +18,7 @@ fun Project.configureKotlinAndroid(
         compileSdk = 32
 
         defaultConfig {
-            minSdk = 23
+            minSdk = 26
             val properties = Properties()
             properties.load(project.rootProject.file("local.properties").inputStream())
             buildConfigField(

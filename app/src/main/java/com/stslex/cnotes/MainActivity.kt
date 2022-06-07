@@ -1,12 +1,19 @@
 package com.stslex.cnotes
 
+import android.content.Intent
+import android.net.Uri
 import android.os.Bundle
 import androidx.activity.ComponentActivity
 import androidx.activity.compose.setContent
 import androidx.compose.material3.windowsizeclass.ExperimentalMaterial3WindowSizeClassApi
 import androidx.compose.material3.windowsizeclass.calculateWindowSizeClass
+import androidx.core.content.pm.ShortcutInfoCompat
+import androidx.core.content.pm.ShortcutManagerCompat
+import androidx.core.graphics.drawable.IconCompat
 import androidx.core.view.WindowCompat
 import com.stslex.cnotes.ui.AppCreator
+import com.stslex.feature_profile.navigation.ProfileDestination
+import com.stslex.feature_single_note.navigation.SingleNoteDestination
 
 class MainActivity : ComponentActivity() {
 
@@ -15,5 +22,37 @@ class MainActivity : ComponentActivity() {
         super.onCreate(savedInstanceState)
         WindowCompat.setDecorFitsSystemWindows(window, false)
         setContent { AppCreator(calculateWindowSizeClass(this)) }
+        ShortcutManagerCompat.pushDynamicShortcut(this, shortcutCreateNewNote)
+        ShortcutManagerCompat.pushDynamicShortcut(this, shortcutProfile)
     }
+
+    private val shortcutCreateNewNote: ShortcutInfoCompat by lazy {
+        ShortcutInfoCompat.Builder(this, getString(R.string.lb_short_shortcut_create))
+            .setShortLabel(getString(R.string.lb_short_shortcut_create))
+            .setLongLabel(getString(R.string.lb_long_shortcut_create))
+            .setDisabledMessage(getString(R.string.lb_shortcut_disabled_message))
+            .setIcon(IconCompat.createWithResource(this, R.drawable.ic_baseline_add_24))
+            .setIntent(shortcutIntent.invoke("${SingleNoteDestination.route}/-1"))
+            .build()
+    }
+
+    private val shortcutProfile: ShortcutInfoCompat by lazy {
+        ShortcutInfoCompat.Builder(this, getString(R.string.lb_short_shortcut_profile))
+            .setShortLabel(getString(R.string.lb_short_shortcut_profile))
+            .setLongLabel(getString(R.string.lb_long_shortcut_profile))
+            .setDisabledMessage(getString(R.string.lb_shortcut_disabled_message))
+            .setIcon(IconCompat.createWithResource(this, R.drawable.ic_baseline_person_outline_24))
+            .setIntent(shortcutIntent.invoke(ProfileDestination.route))
+            .build()
+    }
+
+    private val shortcutIntent: (String) -> Intent
+        get(): (String) -> Intent = { url ->
+            Intent(
+                Intent.ACTION_VIEW,
+                Uri.parse("app://$url"),
+                this,
+                MainActivity::class.java
+            )
+        }
 }

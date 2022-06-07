@@ -9,11 +9,11 @@ interface TransformerEqualTypeValues<in T, out U> : Transformer.ToUI<T, ValueSta
         private val transformer: Transformer.ToUI<T, T, ValueState<U>>
     ) : TransformerEqualTypeValues<T, U> {
 
-        override fun map(firstData: T, secondData: ValueState<T>): ValueState<U> =
+        override fun transform(firstData: T, secondData: ValueState<T>): ValueState<U> =
             secondData.transform(transformer, firstData)
 
-        override fun map(exception: Exception): ValueState<U> = ValueState.Failure(exception)
+        override fun transform(exception: Exception): ValueState<U> = ValueState.Failure(exception)
 
-        override fun map(): ValueState<U> = ValueState.Loading
+        override fun transform(): ValueState<U> = ValueState.Loading
     }
 }
