@@ -55,7 +55,6 @@ dependencies {
     implementation(project(":feature-profile"))
     implementation(project(":feature-auth-phonenumber"))
     implementation(project(":feature-auth-code"))
-    implementation("androidx.core:core-google-shortcuts:1.0.1")
 
     with(libs) {
         implementation(koin.core)
@@ -66,5 +65,6 @@ dependencies {
         implementation(androidx.paging.runtime)
         implementation(androidx.paging.compose)
         implementation(androidx.core.kts)
+        implementation(androidx.core.google.shortcuts)
     }
 }

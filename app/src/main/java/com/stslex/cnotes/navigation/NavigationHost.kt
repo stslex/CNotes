@@ -48,7 +48,11 @@ fun NavigationHost(
             )
             authCodeGraph(
                 popBackStack = { navController.popBackStack() },
-                openProfile = { navController.navigate(ProfileDestination.route) }
+                openProfile = {
+                    navController.navigate(ProfileDestination.route){
+                        launchSingleTop = true
+                    }
+                }
             )
         }
     }

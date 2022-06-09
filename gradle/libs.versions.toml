@@ -1,5 +1,5 @@
 [versions]
-androidGradlePlugin = "7.2.0"
+androidGradlePlugin = "7.2.1"
 kotlin = "1.6.21"
 androidDesugarJdkLibs = "1.1.5"
 paging = "3.1.1"
@@ -25,6 +25,7 @@ firebaseAuth = "21.0.2"
 firestore = "24.1.2"
 database = "20.0.5"
 koinAnnotations = "1.0.0-beta-2"
+shortcuts = "1.0.1"
 
 [libraries]
 android-gradlePlugin = { group = "com.android.tools.build", name = "gradle", version.ref = "androidGradlePlugin" }
@@ -44,6 +45,7 @@ androidx-compose-constraintlayout = { group = "androidx.constraintlayout", name 
 androidx-lifecycle-runtime = { group = "androidx.lifecycle", name = "lifecycle-runtime", version.ref = "lifecycleRuntime" }
 androidx-activity-compose = { group = "androidx.activity", name = "activity-compose", version.ref = "activityCompose" }
 androidx-core-kts = { group = "androidx.core", name = "core-ktx", version.ref = "androidCore" }
+androidx-core-google-shortcuts = { group = "androidx.core", name = "core-google-shortcuts", version.ref = "shortcuts" }
 androidx-navigation-compose = { group = "androidx.navigation", name = "navigation-compose", version.ref = "navigation" }
 
 junit = { group = "junit", name = "junit", version.ref = "junit" }
