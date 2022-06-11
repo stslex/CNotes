@@ -1,9 +1,13 @@
 package com.stslex.feature_profile.ui.components
 
-import androidx.compose.foundation.layout.padding
+import androidx.compose.foundation.layout.Box
+import androidx.compose.foundation.layout.fillMaxWidth
+import androidx.compose.foundation.layout.width
+import androidx.compose.material3.LinearProgressIndicator
 import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.State
+import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.unit.dp
 import com.stslex.core.ValueState
@@ -15,14 +19,28 @@ fun NotesSizeStateLabel(
     label: String,
     notesState: State<ValueState<Int>>
 ) {
-    when (val value = notesState.value) {
-        is ValueState.Success -> {
-            Text(
-                modifier = modifier.padding(16.dp),
-                text = "$label: ${value.data}"
-            )
+    Box(
+        modifier = modifier.fillMaxWidth()
+    ) {
+
+        Text(
+            modifier = Modifier.align(Alignment.CenterStart),
+            text = label
+        )
+
+        when (val value = notesState.value) {
+            is ValueState.Success ->
+                Text(
+                    modifier = modifier.align(Alignment.CenterEnd),
+                    text = value.data.toString()
+                )
+            is ValueState.Failure -> Unit
+            is ValueState.Loading ->
+                LinearProgressIndicator(
+                    modifier = Modifier
+                        .width(50.dp)
+                        .align(Alignment.CenterEnd)
+                )
         }
-        is ValueState.Failure -> Unit
-        is ValueState.Loading -> Unit
     }
 }

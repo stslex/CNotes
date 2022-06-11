@@ -12,7 +12,7 @@ class GetRemoteNotesSizeInteractorImpl(
     private val mapper: MapperNoteSize
 ) : GetRemoteNotesSizeInteractor {
 
-    override suspend fun invoke(): Flow<ValueState<Int>> = repository.getRemoteNotes().map {
+    override suspend fun invoke(): Flow<ValueState<Int>> = repository.getRealtimeRemoteNotes().map {
         it.map(mapper)
     }
 }

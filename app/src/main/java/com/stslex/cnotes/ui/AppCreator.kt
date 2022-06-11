@@ -28,6 +28,7 @@ import com.stslex.feature_todo.navigation.TodoDestination
 import com.stslex.feature_todo.navigation.todoTopLevelDestination
 
 private val topLevelDestinationList = listOf(noteListTopLevelDestination, todoTopLevelDestination)
+private val listOfDestinations = listOf(NoteListDestination.destination, TodoDestination.route)
 
 @OptIn(ExperimentalMaterial3Api::class, ExperimentalLayoutApi::class)
 @Composable
@@ -39,13 +40,12 @@ fun AppCreator(windowSizeClass: WindowSizeClass) {
         }
         val navBackStackEntry by navController.currentBackStackEntryAsState()
         val currentDestination = navBackStackEntry?.destination
-
         Scaffold(
             modifier = Modifier.fillMaxSize(),
             bottomBar = {
                 if (
                     windowSizeClass.widthSizeClass == WindowWidthSizeClass.Compact &&
-                    (currentDestination?.route == NoteListDestination.route || currentDestination?.route == TodoDestination.route)
+                    listOfDestinations.contains(currentDestination?.route)
                 ) {
                     AppBottomBar(
                         onNavigateToTopLevelDestination = niaTopLevelNavigation::navigateTo,
@@ -57,15 +57,10 @@ fun AppCreator(windowSizeClass: WindowSizeClass) {
             Row(
                 Modifier
                     .fillMaxSize()
-                    .windowInsetsPadding(
-                        WindowInsets.safeDrawing.only(
-                            WindowInsetsSides.Horizontal
-                        )
-                    )
+                    .windowInsetsPadding(WindowInsets.safeDrawing.only(WindowInsetsSides.Horizontal))
             ) {
-                if (
-                    windowSizeClass.widthSizeClass != WindowWidthSizeClass.Compact &&
-                    (currentDestination?.route == NoteListDestination.route || currentDestination?.route == TodoDestination.route)
+                if (windowSizeClass.widthSizeClass != WindowWidthSizeClass.Compact &&
+                    listOfDestinations.contains(currentDestination?.route)
                 ) {
                     AppNavRail(
                         onNavigateToTopLevelDestination = niaTopLevelNavigation::navigateTo,

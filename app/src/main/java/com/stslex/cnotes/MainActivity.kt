@@ -12,13 +12,18 @@ import androidx.core.content.pm.ShortcutManagerCompat
 import androidx.core.graphics.drawable.IconCompat
 import androidx.core.view.WindowCompat
 import com.stslex.cnotes.ui.AppCreator
+import com.stslex.core_firebase.abstraction.FirebaseAppInitialisationUtil
 import com.stslex.feature_profile.navigation.ProfileDestination
 import com.stslex.feature_single_note.navigation.SingleNoteDestination
+import org.koin.android.ext.android.inject
 
 class MainActivity : ComponentActivity() {
 
+    private val firebaseAppInitialisationUtil: FirebaseAppInitialisationUtil by inject()
+
     @OptIn(ExperimentalMaterial3WindowSizeClassApi::class)
     override fun onCreate(savedInstanceState: Bundle?) {
+        firebaseAppInitialisationUtil.invoke()
         super.onCreate(savedInstanceState)
         WindowCompat.setDecorFitsSystemWindows(window, false)
         setContent { AppCreator(calculateWindowSizeClass(this)) }

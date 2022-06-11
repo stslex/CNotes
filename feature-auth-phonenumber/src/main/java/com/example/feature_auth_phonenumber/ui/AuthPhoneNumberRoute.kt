@@ -1,6 +1,7 @@
 package com.example.feature_auth_phonenumber.ui
 
 import android.app.Activity
+import androidx.activity.compose.BackHandler
 import androidx.compose.foundation.layout.*
 import androidx.compose.material3.Button
 import androidx.compose.material3.Surface
@@ -15,10 +16,7 @@ import androidx.compose.ui.platform.LocalContext
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
 import com.example.feature_auth_phonenumber.core.SignValueState
-import com.example.feature_auth_phonenumber.navigation.PhoneNumberDestination
-import com.google.firebase.FirebaseApp
 import com.stslex.core_ui.theme.AppTheme
-import org.koin.androidx.compose.get
 import org.koin.androidx.compose.getViewModel
 
 @Composable
@@ -27,15 +25,13 @@ fun PhoneNumberRoute(
     openCodeInput: (String) -> Unit,
     openUserProfile: () -> Unit
 ) {
-    if (FirebaseApp.getApps(LocalContext.current).isEmpty()) {
-        FirebaseApp.initializeApp(LocalContext.current, get(), PhoneNumberDestination.destination)
-    }
     PhoneNumberScreen(
         modifier = Modifier.windowInsetsPadding(WindowInsets.safeDrawing),
         popBackStack = popBackStack,
         openCodeInput = openCodeInput,
         openUserProfile = openUserProfile
     )
+    BackHandler(onBack = popBackStack)
 }
 
 @Composable
