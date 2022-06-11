@@ -7,14 +7,15 @@ import com.stslex.feature_profile.data.ProfileRepositoryOld
 import com.stslex.feature_profile.domain.abstraction.GetSyncNotesSizeInteractor
 import kotlinx.coroutines.flow.Flow
 import kotlinx.coroutines.flow.combineTransform
+import kotlinx.coroutines.flow.flowOf
 
 class GetSyncNotesSizeInteractorImpl(
     private val repository: ProfileRepositoryOld,
     private val transformer: TransformerEqualTypeValues<List<NoteEntity>, Int>
 ) : GetSyncNotesSizeInteractor {
 
-    override suspend fun invoke(): Flow<ValueState<Int>> = repository.getLocalNotes()
-        .combineTransform(repository.getRemoteNotes()) { local, remote ->
+    override suspend fun invoke(): Flow<ValueState<Int>> = flowOf(repository.getLocalNotes())
+        .combineTransform(repository.getRealtimeRemoteNotes()) { local, remote ->
             val result = local.transform(transformer, remote)
             emit(result)
         }
