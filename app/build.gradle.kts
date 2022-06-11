@@ -48,6 +48,7 @@ dependencies {
     implementation(project(":core-model"))
     implementation(project(":core-data-source"))
     implementation(project(":core-firebase"))
+    implementation(project(":core-firebase-auth"))
     implementation(project(":core-coroutines"))
     implementation(project(":feature-note-list"))
     implementation(project(":feature-single-note"))

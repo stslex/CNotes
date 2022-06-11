@@ -1,6 +1,5 @@
 package com.example.feature_auth_phonenumber.core
 
-import com.google.firebase.auth.FirebaseUser
 import com.google.firebase.auth.PhoneAuthProvider
 
 sealed class SignValueState {
@@ -10,6 +9,7 @@ sealed class SignValueState {
         val token: PhoneAuthProvider.ForceResendingToken
     ) : SignValueState()
 
-    data class Success(val user: FirebaseUser) : SignValueState()
+    object Success : SignValueState()
     data class Failure(val exception: Exception) : SignValueState()
+    object Loading : SignValueState()
 }

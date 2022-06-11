@@ -30,6 +30,7 @@
             <option value="$PROJECT_DIR$/core-coroutines" />
             <option value="$PROJECT_DIR$/core-data-source" />
             <option value="$PROJECT_DIR$/core-firebase" />
+            <option value="$PROJECT_DIR$/core-firebase-auth" />
             <option value="$PROJECT_DIR$/core-model" />
             <option value="$PROJECT_DIR$/core-navigation" />
             <option value="$PROJECT_DIR$/core-test" />

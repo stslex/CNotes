@@ -13,6 +13,7 @@ import com.stslex.core_navigation.TopLevelDestination
 fun NavGraphBuilder.noteListGraph(
     openSingleNote: (Int) -> Unit,
     openProfile: () -> Unit,
+    openAuthPhoneNumber: () -> Unit,
     nestedGraphs: NavGraphBuilder.() -> Unit
 ) {
     navigation(
@@ -20,7 +21,11 @@ fun NavGraphBuilder.noteListGraph(
         startDestination = NoteListDestination.destination
     ) {
         composable(route = NoteListDestination.destination) {
-            NoteListRoute(openSingleNote = openSingleNote, openProfile = openProfile)
+            NoteListRoute(
+                openSingleNote = openSingleNote,
+                openProfile = openProfile,
+                openAuthPhoneNumber = openAuthPhoneNumber
+            )
         }
         nestedGraphs()
     }

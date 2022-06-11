@@ -4,7 +4,9 @@ import androidx.compose.foundation.layout.*
 import androidx.compose.material3.Button
 import androidx.compose.material3.ElevatedCard
 import androidx.compose.material3.ExperimentalMaterial3Api
-import androidx.compose.runtime.*
+import androidx.compose.runtime.Composable
+import androidx.compose.runtime.State
+import androidx.compose.runtime.collectAsState
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.tooling.preview.Preview
@@ -14,40 +16,28 @@ import com.stslex.core_ui.theme.AppTheme
 import com.stslex.feature_profile.ui.components.ButtonLabel
 import com.stslex.feature_profile.ui.components.NotesSizeStateLabel
 import com.stslex.feature_profile.ui.components.ProfileActionButtons
-import org.koin.androidx.compose.getViewModel
+import org.koin.androidx.compose.get
 
 @Composable
-fun ProfileRoute(
-    openAuthPhoneNumber: () -> Unit,
-    relaunchProfile: () -> Unit,
-    viewModel: ProfileViewModel = getViewModel()
-) {
-    val isUserAuth = remember(viewModel) {
-        viewModel.userIsAuth
-    }
-    when (isUserAuth) {
-        is ValueState.Success -> {
-            if (isUserAuth.data) ProfileScreen(
-                modifier = Modifier.windowInsetsPadding(WindowInsets.safeDrawing),
-                relaunchProfile = relaunchProfile,
-                viewModel = viewModel
-            )
-            else openAuthPhoneNumber()
-        }
-        is ValueState.Failure -> Unit
-        is ValueState.Loading -> Unit
-    }
+fun ProfileRoute(openAuthPhoneNumber: () -> Unit) {
+    /*if (FirebaseApp.getApps(LocalContext.current).isEmpty()) {
+        FirebaseApp.initializeApp(LocalContext.current, get(), ProfileDestination.destination)
+    }*/
+    ProfileScreen(
+        modifier = Modifier.windowInsetsPadding(WindowInsets.safeDrawing),
+        openAuthPhoneNumber = openAuthPhoneNumber
+    )
 }
 
 @Composable
 fun ProfileScreen(
     modifier: Modifier = Modifier,
-    relaunchProfile: () -> Unit,
-    viewModel: ProfileViewModel
+    openAuthPhoneNumber: () -> Unit,
+    viewModel: ProfileViewModel = get()
 ) {
     ProfileScreenContent(
         modifier = modifier,
-        relaunchProfile = relaunchProfile,
+        openAuthPhoneNumber = openAuthPhoneNumber,
         signOut = viewModel::signOut,
         uploadNotes = viewModel::uploadNotes,
         downloadNotes = viewModel::downloadNotes,
@@ -61,10 +51,10 @@ fun ProfileScreen(
 @Composable
 fun ProfileScreenContent(
     modifier: Modifier = Modifier,
-    relaunchProfile: () -> Unit,
+    openAuthPhoneNumber: () -> Unit,
     signOut: () -> Unit,
-    uploadNotes: () -> Unit,
     downloadNotes: () -> Unit,
+    uploadNotes: () -> Unit,
     syncNoteSize: State<ValueState<Int>>,
     localNotesSize: State<ValueState<Int>>,
     remoteNotesSize: State<ValueState<Int>>
@@ -77,7 +67,8 @@ fun ProfileScreenContent(
                 .padding(16.dp)
         ) {
             Column(
-                modifier = Modifier.padding(32.dp)
+                modifier = Modifier
+                    .padding(32.dp)
             ) {
                 NotesSizeStateLabel(label = "Local Notes", notesState = localNotesSize)
                 NotesSizeStateLabel(label = "Remote notes", notesState = remoteNotesSize)
@@ -96,7 +87,7 @@ fun ProfileScreenContent(
                 .padding(32.dp),
             onClick = {
                 signOut()
-                relaunchProfile()
+                openAuthPhoneNumber()
             }
         ) {
             ButtonLabel(label = "sign out")
@@ -108,18 +99,6 @@ fun ProfileScreenContent(
 @Composable
 fun ProfileScreenContentPreview() {
     AppTheme {
-        val syncNoteSize = remember { mutableStateOf(ValueState.Success(1)) }
-        val localNotesSize = remember { mutableStateOf(ValueState.Loading) }
-        val remoteNotesSize = remember { mutableStateOf(ValueState.Loading) }
-        ProfileScreenContent(
-            modifier = Modifier,
-            relaunchProfile = {},
-            signOut = {},
-            uploadNotes = {},
-            downloadNotes = {},
-            syncNoteSize = syncNoteSize,
-            localNotesSize = localNotesSize,
-            remoteNotesSize = remoteNotesSize
-        )
+
     }
 }

@@ -6,6 +6,7 @@
       <module name="CNotes.core-coroutines" target="11" />
       <module name="CNotes.core-data-source" target="11" />
       <module name="CNotes.core-firebase" target="11" />
+      <module name="CNotes.core-firebase-auth" target="11" />
       <module name="CNotes.core-model" target="11" />
       <module name="CNotes.core-navigation" target="11" />
       <module name="CNotes.core-test" target="11" />

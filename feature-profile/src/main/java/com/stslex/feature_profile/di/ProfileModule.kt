@@ -1,6 +1,7 @@
 package com.stslex.feature_profile.di
 
 import com.stslex.feature_profile.data.ProfileRepository
+
 import com.stslex.feature_profile.domain.abstraction.*
 import com.stslex.feature_profile.domain.realisation.*
 import com.stslex.feature_profile.ui.ProfileViewModel

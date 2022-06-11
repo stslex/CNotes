@@ -25,6 +25,7 @@ import org.koin.androidx.compose.getViewModel
 fun NotesScreen(
     openSingleNote: (Int) -> Unit,
     openProfile: () -> Unit,
+    openAuthPhoneNumber: () -> Unit,
     modifier: Modifier = Modifier,
     viewModel: NotesViewModel = getViewModel(),
     lazyListState: LazyListState = rememberLazyListState()
@@ -47,7 +48,10 @@ fun NotesScreen(
                 openSingleNote = openSingleNote
             )
         },
-        topBar = noteMediumTopAppBar(scrollBehavior, openProfile),
+        topBar = noteMediumTopAppBar(
+            scrollBehavior = scrollBehavior,
+            openAuthProfile = if (viewModel.isUserAuth) openProfile else openAuthPhoneNumber
+        ),
         floatingActionButtonPosition = FabPosition.End
     ) { paddingValues ->
         Surface(
@@ -72,7 +76,7 @@ fun NotesScreen(
 
 fun noteMediumTopAppBar(
     scrollBehavior: TopAppBarScrollBehavior,
-    openProfile: () -> Unit
+    openAuthProfile: () -> Unit
 ): @Composable () -> Unit = {
     MediumTopAppBar(
         title = {
@@ -82,7 +86,7 @@ fun noteMediumTopAppBar(
             )
         },
         navigationIcon = {
-            IconButton(onClick = openProfile) {
+            IconButton(onClick = openAuthProfile) {
                 Icon(
                     imageVector = Icons.Default.Person,
                     contentDescription = "account"
@@ -104,5 +108,5 @@ fun noteMediumTopAppBar(
 @Preview
 @Composable
 fun NotesPreview() {
-    NotesScreen({}, {})
+    NotesScreen({}, {}, {})
 }

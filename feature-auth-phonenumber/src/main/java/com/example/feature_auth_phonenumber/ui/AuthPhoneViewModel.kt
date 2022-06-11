@@ -4,27 +4,30 @@ import android.app.Activity
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
 import com.example.feature_auth_phonenumber.core.SignValueState
-import com.example.feature_auth_phonenumber.ui.use_cases.AuthPhoneNumberUseCase
+import com.example.feature_auth_phonenumber.domain.AuthPhoneNumberInteractor
 import com.stslex.core_coroutines.AppDispatchers
-import kotlinx.coroutines.flow.MutableSharedFlow
-import kotlinx.coroutines.flow.SharedFlow
-import kotlinx.coroutines.flow.asSharedFlow
-import kotlinx.coroutines.flow.collectLatest
+import kotlinx.coroutines.flow.*
 import kotlinx.coroutines.launch
 
 class AuthPhoneViewModel(
     private val dispatchers: AppDispatchers,
-    private val authPhoneNumberUseCase: AuthPhoneNumberUseCase
+    private val authPhoneNumberInteractor: AuthPhoneNumberInteractor
 ) : ViewModel() {
 
-    private val _signInState: MutableSharedFlow<SignValueState> = MutableSharedFlow(0)
-    val signValueState: SharedFlow<SignValueState>
-        get() = _signInState.asSharedFlow()
+    private val _signInState: MutableStateFlow<SignValueState> =
+        MutableStateFlow(SignValueState.Loading)
+    val signValueState: StateFlow<SignValueState>
+        get() = _signInState
+            .asStateFlow()
+            .stateIn(
+                scope = viewModelScope,
+                started = SharingStarted.WhileSubscribed(stopTimeoutMillis = 100),
+                initialValue = SignValueState.Loading
+            )
 
     fun signIn(activity: Activity, phoneNumber: String) {
         viewModelScope.launch(dispatchers.io) {
-            authPhoneNumberUseCase.signIn(activity, phoneNumber)
-                .collectLatest(_signInState::emit)
+            authPhoneNumberInteractor.login(activity, phoneNumber).collectLatest(_signInState::emit)
         }
     }
 }
