@@ -39,7 +39,8 @@ fun ProfileScreen(
         modifier = modifier,
         openAuthPhoneNumber = openAuthPhoneNumber,
         signOut = viewModel::signOut,
-        syncNotes = viewModel::synchronizeNotes,
+        uploadNotes = viewModel::uploadNotes,
+        downloadNotes = viewModel::downloadNotes,
         syncNoteSize = viewModel.syncNoteSize.collectAsState(initial = ValueState.Loading),
         localNotesSize = viewModel.localNotesSize.collectAsState(initial = ValueState.Loading),
         remoteNotesSize = viewModel.remoteNoteSize.collectAsState(initial = ValueState.Loading)
@@ -52,7 +53,8 @@ fun ProfileScreenContent(
     modifier: Modifier = Modifier,
     openAuthPhoneNumber: () -> Unit,
     signOut: () -> Unit,
-    syncNotes: () -> Unit,
+    downloadNotes: () -> Unit,
+    uploadNotes: () -> Unit,
     syncNoteSize: State<ValueState<Int>>,
     localNotesSize: State<ValueState<Int>>,
     remoteNotesSize: State<ValueState<Int>>
@@ -73,8 +75,8 @@ fun ProfileScreenContent(
                 NotesSizeStateLabel(label = "Synced Notes", notesState = syncNoteSize)
 
                 ProfileActionButtons(
-                    actionDownload = {},
-                    actionUpload = syncNotes
+                    actionDownload = downloadNotes,
+                    actionUpload = uploadNotes
                 )
             }
         }
