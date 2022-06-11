@@ -10,10 +10,12 @@ import androidx.compose.ui.Modifier
 fun NoteListRoute(
     openSingleNote: (Int) -> Unit,
     openProfile: () -> Unit,
+    openAuthPhoneNumber: () -> Unit
 ) {
     NotesScreen(
         openSingleNote = openSingleNote,
         openProfile = openProfile,
+        openAuthPhoneNumber = openAuthPhoneNumber,
         modifier = Modifier.windowInsetsPadding(
             WindowInsets.safeDrawing
         )

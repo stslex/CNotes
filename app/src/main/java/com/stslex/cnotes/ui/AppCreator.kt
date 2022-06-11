@@ -45,7 +45,7 @@ fun AppCreator(windowSizeClass: WindowSizeClass) {
             bottomBar = {
                 if (
                     windowSizeClass.widthSizeClass == WindowWidthSizeClass.Compact &&
-                    (currentDestination?.route == NoteListDestination.route || currentDestination?.route == TodoDestination.route)
+                    (currentDestination?.route == NoteListDestination.destination || currentDestination?.route == TodoDestination.route)
                 ) {
                     AppBottomBar(
                         onNavigateToTopLevelDestination = niaTopLevelNavigation::navigateTo,
@@ -65,7 +65,7 @@ fun AppCreator(windowSizeClass: WindowSizeClass) {
             ) {
                 if (
                     windowSizeClass.widthSizeClass != WindowWidthSizeClass.Compact &&
-                    (currentDestination?.route == NoteListDestination.route || currentDestination?.route == TodoDestination.route)
+                    (currentDestination?.route == NoteListDestination.destination || currentDestination?.route == TodoDestination.route)
                 ) {
                     AppNavRail(
                         onNavigateToTopLevelDestination = niaTopLevelNavigation::navigateTo,

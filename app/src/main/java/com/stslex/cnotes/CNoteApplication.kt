@@ -8,6 +8,7 @@ import com.google.firebase.FirebaseApp
 import com.stslex.core_coroutines.coroutinesModule
 import com.stslex.core_data_source.roomDatabaseModule
 import com.stslex.core_firebase.firebaseModule
+import com.stslex.core_firebase_auth.di.firebaseAuthModule
 import com.stslex.core_model.di.mapperModule
 import com.stslex.feature_profile.di.profileModule
 import com.stslex.feature_single_note.di.singleNoteModule
@@ -31,7 +32,8 @@ class CNoteApplication : Application() {
                 firebaseModule,
                 authPhoneNumberModule,
                 authCodeModule,
-                profileModule
+                profileModule,
+                firebaseAuthModule
             )
         }
         super.onCreate()

@@ -12,6 +12,7 @@ dependencies {
     implementation(project(":core-model"))
     implementation(project(":core-data-source"))
     implementation(project(":core-coroutines"))
+    implementation(project(":core-firebase"))
 
     with(libs) {
         implementation(koin.core)

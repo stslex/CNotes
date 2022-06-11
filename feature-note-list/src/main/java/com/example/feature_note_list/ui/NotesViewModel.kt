@@ -30,4 +30,7 @@ class NotesViewModel(
             noteRepository.deleteNotesById(ids)
         }
     }
+
+    val isUserAuth: Boolean
+        get() = noteRepository.isUserAuth
 }

@@ -9,43 +9,35 @@ import androidx.compose.runtime.State
 import androidx.compose.runtime.collectAsState
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
-import androidx.compose.ui.platform.LocalContext
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
-import com.google.firebase.FirebaseApp
-import com.google.firebase.auth.FirebaseAuth
 import com.stslex.core.ValueState
 import com.stslex.core_ui.theme.AppTheme
-import com.stslex.feature_profile.navigation.ProfileDestination
 import com.stslex.feature_profile.ui.components.ButtonLabel
 import com.stslex.feature_profile.ui.components.NotesSizeStateLabel
 import com.stslex.feature_profile.ui.components.ProfileActionButtons
 import org.koin.androidx.compose.get
 
 @Composable
-fun ProfileRoute(openAuthPhoneNumber: () -> Unit, relaunchProfile: () -> Unit) {
-    if (FirebaseApp.getApps(LocalContext.current).isEmpty()) {
+fun ProfileRoute(openAuthPhoneNumber: () -> Unit) {
+    /*if (FirebaseApp.getApps(LocalContext.current).isEmpty()) {
         FirebaseApp.initializeApp(LocalContext.current, get(), ProfileDestination.destination)
-    }
-    if (FirebaseAuth.getInstance().currentUser == null) {
-        openAuthPhoneNumber()
-    } else {
-        ProfileScreen(
-            modifier = Modifier.windowInsetsPadding(WindowInsets.safeDrawing),
-            relaunchProfile = relaunchProfile
-        )
-    }
+    }*/
+    ProfileScreen(
+        modifier = Modifier.windowInsetsPadding(WindowInsets.safeDrawing),
+        openAuthPhoneNumber = openAuthPhoneNumber
+    )
 }
 
 @Composable
 fun ProfileScreen(
     modifier: Modifier = Modifier,
-    relaunchProfile: () -> Unit,
+    openAuthPhoneNumber: () -> Unit,
     viewModel: ProfileViewModel = get()
 ) {
     ProfileScreenContent(
         modifier = modifier,
-        relaunchProfile = relaunchProfile,
+        openAuthPhoneNumber = openAuthPhoneNumber,
         signOut = viewModel::signOut,
         syncNotes = viewModel::synchronizeNotes,
         syncNoteSize = viewModel.syncNoteSize.collectAsState(initial = ValueState.Loading),
@@ -58,7 +50,7 @@ fun ProfileScreen(
 @Composable
 fun ProfileScreenContent(
     modifier: Modifier = Modifier,
-    relaunchProfile: () -> Unit,
+    openAuthPhoneNumber: () -> Unit,
     signOut: () -> Unit,
     syncNotes: () -> Unit,
     syncNoteSize: State<ValueState<Int>>,
@@ -93,7 +85,7 @@ fun ProfileScreenContent(
                 .padding(32.dp),
             onClick = {
                 signOut()
-                relaunchProfile()
+                openAuthPhoneNumber()
             }
         ) {
             ButtonLabel(label = "sign out")

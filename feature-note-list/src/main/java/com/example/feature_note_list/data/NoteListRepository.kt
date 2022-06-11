@@ -9,4 +9,6 @@ interface NoteListRepository {
     val allNotes: Flow<PagingData<NoteEntity>>
 
     suspend fun deleteNotesById(ids: List<Int>)
+
+    val isUserAuth: Boolean
 }

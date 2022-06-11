@@ -2,6 +2,7 @@ package com.stslex.cnotes.navigation
 
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Modifier
+import androidx.navigation.NavGraph.Companion.findStartDestination
 import androidx.navigation.NavHostController
 import androidx.navigation.compose.NavHost
 import com.example.feature_auth_code.navigation.AuthCodeDestination
@@ -29,27 +30,39 @@ fun NavigationHost(
     ) {
         noteListGraph(
             openSingleNote = { navController.navigate("${SingleNoteDestination.route}/$it") },
-            openProfile = { navController.navigate(ProfileDestination.route) }
+            openProfile = { navController.navigate(ProfileDestination.route) },
+            openAuthPhoneNumber = { navController.navigate(PhoneNumberDestination.route) }
         ) {
             singleNoteGraph(popBackStack = { navController.popBackStack() })
         }
         todoGraph()
         profileGraph(
-            openAuthPhoneNumber = { navController.navigate(PhoneNumberDestination.route) },
-            relaunchProfile = {
-                navController.popBackStack()
-                navController.navigate(ProfileDestination.route)
+            openAuthPhoneNumber = {
+                navController.navigate(PhoneNumberDestination.route) {
+                    popUpTo(navController.graph.findStartDestination().id) {
+                        saveState = true
+                    }
+                    launchSingleTop = true
+                    restoreState = true
+                }
             }
-        ) {
-            authPhoneNumberGraph(
-                popBackStack = { navController.navigate(NoteListDestination.route) },
-                openCodeInput = { navController.navigate("${AuthCodeDestination.route}/$it") },
-                openUserProfile = { navController.navigate(ProfileDestination.route) }
-            )
-            authCodeGraph(
-                popBackStack = { navController.popBackStack() },
-                openProfile = { navController.navigate(ProfileDestination.route) }
-            )
-        }
+        )
+        authPhoneNumberGraph(
+            popBackStack = { navController.popBackStack() },
+            openCodeInput = { navController.navigate("${AuthCodeDestination.route}/$it") },
+            openUserProfile = { navController.navigate(ProfileDestination.route) }
+        )
+        authCodeGraph(
+            popBackStack = { navController.popBackStack() },
+            openProfile = {
+                navController.navigate(ProfileDestination.route) {
+                    popUpTo(navController.graph.findStartDestination().id) {
+                        saveState = true
+                    }
+                    launchSingleTop = true
+                    restoreState = true
+                }
+            }
+        )
     }
 }

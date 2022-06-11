@@ -11,6 +11,7 @@ dependencies {
     implementation(project(":core-navigation"))
     implementation(project(":core-coroutines"))
     implementation(project(":core-firebase"))
+    implementation(project(":core-firebase-auth"))
 
     with(libs) {
         implementation(koin.core)

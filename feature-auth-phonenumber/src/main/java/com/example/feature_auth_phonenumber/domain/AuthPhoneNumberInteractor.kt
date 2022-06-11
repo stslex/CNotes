@@ -2,11 +2,10 @@ package com.example.feature_auth_phonenumber.domain
 
 import android.app.Activity
 import com.example.feature_auth_phonenumber.core.SignValueState
-import com.example.feature_auth_phonenumber.data.AuthPhoneNumberRepository
 import com.example.feature_auth_phonenumber.ui.use_cases.AuthPhoneNumberUseCase
 import com.stslex.core.ValueState
+import com.stslex.core_firebase_auth.data.FirebaseAuthRepository
 import kotlinx.coroutines.flow.Flow
-import kotlinx.coroutines.flow.collectLatest
 import kotlinx.coroutines.flow.flow
 
 interface AuthPhoneNumberInteractor {
@@ -15,24 +14,22 @@ interface AuthPhoneNumberInteractor {
 
     class Base(
         private val authPhoneNumberUseCase: AuthPhoneNumberUseCase,
-        private val authPhoneNumberRepository: AuthPhoneNumberRepository
+        private val authPhoneNumberRepository: FirebaseAuthRepository
     ) : AuthPhoneNumberInteractor {
 
         override suspend fun login(
             activity: Activity,
             phoneNumber: String
         ): Flow<SignValueState> = flow {
-            authPhoneNumberUseCase.signIn(activity, phoneNumber).collectLatest { logInResult ->
-                if (logInResult is SignValueState.Success) {
-                    authPhoneNumberRepository.saveUser().collectLatest { valueState ->
-                        when (valueState) {
-                            is ValueState.Success -> emit(logInResult)
-                            is ValueState.Failure -> emit(SignValueState.Failure(valueState.exception))
-                            else -> Unit
-                        }
-                    }
-                } else emit(logInResult)
-            }
+            val signInResult = authPhoneNumberUseCase.signIn(activity, phoneNumber)
+            val result = if (signInResult is SignValueState.Success) {
+                when (val saveResult = authPhoneNumberRepository.saveUser()) {
+                    is ValueState.Success -> SignValueState.Success
+                    is ValueState.Failure -> SignValueState.Failure(saveResult.exception)
+                    is ValueState.Loading -> SignValueState.Loading
+                }
+            } else signInResult
+            emit(result)
         }
     }
 }
