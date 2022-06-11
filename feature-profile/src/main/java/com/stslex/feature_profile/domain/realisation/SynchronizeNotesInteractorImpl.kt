@@ -2,14 +2,14 @@ package com.stslex.feature_profile.domain.realisation
 
 import com.stslex.core.ValueState
 import com.stslex.core_model.mapper.MapperNoteListRemote
-import com.stslex.feature_profile.data.ProfileRepository
+import com.stslex.feature_profile.data.ProfileRepositoryOld
 import com.stslex.feature_profile.domain.abstraction.SynchronizeNotesInteractor
 import kotlinx.coroutines.flow.Flow
 import kotlinx.coroutines.flow.collectLatest
 import kotlinx.coroutines.flow.flow
 
 class SynchronizeNotesInteractorImpl(
-    private val repository: ProfileRepository,
+    private val repository: ProfileRepositoryOld,
     private val mapper: MapperNoteListRemote
 ) : SynchronizeNotesInteractor {
 

@@ -15,7 +15,7 @@ interface NoteDao {
     fun getAllNotes(): PagingSource<Int, NoteEntity>
 
     @Query("SELECT * FROM note_table")
-    fun getAllNotesRow(): List<NoteEntity>
+    fun getAllNotesFlow(): Flow<List<NoteEntity>>
 
     @Query("SELECT COUNT(*) FROM note_table")
     fun getNotesSize(): Flow<Int>
