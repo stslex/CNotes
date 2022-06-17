@@ -29,7 +29,7 @@ jobs:
           cache: gradle
 
       - name: Copy CI gradle.properties
-        run: mkdir -p secrets.PATH_PROJECT/.gradle ; cp .github/ci-gradle.properties secrets.PATH_PROJECT/.gradle/gradle.properties
+        run: mkdir -p {secrets.PATH_PROJECT}/.gradle ; cp .github/ci-gradle.properties {secrets.PATH_PROJECT}/.gradle/gradle.properties
 
       - name: Grant execute permission for gradlew
         run: chmod +x gradlew
@@ -38,21 +38,21 @@ jobs:
         uses: actions/cache@v3.0.2
         with:
           path: |
-            secrets.PATH_PROJECT/.gradle/caches
-            secrets.PATH_PROJECT/.gradle/wrapper
-          key: ${{ runner.os }}-gradle-${{ hashFiles('secrets.PATH_PROJECT/**/*.gradle*', 'secrets.PATH_PROJECT/**/gradle-wrapper.properties') }}
+            {secrets.PATH_PROJECT}/.gradle/caches
+            {secrets.PATH_PROJECT}/.gradle/wrapper
+          key: ${{ runner.os }}-gradle-${{ hashFiles('{secrets.PATH_PROJECT}/**/*.gradle*', '{secrets.PATH_PROJECT}/**/gradle-wrapper.properties') }}
           restore-keys: |
             ${{ runner.os }}-gradle
 
       - name: Set up Local properties keys
         run: |
-          echo FIREBASE_API_KEY=\"${{ secrets.FIREBASE_API_KEY }}\" >> secrets.PATH_PROJECT/.local.properties
-          echo FIREBASE_APPLICATION_ID=\"${{ secrets.FIREBASE_APPLICATION_ID }}\" >> secrets.PATH_PROJECT/.local.properties
-          echo FIREBASE_CLIENT_ID=\"${{ secrets.FIREBASE_CLIENT_ID }}\" >> secrets.PATH_PROJECT/.local.properties
-          echo FIREBASE_DATABASE_URL=\"${{ secrets.FIREBASE_DATABASE_URL }}\" >> secrets.PATH_PROJECT/.local.properties
-          echo FIREBASE_PROJECT_ID=\"${{ secrets.FIREBASE_PROJECT_ID }}\" >> secrets.PATH_PROJECT/.local.properties
-          echo sdk.dir=\"${{ secrets.PATH_SDK }}\" >> secrets.PATH_PROJECT/.local.properties
-          ls secrets.PATH_PROJECT
+          echo FIREBASE_API_KEY=\"${{ secrets.FIREBASE_API_KEY }}\" >> {secrets.PATH_PROJECT}/.local.properties
+          echo FIREBASE_APPLICATION_ID=\"${{ secrets.FIREBASE_APPLICATION_ID }}\" >> {secrets.PATH_PROJECT}/.local.properties
+          echo FIREBASE_CLIENT_ID=\"${{ secrets.FIREBASE_CLIENT_ID }}\" >> {secrets.PATH_PROJECT}/.local.properties
+          echo FIREBASE_DATABASE_URL=\"${{ secrets.FIREBASE_DATABASE_URL }}\" >> {secrets.PATH_PROJECT}/.local.properties
+          echo FIREBASE_PROJECT_ID=\"${{ secrets.FIREBASE_PROJECT_ID }}\" >> {secrets.PATH_PROJECT}/.local.properties
+          echo sdk.dir=\"${{ secrets.PATH_SDK }}\" >> {secrets.PATH_PROJECT}/.local.properties
+          ls {secrets.PATH_PROJECT}
 
       - name: Check lint
         run: ./gradlew lintDebug --stacktrace
