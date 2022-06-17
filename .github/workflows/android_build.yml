@@ -52,5 +52,14 @@ jobs:
           echo FIREBASE_DATABASE_URL=\"${{ secrets.FIREBASE_DATABASE_URL }}\" >> secrets.PATH_PROJECT/.local.properties
           echo FIREBASE_PROJECT_ID=\"${{ secrets.FIREBASE_PROJECT_ID }}\" >> secrets.PATH_PROJECT/.local.properties
 
+      - name: Check lint
+        run: ./gradlew lintDebug --status --stacktrace
+
+      - name: Build debug
+        run: ./gradlew assembleDebug --status --stacktrace
+
+      - name: Build release
+        run: ./gradlew assembleRelease --status --stacktrace
+
       - name: Run local tests
         run: ./gradlew testDebug --status --stacktrace
