@@ -63,3 +63,12 @@ jobs:
 
       - name: Run local tests
         run: ./gradlew testDebug --status --stacktrace
+
+      - name: Run instrumentation tests
+        uses: reactivecircus/android-emulator-runner@v2
+        with:
+          api-level: 27
+          disable-animations: true
+          disk-size: 1500M
+          heap-size: 512M
+          script: ./gradlew connectedAndroidTest
