@@ -14,12 +14,19 @@ concurrency:
 jobs:
   unitTest:
     name: Unit tests
-    runs-on: ubuntu-latest
+    runs-on: self-hosted
     timeout-minutes: 60
 
     steps:
       - name: Checkout branch
         uses: actions/checkout@v3
+
+      - name: Setup Android SDK
+        uses: amyu/setup-android@v1.1
+        with:
+          is-use-cache: false
+          sdk-version: '32'
+          build-tools-version: '32.0.0'
 
       - name: Copy CI gradle.properties
         run: mkdir -p ~/.gradle ; cp .github/ci-gradle.properties ~/.gradle/gradle.properties

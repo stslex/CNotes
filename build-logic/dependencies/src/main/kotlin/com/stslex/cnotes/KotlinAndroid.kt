@@ -1,6 +1,17 @@
 package com.stslex.cnotes
 
 import com.android.build.api.dsl.CommonExtension
+import com.android.build.api.dsl.DefaultConfig
+import com.stslex.cnotes.BuildConstants
+import com.stslex.cnotes.BuildConstants.OptionFields.KOTLIN_JVM_OPTIONS
+import com.stslex.cnotes.BuildConstants.Paths.LOCAL_PROPERTIES
+import com.stslex.cnotes.BuildConstants.Paths.SOURCE_DIR
+import com.stslex.cnotes.BuildConstants.Types.STRING
+import com.stslex.cnotes.BuildConstants.Values.FIREBASE_API_KEY
+import com.stslex.cnotes.BuildConstants.Values.FIREBASE_APPLICATION_ID
+import com.stslex.cnotes.BuildConstants.Values.FIREBASE_CLIENT_ID
+import com.stslex.cnotes.BuildConstants.Values.FIREBASE_DATABASE_URL
+import com.stslex.cnotes.BuildConstants.Values.FIREBASE_PROJECT_ID
 import org.gradle.api.JavaVersion
 import org.gradle.api.Project
 import org.gradle.api.artifacts.VersionCatalogsExtension
@@ -19,33 +30,9 @@ fun Project.configureKotlinAndroid(
 
         defaultConfig {
             minSdk = 26
-            val properties = Properties()
-            properties.load(project.rootProject.file("local.properties").inputStream())
-            buildConfigField(
-                "String",
-                "FIREBASE_PROJECT_ID",
-                properties.getProperty("FIREBASE_PROJECT_ID")
-            )
-            buildConfigField(
-                "String",
-                "FIREBASE_APPLICATION_ID",
-                properties.getProperty("FIREBASE_APPLICATION_ID")
-            )
-            buildConfigField(
-                "String",
-                "FIREBASE_CLIENT_ID",
-                properties.getProperty("FIREBASE_CLIENT_ID")
-            )
-            buildConfigField(
-                "String",
-                "FIREBASE_API_KEY",
-                properties.getProperty("FIREBASE_API_KEY")
-            )
-            buildConfigField(
-                "String",
-                "FIREBASE_DATABASE_URL",
-                properties.getProperty("FIREBASE_DATABASE_URL")
-            )
+            Properties().apply {
+                load(project.rootProject.file(LOCAL_PROPERTIES).inputStream())
+            }.let(::setUpBuildConstants)
         }
         compileOptions {
             sourceCompatibility = JavaVersion.VERSION_1_8
@@ -53,22 +40,10 @@ fun Project.configureKotlinAndroid(
             isCoreLibraryDesugaringEnabled = true
         }
         sourceSets.all {
-            java.srcDirs("build/generated/ksp/main/kotlin")
+            java.srcDirs(SOURCE_DIR)
         }
         kotlinOptions {
-            // Treat all Kotlin warnings as errors (disabled by default)
-            // allWarningsAsErrors = properties["warningsAsErrors"] as? Boolean ?: false
-
-            freeCompilerArgs = freeCompilerArgs + listOf(
-                "-Xopt-in=kotlin.RequiresOptIn",
-                // Enable experimental coroutines APIs, including Flow
-                "-Xopt-in=kotlinx.coroutines.ExperimentalCoroutinesApi",
-                "-Xopt-in=kotlinx.coroutines.FlowPreview",
-                "-Xopt-in=kotlin.Experimental",
-                // Enable experimental kotlinx serialization APIs
-                "-Xopt-in=kotlinx.serialization.ExperimentalSerializationApi"
-            )
-
+            freeCompilerArgs = freeCompilerArgs + KOTLIN_JVM_OPTIONS
             // Set JVM target to 1.8
             jvmTarget = JavaVersion.VERSION_1_8.toString()
 
@@ -87,4 +62,12 @@ fun Project.configureKotlinAndroid(
 
 private fun CommonExtension<*, *, *, *>.kotlinOptions(block: KotlinJvmOptions.() -> Unit) {
     (this as ExtensionAware).extensions.configure("kotlinOptions", block)
+}
+
+private fun DefaultConfig.setUpBuildConstants(properties: Properties): Unit = with(properties) {
+    buildConfigField(STRING, FIREBASE_PROJECT_ID, getProperty(FIREBASE_PROJECT_ID))
+    buildConfigField(STRING, FIREBASE_APPLICATION_ID, getProperty(FIREBASE_APPLICATION_ID))
+    buildConfigField(STRING, FIREBASE_CLIENT_ID, getProperty(FIREBASE_CLIENT_ID))
+    buildConfigField(STRING, FIREBASE_API_KEY, getProperty(FIREBASE_API_KEY))
+    buildConfigField(STRING, FIREBASE_DATABASE_URL, getProperty(FIREBASE_DATABASE_URL))
 }
