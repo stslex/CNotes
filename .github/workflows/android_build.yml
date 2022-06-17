@@ -53,4 +53,4 @@ jobs:
           echo FIREBASE_PROJECT_ID=\"${{ secrets.FIREBASE_PROJECT_ID }}\" >> secrets.PATH_PROJECT/.local.properties
 
       - name: Run local tests
-        run: ./gradlew testDebug --stacktrace
+        run: ./gradlew testDebug --status --stacktrace
