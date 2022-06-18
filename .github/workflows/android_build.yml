@@ -40,7 +40,7 @@ jobs:
           path: |
             {secrets.PATH_PROJECT}/.gradle/caches
             {secrets.PATH_PROJECT}/.gradle/wrapper
-          key: ${{ runner.os }}-gradle-${{ hashFiles('${{ secrets.PATH_PROJECT }}/.gradle', '${{ secrets.PATH_PROJECT }}/gradle-wrapper.properties') }}
+          key: ${{ runner.os }}-gradle-${{ hashFiles('${{ secrets.PATH_PROJECT }}/.gradle', '${{ secrets.PATH_PROJECT }}/.gradle/wrapper/gradle-wrapper.properties') }}
           restore-keys: |
             ${{ runner.os }}-gradle
 
