@@ -54,6 +54,8 @@ jobs:
           echo sdk.dir=\"${{ secrets.PATH_SDK }}\" >> ${{ secrets.PATH_PROJECT }}/local.properties
           ls ${{ secrets.PATH_PROJECT }}
 
+      -name: Gradle stop
+        run: ./gradlew --stop
       - name: Check lint
         run: ./gradlew lintDebug --stacktrace
 
