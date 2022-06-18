@@ -46,12 +46,12 @@ jobs:
 
       - name: Set up Local properties keys
         run: |
+          echo sdk.dir=${{ secrets.PATH_SDK }} >> ${{ secrets.PATH_PROJECT }}/local.properties
           echo FIREBASE_API_KEY=\"${{ secrets.FIREBASE_API_KEY }}\" >> ${{ secrets.PATH_PROJECT }}/local.properties
           echo FIREBASE_APPLICATION_ID=\"${{ secrets.FIREBASE_APPLICATION_ID }}\" >> ${{ secrets.PATH_PROJECT }}/local.properties
           echo FIREBASE_CLIENT_ID=\"${{ secrets.FIREBASE_CLIENT_ID }}\" >> ${{ secrets.PATH_PROJECT }}/local.properties
           echo FIREBASE_DATABASE_URL=\"${{ secrets.FIREBASE_DATABASE_URL }}\" >> ${{ secrets.PATH_PROJECT }}/local.properties
           echo FIREBASE_PROJECT_ID=\"${{ secrets.FIREBASE_PROJECT_ID }}\" >> ${{ secrets.PATH_PROJECT }}/local.properties
-          echo sdk.dir=\"${{ secrets.PATH_SDK }}\" >> ${{ secrets.PATH_PROJECT }}/local.properties
           ls ${{ secrets.PATH_PROJECT }}
 
       - name: Gradle stop
