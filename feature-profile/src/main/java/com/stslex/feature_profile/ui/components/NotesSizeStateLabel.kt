@@ -9,6 +9,7 @@ import androidx.compose.runtime.Composable
 import androidx.compose.runtime.State
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
+import androidx.compose.ui.platform.LocalContext
 import androidx.compose.ui.unit.dp
 import com.stslex.core.ValueState
 
@@ -16,7 +17,7 @@ import com.stslex.core.ValueState
 @Composable
 fun NotesSizeStateLabel(
     modifier: Modifier = Modifier,
-    label: String,
+    labelId: Int,
     notesState: State<ValueState<Int>>
 ) {
     Box(
@@ -25,7 +26,7 @@ fun NotesSizeStateLabel(
 
         Text(
             modifier = Modifier.align(Alignment.CenterStart),
-            text = label
+            text = LocalContext.current.getString(labelId)
         )
 
         when (val value = notesState.value) {

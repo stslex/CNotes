@@ -2,7 +2,7 @@ package com.stslex.cnotes
 
 import com.example.feature_note_list.di.noteListModule
 import com.stslex.core_coroutines.coroutinesModule
-import com.stslex.core_data_source.roomDatabaseModule
+import com.stslex.core_data_source.di.roomDatabaseModule
 import com.stslex.core_model.di.mapperModule
 import com.stslex.feature_single_note.di.singleNoteModule
 import org.junit.Rule
