@@ -13,9 +13,9 @@ import androidx.core.graphics.drawable.IconCompat
 import androidx.core.view.WindowCompat
 import com.stslex.cnotes.ui.AppCreator
 import com.stslex.core_firebase.abstraction.FirebaseAppInitialisationUtil
+import com.stslex.core_navigation.ProfileDestination
+import com.stslex.core_navigation.SingleNoteDestination
 import com.stslex.core_resources.R.string
-import com.stslex.feature_profile.navigation.ProfileDestination
-import com.stslex.feature_single_note.navigation.SingleNoteDestination
 import org.koin.android.ext.android.inject
 
 class MainActivity : ComponentActivity() {

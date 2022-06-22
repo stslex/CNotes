@@ -24,12 +24,11 @@ class FirebaseNotesServiceImpl(
             reference.updateChildren(updateMap)
         ).invoke()
 
-    override suspend fun getRealtimeRemoteNotes(): Flow<ValueState<List<NoteEntity>>> =
-        callbackFlow {
-            val listener = ListSnapshot(::trySendBlocking).invoke(NoteEntity::class)
-            reference.addValueEventListener(listener)
-            awaitClose { reference.removeEventListener(listener) }
-        }
+    override val remoteNotes: Flow<ValueState<List<NoteEntity>>> = callbackFlow {
+        val listener = ListSnapshot(::trySendBlocking).invoke(NoteEntity::class)
+        reference.addValueEventListener(listener)
+        awaitClose { reference.removeEventListener(listener) }
+    }
 
     override suspend fun getRemoteNotes(): ValueState<List<NoteEntity>> =
         CoroutineSnapshotHandler<NoteEntity>().invoke(

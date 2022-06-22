@@ -15,7 +15,6 @@ espresso = "3.4.0"
 androidCore = "1.7.0"
 navigation = "2.4.2"
 room = "2.5.0-alpha01"
-accompanist = "0.24.9-beta"
 leakcanary = "2.9.1"
 koin = "3.2.0"
 robolectric = "4.8"
@@ -26,6 +25,7 @@ firestore = "24.1.2"
 database = "20.0.5"
 koinAnnotations = "1.0.0-beta-2"
 shortcuts = "1.0.1"
+accompanist = "0.24.11-rc"
 
 [libraries]
 android-gradlePlugin = { group = "com.android.tools.build", name = "gradle", version.ref = "androidGradlePlugin" }
@@ -63,8 +63,6 @@ androidx-room-compiler = { group = "androidx.room", name = "room-compiler", vers
 androidx-room-ktx = { group = "androidx.room", name = "room-ktx", version.ref = "room" }
 androidx-room-paging = { group = "androidx.room", name = "room-paging", version.ref = "room" }
 
-accompanist-navigation-animation = { group = "com.google.accompanist", name = "accompanist-navigation-animation", version.ref = "accompanist" }
-
 leakcanary = { group = "com.squareup.leakcanary", name = "leakcanary-android", version.ref = "leakcanary" }
 
 koin-android = { group = "io.insert-koin", name = "koin-android", version.ref = "koin" }
@@ -78,3 +76,5 @@ google-services = { group = "com.google.gms", name = "google-services", version.
 google-firebase-auth = { group = "com.google.firebase", name = "firebase-auth-ktx", version.ref = "firebaseAuth" }
 google-firebase-firestore = { group = "com.google.firebase", name = "firebase-firestore-ktx", version.ref = "firestore" }
 google-firebase-database = { group = "com.google.firebase", name = "firebase-database-ktx", version.ref = "database" }
+
+google-accompanist-navigation-animation = { group = "com.google.accompanist", name = "accompanist-navigation-animation", version.ref = "accompanist" }

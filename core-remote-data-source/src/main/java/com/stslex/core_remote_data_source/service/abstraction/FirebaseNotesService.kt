@@ -6,6 +6,6 @@ import kotlinx.coroutines.flow.Flow
 
 interface FirebaseNotesService {
     suspend fun uploadNotesToRemoteDatabase(updateMap: Map<String, Any>): ValueState<Void>
-    suspend fun getRealtimeRemoteNotes(): Flow<ValueState<List<NoteEntity>>>
+    val remoteNotes: Flow<ValueState<List<NoteEntity>>>
     suspend fun getRemoteNotes(): ValueState<List<NoteEntity>>
 }

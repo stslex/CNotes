@@ -35,7 +35,6 @@ fun NotesScreen(
         mutableStateListOf<NoteDynamicUI>()
     }
     val deleteNotesFunction = viewModel::deleteNotesById
-
     val scrollBehavior = enterAlwaysScrollBehavior { true }
 
     Scaffold(

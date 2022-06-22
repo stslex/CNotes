@@ -1,8 +1,6 @@
-package com.example.feature_auth_code.navigation
+package com.stslex.core_navigation
 
-import com.stslex.core_navigation.AppNavigationDestination
-
-object AuthCodeDestination : AppNavigationDestination {
+object AuthCodeDestination : AppDestinations {
     override val route: String
         get() = "auth_code_route"
     override val destination: String

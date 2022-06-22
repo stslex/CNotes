@@ -1,7 +1,9 @@
 package com.example.feature_auth_phonenumber.ui
 
 import android.app.Activity
+import androidx.compose.foundation.background
 import androidx.compose.foundation.layout.*
+import androidx.compose.material3.MaterialTheme
 import androidx.compose.material3.Surface
 import androidx.compose.runtime.*
 import androidx.compose.ui.Alignment
@@ -9,10 +11,10 @@ import androidx.compose.ui.Modifier
 import androidx.compose.ui.platform.LocalContext
 import androidx.compose.ui.tooling.preview.Preview
 import com.example.feature_auth_phonenumber.core.SignValueState
-import com.example.feature_auth_phonenumber.navigation.PhoneNumberDestination
 import com.example.feature_auth_phonenumber.ui.components.ButtonNextStep
 import com.example.feature_auth_phonenumber.ui.components.ButtonPreviousStep
 import com.google.firebase.FirebaseApp
+import com.stslex.core_navigation.PhoneNumberDestination
 import com.stslex.core_ui.theme.AppTheme
 import org.koin.androidx.compose.get
 import org.koin.androidx.compose.getViewModel
@@ -52,7 +54,11 @@ fun PhoneNumberScreen(
 
     val signInValue = viewModel.signValueState.collectAsState(SignValueState.Loading)
 
-    Box(modifier = modifier.fillMaxSize()) {
+    Box(
+        modifier = modifier
+            .fillMaxSize()
+            .background(color = MaterialTheme.colorScheme.background)
+    ) {
 
         PhoneNumberField(
             modifier = Modifier
