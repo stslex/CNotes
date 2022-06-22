@@ -7,3 +7,7 @@ plugins {
 android {
     namespace = "com.stslex.core_resources"
 }
+
+dependencies {
+    implementation(project(":core-test"))
+}
