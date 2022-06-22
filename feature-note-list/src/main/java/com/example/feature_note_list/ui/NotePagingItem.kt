@@ -38,7 +38,7 @@ fun NotePagingItem(
             easing = LinearOutSlowInEasing
         )
     )
-    ElevatedCard(
+    OutlinedCard(
         modifier = Modifier
             .combinedClickable(
                 onClick = noteItemClick(

@@ -1,5 +1,6 @@
 package com.stslex.feature_single_note.ui
 
+import androidx.compose.foundation.background
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.foundation.layout.fillMaxWidth
@@ -26,6 +27,7 @@ fun SingleNoteContent(
     Column(
         modifier = modifier
             .fillMaxSize()
+            .background(color = MaterialTheme.colorScheme.background)
             .padding(20.dp)
     ) {
         SingleNoteTextInputTitle(

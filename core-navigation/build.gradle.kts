@@ -5,7 +5,7 @@ plugins {
 dependencies {
     implementation(project(":core-test"))
     with(libs) {
-        api(androidx.navigation.compose)
+        api(google.accompanist.navigation.animation)
     }
 }
 

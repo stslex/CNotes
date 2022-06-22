@@ -10,7 +10,7 @@ dependencies {
     implementation(project(":core-test"))
     implementation(project(":core-navigation"))
     implementation(project(":core-model"))
-    implementation(project(":core-data-source"))
+    implementation(project(":core-local-data-source"))
     implementation(project(":core-coroutines"))
 
     with(libs) {

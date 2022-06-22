@@ -1,29 +1,27 @@
 package com.stslex.cnotes.navigation
 
+import androidx.compose.animation.ExperimentalAnimationApi
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Modifier
 import androidx.navigation.NavGraph.Companion.findStartDestination
 import androidx.navigation.NavHostController
-import androidx.navigation.compose.NavHost
-import com.example.feature_auth_code.navigation.AuthCodeDestination
 import com.example.feature_auth_code.navigation.authCodeGraph
-import com.example.feature_auth_phonenumber.navigation.PhoneNumberDestination
 import com.example.feature_auth_phonenumber.navigation.authPhoneNumberGraph
-import com.example.feature_note_list.navigation.NoteListDestination
 import com.example.feature_note_list.navigation.noteListGraph
-import com.stslex.feature_profile.navigation.ProfileDestination
+import com.google.accompanist.navigation.animation.AnimatedNavHost
+import com.stslex.core_navigation.*
 import com.stslex.feature_profile.navigation.profileGraph
-import com.stslex.feature_single_note.navigation.SingleNoteDestination
 import com.stslex.feature_single_note.navigation.singleNoteGraph
 import com.stslex.feature_todo.navigation.todoGraph
 
+@OptIn(ExperimentalAnimationApi::class)
 @Composable
 fun NavigationHost(
     navController: NavHostController,
     modifier: Modifier = Modifier,
     startDestination: String = NoteListDestination.route
 ) {
-    NavHost(
+    AnimatedNavHost(
         modifier = modifier,
         navController = navController,
         startDestination = startDestination

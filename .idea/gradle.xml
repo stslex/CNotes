@@ -28,11 +28,13 @@
             <option value="$PROJECT_DIR$/build-logic/dependencies" />
             <option value="$PROJECT_DIR$/core" />
             <option value="$PROJECT_DIR$/core-coroutines" />
-            <option value="$PROJECT_DIR$/core-data-source" />
             <option value="$PROJECT_DIR$/core-firebase" />
             <option value="$PROJECT_DIR$/core-firebase-auth" />
+            <option value="$PROJECT_DIR$/core-local-data-source" />
             <option value="$PROJECT_DIR$/core-model" />
             <option value="$PROJECT_DIR$/core-navigation" />
+            <option value="$PROJECT_DIR$/core-remote-data-source" />
+            <option value="$PROJECT_DIR$/core-resources" />
             <option value="$PROJECT_DIR$/core-test" />
             <option value="$PROJECT_DIR$/core-ui" />
             <option value="$PROJECT_DIR$/feature-auth-code" />

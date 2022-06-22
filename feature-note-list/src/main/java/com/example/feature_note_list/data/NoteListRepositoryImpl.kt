@@ -4,7 +4,7 @@ import androidx.paging.Pager
 import androidx.paging.PagingConfig
 import androidx.paging.PagingData
 import com.google.firebase.auth.FirebaseAuth
-import com.stslex.core_data_source.NoteDao
+import com.stslex.core_data_source.dao.NoteDao
 import com.stslex.core_model.model.NoteEntity
 import kotlinx.coroutines.flow.Flow
 

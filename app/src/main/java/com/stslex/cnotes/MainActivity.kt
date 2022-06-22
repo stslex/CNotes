@@ -13,8 +13,9 @@ import androidx.core.graphics.drawable.IconCompat
 import androidx.core.view.WindowCompat
 import com.stslex.cnotes.ui.AppCreator
 import com.stslex.core_firebase.abstraction.FirebaseAppInitialisationUtil
-import com.stslex.feature_profile.navigation.ProfileDestination
-import com.stslex.feature_single_note.navigation.SingleNoteDestination
+import com.stslex.core_navigation.ProfileDestination
+import com.stslex.core_navigation.SingleNoteDestination
+import com.stslex.core_resources.R.string
 import org.koin.android.ext.android.inject
 
 class MainActivity : ComponentActivity() {
@@ -32,20 +33,20 @@ class MainActivity : ComponentActivity() {
     }
 
     private val shortcutCreateNewNote: ShortcutInfoCompat by lazy {
-        ShortcutInfoCompat.Builder(this, getString(R.string.lb_short_shortcut_create))
-            .setShortLabel(getString(R.string.lb_short_shortcut_create))
-            .setLongLabel(getString(R.string.lb_long_shortcut_create))
-            .setDisabledMessage(getString(R.string.lb_shortcut_disabled_message))
+        ShortcutInfoCompat.Builder(this, getString(string.lb_short_shortcut_create))
+            .setShortLabel(getString(string.lb_short_shortcut_create))
+            .setLongLabel(getString(string.lb_long_shortcut_create))
+            .setDisabledMessage(getString(string.lb_shortcut_disabled_message))
             .setIcon(IconCompat.createWithResource(this, R.drawable.ic_baseline_add_24))
             .setIntent(shortcutIntent.invoke("${SingleNoteDestination.route}/-1"))
             .build()
     }
 
     private val shortcutProfile: ShortcutInfoCompat by lazy {
-        ShortcutInfoCompat.Builder(this, getString(R.string.lb_short_shortcut_profile))
-            .setShortLabel(getString(R.string.lb_short_shortcut_profile))
-            .setLongLabel(getString(R.string.lb_long_shortcut_profile))
-            .setDisabledMessage(getString(R.string.lb_shortcut_disabled_message))
+        ShortcutInfoCompat.Builder(this, getString(string.lb_short_shortcut_profile))
+            .setShortLabel(getString(string.lb_short_shortcut_profile))
+            .setLongLabel(getString(string.lb_long_shortcut_profile))
+            .setDisabledMessage(getString(string.lb_shortcut_disabled_message))
             .setIcon(IconCompat.createWithResource(this, R.drawable.ic_baseline_person_outline_24))
             .setIntent(shortcutIntent.invoke(ProfileDestination.route))
             .build()

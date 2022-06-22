@@ -9,9 +9,11 @@ import androidx.compose.runtime.State
 import androidx.compose.runtime.collectAsState
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
+import androidx.compose.ui.platform.LocalContext
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
 import com.stslex.core.ValueState
+import com.stslex.core_resources.R.string
 import com.stslex.core_ui.theme.AppTheme
 import com.stslex.feature_profile.ui.components.ButtonLabel
 import com.stslex.feature_profile.ui.components.NotesSizeStateLabel
@@ -20,9 +22,6 @@ import org.koin.androidx.compose.get
 
 @Composable
 fun ProfileRoute(openAuthPhoneNumber: () -> Unit) {
-    /*if (FirebaseApp.getApps(LocalContext.current).isEmpty()) {
-        FirebaseApp.initializeApp(LocalContext.current, get(), ProfileDestination.destination)
-    }*/
     ProfileScreen(
         modifier = Modifier.windowInsetsPadding(WindowInsets.safeDrawing),
         openAuthPhoneNumber = openAuthPhoneNumber
@@ -70,9 +69,9 @@ fun ProfileScreenContent(
                 modifier = Modifier
                     .padding(32.dp)
             ) {
-                NotesSizeStateLabel(label = "Local Notes", notesState = localNotesSize)
-                NotesSizeStateLabel(label = "Remote notes", notesState = remoteNotesSize)
-                NotesSizeStateLabel(label = "Synced Notes", notesState = syncNoteSize)
+                NotesSizeStateLabel(labelId = string.lb_local_notes, notesState = localNotesSize)
+                NotesSizeStateLabel(labelId = string.lb_remote_notes, notesState = remoteNotesSize)
+                NotesSizeStateLabel(labelId = string.lb_synced_notes, notesState = syncNoteSize)
 
                 ProfileActionButtons(
                     actionDownload = downloadNotes,
@@ -90,7 +89,7 @@ fun ProfileScreenContent(
                 openAuthPhoneNumber()
             }
         ) {
-            ButtonLabel(label = "sign out")
+            ButtonLabel(label = LocalContext.current.getString(string.b_sign_out))
         }
     }
 }

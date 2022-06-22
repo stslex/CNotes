@@ -16,8 +16,6 @@ fun NoteListRoute(
         openSingleNote = openSingleNote,
         openProfile = openProfile,
         openAuthPhoneNumber = openAuthPhoneNumber,
-        modifier = Modifier.windowInsetsPadding(
-            WindowInsets.safeDrawing
-        )
+        modifier = Modifier.windowInsetsPadding(WindowInsets.safeDrawing)
     )
 }

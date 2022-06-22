@@ -5,10 +5,11 @@ import com.example.feature_auth_code.di.authCodeModule
 import com.example.feature_auth_phonenumber.di.authPhoneNumberModule
 import com.example.feature_note_list.di.noteListModule
 import com.stslex.core_coroutines.coroutinesModule
-import com.stslex.core_data_source.roomDatabaseModule
+import com.stslex.core_data_source.di.roomDatabaseModule
 import com.stslex.core_firebase.firebaseModule
 import com.stslex.core_firebase_auth.di.firebaseAuthModule
 import com.stslex.core_model.di.mapperModule
+import com.stslex.core_remote_data_source.di.remoteDataSourceModule
 import com.stslex.feature_profile.di.profileModule
 import com.stslex.feature_single_note.di.singleNoteModule
 import org.koin.android.ext.koin.androidContext
@@ -31,7 +32,8 @@ class CNoteApplication : Application() {
                 authPhoneNumberModule,
                 authCodeModule,
                 profileModule,
-                firebaseAuthModule
+                firebaseAuthModule,
+                remoteDataSourceModule
             )
         }
         super.onCreate()
