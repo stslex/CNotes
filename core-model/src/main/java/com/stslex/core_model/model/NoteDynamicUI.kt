@@ -8,7 +8,7 @@ data class NoteDynamicUI(
     val id: Int,
     val title: String,
     val content: String,
-    val timestamp: Long,
+    val timestamp: String,
     private val select: MutableState<Boolean> = mutableStateOf(false)
 ) {
     fun setSelect(select: Boolean) {

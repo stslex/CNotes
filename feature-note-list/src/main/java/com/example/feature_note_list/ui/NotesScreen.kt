@@ -1,24 +1,31 @@
 package com.example.feature_note_list.ui
 
+import androidx.compose.animation.AnimatedVisibility
+import androidx.compose.animation.core.exponentialDecay
 import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.lazy.LazyColumn
 import androidx.compose.foundation.lazy.LazyListState
 import androidx.compose.foundation.lazy.rememberLazyListState
-import androidx.compose.material.icons.Icons
-import androidx.compose.material.icons.filled.Person
-import androidx.compose.material.icons.filled.Share
-import androidx.compose.material3.*
-import androidx.compose.material3.TopAppBarDefaults.enterAlwaysScrollBehavior
+import androidx.compose.material3.ExperimentalMaterial3Api
+import androidx.compose.material3.FabPosition
+import androidx.compose.material3.Scaffold
+import androidx.compose.material3.Surface
+import androidx.compose.material3.TopAppBarDefaults.exitUntilCollapsedScrollBehavior
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.mutableStateListOf
+import androidx.compose.runtime.mutableStateOf
 import androidx.compose.runtime.remember
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.input.nestedscroll.nestedScroll
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.paging.compose.collectAsLazyPagingItems
 import androidx.paging.compose.items
+import com.example.feature_note_list.ui.fab.NotesFab
+import com.example.feature_note_list.ui.note.NotePagingItem
+import com.example.feature_note_list.ui.top_bar.NoteMediumTopAppBar
 import com.stslex.core_model.model.NoteDynamicUI
 import org.koin.androidx.compose.getViewModel
+
 
 @OptIn(ExperimentalMaterial3Api::class)
 @Composable
@@ -31,26 +38,33 @@ fun NotesScreen(
     lazyListState: LazyListState = rememberLazyListState()
 ) {
     val pagingItems = viewModel.allNotes.collectAsLazyPagingItems()
-    val selectedNotes = remember {
-        mutableStateListOf<NoteDynamicUI>()
-    }
+    val selectedNotes = remember { mutableStateListOf<NoteDynamicUI>() }
     val deleteNotesFunction = viewModel::deleteNotesById
-    val scrollBehavior = enterAlwaysScrollBehavior { true }
-
+    val scrollBehavior = exitUntilCollapsedScrollBehavior(
+        decayAnimationSpec = exponentialDecay(),
+        canScroll = { true }
+    )
+    val isButtonVisible = remember { mutableStateOf(true) }
     Scaffold(
         modifier = modifier.nestedScroll(scrollBehavior.nestedScrollConnection),
         floatingActionButton = {
-            NotesFab(
-                lazyListState = lazyListState,
-                selectedNotes = selectedNotes,
-                deleteNotesFunction = deleteNotesFunction,
-                openSingleNote = openSingleNote
+            AnimatedVisibility(visible = isButtonVisible.value) {
+                NotesFab(
+                    lazyListState = lazyListState,
+                    selectedNotes = selectedNotes,
+                    deleteNotesFunction = deleteNotesFunction,
+                    openSingleNote = openSingleNote,
+                    isButtonVisible = isButtonVisible
+                )
+            }
+        },
+        topBar = {
+            NoteMediumTopAppBar(
+                scrollBehavior = scrollBehavior,
+                openAccount = if (viewModel.isUserAuth) openProfile else openAuthPhoneNumber,
+                selectedNotes = selectedNotes
             )
         },
-        topBar = noteMediumTopAppBar(
-            scrollBehavior = scrollBehavior,
-            openAuthProfile = if (viewModel.isUserAuth) openProfile else openAuthPhoneNumber
-        ),
         floatingActionButtonPosition = FabPosition.End
     ) { paddingValues ->
         Surface(
@@ -64,7 +78,8 @@ fun NotesScreen(
                         NotePagingItem(
                             note = item,
                             selectedNotes = selectedNotes,
-                            openSingleNote = openSingleNote
+                            openSingleNote = openSingleNote,
+                            isButtonVisible = isButtonVisible
                         )
                     }
                 }
@@ -73,36 +88,6 @@ fun NotesScreen(
     }
 }
 
-fun noteMediumTopAppBar(
-    scrollBehavior: TopAppBarScrollBehavior,
-    openAuthProfile: () -> Unit
-): @Composable () -> Unit = {
-    MediumTopAppBar(
-        title = {
-            Text(
-                text = "Notes",
-                style = MaterialTheme.typography.titleLarge
-            )
-        },
-        navigationIcon = {
-            IconButton(onClick = openAuthProfile) {
-                Icon(
-                    imageVector = Icons.Default.Person,
-                    contentDescription = "account"
-                )
-            }
-        },
-        actions = {
-            IconButton(onClick = { /*TODO*/ }) {
-                Icon(
-                    imageVector = Icons.Default.Share,
-                    contentDescription = "account"
-                )
-            }
-        },
-        scrollBehavior = scrollBehavior
-    )
-}
 
 @Preview
 @Composable

@@ -12,6 +12,7 @@ dependencies {
     implementation(project(":core-model"))
     implementation(project(":core-local-data-source"))
     implementation(project(":core-coroutines"))
+    implementation(project(":core-resources"))
     implementation(project(":core-firebase"))
 
     with(libs) {
