@@ -12,6 +12,9 @@
     <string name="lb_remote_notes">Remote Notes</string>
     <string name="lb_synced_notes">Synced Notes</string>
     <string name="lb_create">create</string>
+    <string name="lb_delete">delete</string>
+    <string name="lb_account">account</string>
+    <string name="lb_share">share</string>
 
     <!--Labels Shortcut-->
     <string name="lb_short_shortcut_create">create</string>

@@ -1,4 +1,4 @@
-package com.stslex.core_navigation
+package com.stslex.core_navigation.transitions
 
 import androidx.compose.animation.AnimatedContentScope
 import androidx.compose.animation.EnterTransition

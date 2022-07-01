@@ -8,8 +8,8 @@ import androidx.compose.material.icons.filled.Notifications
 import androidx.compose.material.icons.outlined.Notifications
 import androidx.navigation.NavGraphBuilder
 import com.google.accompanist.navigation.animation.composable
-import com.stslex.core_navigation.NoteListDestination
-import com.stslex.core_navigation.TodoDestination
+import com.stslex.core_navigation.destinations.NoteListDestination
+import com.stslex.core_navigation.destinations.TodoDestination
 import com.stslex.core_navigation.TopLevelDestination
 import com.stslex.feature_todo.R
 import com.stslex.feature_todo.ui.TodoRoute

@@ -1,10 +1,11 @@
-package com.stslex.feature_single_note.data
+package com.stslex.feature_single_note.data.realisation
 
 import com.stslex.core.ValueState
 import com.stslex.core_data_source.dao.NoteDao
 import com.stslex.core_model.mapper.MapperNoteUIEntity
 import com.stslex.core_model.model.NoteEntity
 import com.stslex.core_model.model.NoteUI
+import com.stslex.feature_single_note.data.abstraction.SingleNoteRepository
 import kotlinx.coroutines.flow.Flow
 import kotlinx.coroutines.flow.flow
 import java.io.IOException

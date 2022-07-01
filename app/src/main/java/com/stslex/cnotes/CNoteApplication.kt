@@ -4,6 +4,7 @@ import android.app.Application
 import com.example.feature_auth_code.di.authCodeModule
 import com.example.feature_auth_phonenumber.di.authPhoneNumberModule
 import com.example.feature_note_list.di.noteListModule
+import com.stslex.cnotes.di.appModule
 import com.stslex.core_coroutines.coroutinesModule
 import com.stslex.core_data_source.di.roomDatabaseModule
 import com.stslex.core_firebase.firebaseModule
@@ -23,6 +24,7 @@ class CNoteApplication : Application() {
             androidLogger()
             androidContext(this@CNoteApplication)
             modules(
+                appModule,
                 roomDatabaseModule,
                 coroutinesModule,
                 mapperModule,

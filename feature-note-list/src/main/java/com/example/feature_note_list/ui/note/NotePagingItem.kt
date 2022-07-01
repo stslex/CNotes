@@ -1,24 +1,22 @@
-package com.example.feature_note_list.ui
+package com.example.feature_note_list.ui.note
 
 import androidx.compose.animation.animateColorAsState
 import androidx.compose.animation.core.LinearOutSlowInEasing
 import androidx.compose.animation.core.tween
 import androidx.compose.foundation.ExperimentalFoundationApi
 import androidx.compose.foundation.combinedClickable
-import androidx.compose.foundation.layout.Column
-import androidx.compose.foundation.layout.ColumnScope
 import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.padding
-import androidx.compose.material3.*
+import androidx.compose.material3.CardDefaults
+import androidx.compose.material3.ExperimentalMaterial3Api
+import androidx.compose.material3.MaterialTheme
+import androidx.compose.material3.OutlinedCard
 import androidx.compose.runtime.Composable
+import androidx.compose.runtime.MutableState
 import androidx.compose.runtime.snapshots.SnapshotStateList
 import androidx.compose.ui.Modifier
-import androidx.compose.ui.text.style.TextAlign
-import androidx.compose.ui.text.style.TextOverflow
 import androidx.compose.ui.unit.dp
 import com.stslex.core_model.model.NoteDynamicUI
-import java.text.SimpleDateFormat
-import java.util.*
 
 
 @OptIn(ExperimentalMaterial3Api::class, ExperimentalFoundationApi::class)
@@ -26,7 +24,8 @@ import java.util.*
 fun NotePagingItem(
     note: NoteDynamicUI,
     selectedNotes: SnapshotStateList<NoteDynamicUI>,
-    openSingleNote: (Int) -> Unit
+    openSingleNote: (Int) -> Unit,
+    isButtonVisible: MutableState<Boolean>
 ) {
     val colorUnselect = MaterialTheme.colorScheme.surface
     val colorSelect = MaterialTheme.colorScheme.primaryContainer
@@ -44,7 +43,8 @@ fun NotePagingItem(
                 onClick = noteItemClick(
                     note = note,
                     openSingleNote = openSingleNote,
-                    selectedNotes = selectedNotes
+                    selectedNotes = selectedNotes,
+                    isButtonVisible = isButtonVisible
                 ),
                 onLongClick = noteItemLongClick(
                     note = note,
@@ -59,18 +59,20 @@ fun NotePagingItem(
             containerColor = color.value,
             disabledContainerColor = color.value
         ),
-        content = noteItemContent(note = note),
+        content = { NoteItemContent(note = note) }
     )
 }
 
 fun noteItemClick(
     note: NoteDynamicUI,
     selectedNotes: SnapshotStateList<NoteDynamicUI>,
-    openSingleNote: (Int) -> Unit
+    openSingleNote: (Int) -> Unit,
+    isButtonVisible: MutableState<Boolean>
 ): () -> Unit = {
     if (selectedNotes.isNotEmpty()) {
         selectItem(note, selectedNotes)
     } else {
+        isButtonVisible.value = false
         openSingleNote(note.id)
     }
 }
@@ -90,69 +92,4 @@ private fun selectItem(
     if (selectedNotes.contains(note)) {
         selectedNotes.remove(note)
     } else selectedNotes.add(note)
-}
-
-fun noteItemContent(note: NoteDynamicUI): @Composable ColumnScope.() -> Unit = {
-    Column(
-        modifier = Modifier
-            .fillMaxWidth()
-            .padding(8.dp)
-    ) {
-        NoteTitle(
-            modifier = Modifier
-                .padding(8.dp)
-                .fillMaxWidth(),
-            title = note.title
-        )
-        NoteContent(
-            modifier = Modifier
-                .padding(4.dp)
-                .fillMaxWidth(),
-            content = note.content
-        )
-        NoteTimestamp(
-            modifier = Modifier
-                .padding(4.dp)
-                .fillMaxWidth(),
-            timestamp = note.timestamp
-        )
-    }
-}
-
-@Composable
-fun NoteTitle(
-    modifier: Modifier = Modifier,
-    title: String
-) {
-    Text(
-        modifier = modifier,
-        text = title,
-        maxLines = 1,
-        style = MaterialTheme.typography.titleLarge,
-        overflow = TextOverflow.Ellipsis
-    )
-}
-
-@Composable
-fun NoteContent(modifier: Modifier, content: String) {
-    Text(
-        modifier = modifier,
-        text = content,
-        maxLines = 5,
-        style = MaterialTheme.typography.bodyLarge,
-        overflow = TextOverflow.Ellipsis
-    )
-}
-
-@Composable
-fun NoteTimestamp(modifier: Modifier, timestamp: Long) {
-    val locale = Locale.getDefault()
-    val time = SimpleDateFormat("kk.mm", locale).format(timestamp)
-    Text(
-        modifier = modifier,
-        text = time,
-        maxLines = 5,
-        style = MaterialTheme.typography.labelMedium,
-        textAlign = TextAlign.End
-    )
 }

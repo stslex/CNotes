@@ -9,7 +9,7 @@ import com.example.feature_auth_code.navigation.authCodeGraph
 import com.example.feature_auth_phonenumber.navigation.authPhoneNumberGraph
 import com.example.feature_note_list.navigation.noteListGraph
 import com.google.accompanist.navigation.animation.AnimatedNavHost
-import com.stslex.core_navigation.*
+import com.stslex.core_navigation.destinations.*
 import com.stslex.feature_profile.navigation.profileGraph
 import com.stslex.feature_single_note.navigation.singleNoteGraph
 import com.stslex.feature_todo.navigation.todoGraph

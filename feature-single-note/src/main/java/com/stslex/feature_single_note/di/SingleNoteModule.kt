@@ -1,7 +1,7 @@
 package com.stslex.feature_single_note.di
 
-import com.stslex.feature_single_note.data.SingleNoteRepository
-import com.stslex.feature_single_note.data.SingleNoteRepositoryImpl
+import com.stslex.feature_single_note.data.abstraction.SingleNoteRepository
+import com.stslex.feature_single_note.data.realisation.SingleNoteRepositoryImpl
 import com.stslex.feature_single_note.ui.SingleNoteViewModel
 import org.koin.androidx.viewmodel.dsl.viewModelOf
 import org.koin.core.module.dsl.bind

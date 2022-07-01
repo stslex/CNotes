@@ -14,7 +14,7 @@ import com.example.feature_auth_phonenumber.core.SignValueState
 import com.example.feature_auth_phonenumber.ui.components.ButtonNextStep
 import com.example.feature_auth_phonenumber.ui.components.ButtonPreviousStep
 import com.google.firebase.FirebaseApp
-import com.stslex.core_navigation.PhoneNumberDestination
+import com.stslex.core_navigation.destinations.PhoneNumberDestination
 import com.stslex.core_ui.theme.AppTheme
 import org.koin.androidx.compose.get
 import org.koin.androidx.compose.getViewModel

@@ -1,4 +1,4 @@
-package com.stslex.core_navigation
+package com.stslex.core_navigation.destinations
 
 object AuthCodeDestination : AppDestinations {
     override val route: String

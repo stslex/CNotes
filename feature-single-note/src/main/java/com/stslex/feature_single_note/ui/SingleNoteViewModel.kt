@@ -6,7 +6,7 @@ import com.stslex.core.ValueState
 import com.stslex.core_coroutines.AppDispatchers
 import com.stslex.core_model.mapper.MapperValueNoteEntityUI
 import com.stslex.core_model.model.NoteUI
-import com.stslex.feature_single_note.data.SingleNoteRepository
+import com.stslex.feature_single_note.data.abstraction.SingleNoteRepository
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.flow.*
 import kotlinx.coroutines.launch
