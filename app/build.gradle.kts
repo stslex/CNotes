@@ -69,5 +69,6 @@ dependencies {
         implementation(androidx.paging.compose)
         implementation(androidx.core.kts)
         implementation(androidx.core.google.shortcuts)
+        implementation(google.accompanist.systemuicontroller)
     }
 }
