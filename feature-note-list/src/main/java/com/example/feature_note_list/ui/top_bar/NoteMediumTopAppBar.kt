@@ -63,7 +63,7 @@ private fun ActionShare(
         modifier = modifier,
         onClick = {
             val sendingData = selectedNotes.joinToString(separator = "\n") {
-                "${it.title}: ${it.content}"
+                "${it.title}: \n${it.content}"
             }
             val intent = Intent().apply {
                 action = Intent.ACTION_SEND

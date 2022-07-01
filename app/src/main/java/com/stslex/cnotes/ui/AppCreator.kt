@@ -17,8 +17,8 @@ import com.example.feature_note_list.navigation.noteListTopLevelDestination
 import com.google.accompanist.navigation.animation.rememberAnimatedNavController
 import com.stslex.cnotes.navigation.AppTopLevelNavigation
 import com.stslex.cnotes.navigation.NavigationHost
-import com.stslex.core_navigation.NoteListDestination
-import com.stslex.core_navigation.TodoDestination
+import com.stslex.core_navigation.destinations.NoteListDestination
+import com.stslex.core_navigation.destinations.TodoDestination
 import com.stslex.core_ui.theme.AppTheme
 import com.stslex.feature_todo.navigation.todoTopLevelDestination
 

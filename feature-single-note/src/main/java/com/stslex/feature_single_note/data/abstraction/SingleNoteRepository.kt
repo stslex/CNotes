@@ -1,4 +1,4 @@
-package com.stslex.feature_single_note.data
+package com.stslex.feature_single_note.data.abstraction
 
 import com.stslex.core.ValueState
 import com.stslex.core_model.model.NoteEntity

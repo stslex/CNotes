@@ -9,7 +9,7 @@ import com.example.feature_note_list.R
 import com.example.feature_note_list.ui.NoteListRoute
 import com.google.accompanist.navigation.animation.composable
 import com.google.accompanist.navigation.animation.navigation
-import com.stslex.core_navigation.NoteListDestination
+import com.stslex.core_navigation.destinations.NoteListDestination
 import com.stslex.core_navigation.TopLevelDestination
 
 @OptIn(ExperimentalAnimationApi::class)

@@ -4,7 +4,7 @@ import androidx.compose.animation.ExperimentalAnimationApi
 import androidx.navigation.NavGraphBuilder
 import androidx.navigation.navDeepLink
 import com.google.accompanist.navigation.animation.composable
-import com.stslex.core_navigation.ProfileDestination
+import com.stslex.core_navigation.destinations.ProfileDestination
 import com.stslex.feature_profile.ui.ProfileRoute
 
 @OptIn(ExperimentalAnimationApi::class)

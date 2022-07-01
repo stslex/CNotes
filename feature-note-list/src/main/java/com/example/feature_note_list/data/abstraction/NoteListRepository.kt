@@ -1,4 +1,4 @@
-package com.example.feature_note_list.data
+package com.example.feature_note_list.data.abstraction
 
 import androidx.paging.PagingData
 import com.stslex.core_model.model.NoteEntity

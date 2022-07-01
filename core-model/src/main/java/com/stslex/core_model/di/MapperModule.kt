@@ -1,5 +1,6 @@
 package com.stslex.core_model.di
 
+import com.stslex.core_model.common.PrimaryMapper
 import com.stslex.core_model.mapper.*
 import com.stslex.core_model.model.NoteEntity
 import com.stslex.core_model.transformer.TransformerNotesSyncedSize
@@ -18,6 +19,7 @@ val mapperModule = module {
     singleOf(MapperNoteListRemote::Base) { bind<MapperNoteListRemote>() }
     singleOf(MapperNoteSize::Base) { bind<MapperNoteSize>() }
     singleOf(TransformerNotesSyncedSize::Base) { bind<TransformerNotesSyncedSize>() }
+    singleOf(PrimaryMapper::Base) { bind<PrimaryMapper>() }
     single<TransformerEqualTypeValues<List<NoteEntity>, Int>> {
         TransformerEqualTypeValues.Base(get<TransformerNotesSyncedSize>())
     }

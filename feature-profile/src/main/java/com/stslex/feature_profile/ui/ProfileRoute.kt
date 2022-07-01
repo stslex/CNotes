@@ -69,6 +69,7 @@ fun ProfileScreenContent(
                 modifier = Modifier
                     .padding(32.dp)
             ) {
+                System.out.println("remoteNotesSize::" + remoteNotesSize.value)
                 NotesSizeStateLabel(labelId = string.lb_local_notes, notesState = localNotesSize)
                 NotesSizeStateLabel(labelId = string.lb_remote_notes, notesState = remoteNotesSize)
                 NotesSizeStateLabel(labelId = string.lb_synced_notes, notesState = syncNoteSize)
