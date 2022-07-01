@@ -25,7 +25,7 @@ firestore = "24.1.2"
 database = "20.0.5"
 koinAnnotations = "1.0.0-beta-2"
 shortcuts = "1.0.1"
-accompanist = "0.24.11-rc"
+accompanist = "0.24.13-rc"
 
 [libraries]
 android-gradlePlugin = { group = "com.android.tools.build", name = "gradle", version.ref = "androidGradlePlugin" }
@@ -77,4 +77,5 @@ google-firebase-auth = { group = "com.google.firebase", name = "firebase-auth-kt
 google-firebase-firestore = { group = "com.google.firebase", name = "firebase-firestore-ktx", version.ref = "firestore" }
 google-firebase-database = { group = "com.google.firebase", name = "firebase-database-ktx", version.ref = "database" }
 
-google-accompanist-navigation-animation = { group = "com.google.accompanist", name = "accompanist-navigation-animation", version.ref = "accompanist" }
+google-accompanist-navigation = { group = "com.google.accompanist", name = "accompanist-navigation-animation", version.ref = "accompanist" }
+google-accompanist-systemuicontroller = { group = "com.google.accompanist", name = "accompanist-systemuicontroller", version.ref = "accompanist" }

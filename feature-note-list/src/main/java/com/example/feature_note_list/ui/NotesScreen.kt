@@ -39,7 +39,7 @@ fun NotesScreen(
     val pagingItems = viewModel.allNotes.collectAsLazyPagingItems()
     val selectedNotes = remember { mutableStateListOf<NoteDynamicUI>() }
     val deleteNotesFunction = viewModel::deleteNotesById
-    val scrollBehavior = enterAlwaysScrollBehavior { true }
+    val scrollBehavior = enterAlwaysScrollBehavior { pagingItems.itemCount >= 6 }
     val isButtonVisible = remember { mutableStateOf(true) }
     Scaffold(
         modifier = modifier.nestedScroll(scrollBehavior.nestedScrollConnection),

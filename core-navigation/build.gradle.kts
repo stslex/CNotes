@@ -5,7 +5,7 @@ plugins {
 dependencies {
     implementation(project(":core-test"))
     with(libs) {
-        api(google.accompanist.navigation.animation)
+        api(google.accompanist.navigation)
     }
 }
 
