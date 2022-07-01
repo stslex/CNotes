@@ -81,8 +81,8 @@ class ProfileRepositoryImpl(
         }
 
     override val localNotes: Flow<ValueState<List<NoteEntity>>>
-        get() = flowMapper.map(noteDao.getAllNotesFlow())
+        get() = flowMapper.map(noteDao::getAllNotesFlow)
 
     override val localNotesSize: Flow<ValueState<Int>>
-        get() = flowMapper.map(noteDao.getNotesSize())
+        get() = flowMapper.map(noteDao::getNotesSize)
 }

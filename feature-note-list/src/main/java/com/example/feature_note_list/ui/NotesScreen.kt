@@ -5,10 +5,7 @@ import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.lazy.LazyColumn
 import androidx.compose.foundation.lazy.LazyListState
 import androidx.compose.foundation.lazy.rememberLazyListState
-import androidx.compose.material3.ExperimentalMaterial3Api
-import androidx.compose.material3.FabPosition
-import androidx.compose.material3.Scaffold
-import androidx.compose.material3.Surface
+import androidx.compose.material3.*
 import androidx.compose.material3.TopAppBarDefaults.enterAlwaysScrollBehavior
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.mutableStateListOf
@@ -34,12 +31,13 @@ fun NotesScreen(
     openAuthPhoneNumber: () -> Unit,
     modifier: Modifier = Modifier,
     viewModel: NotesViewModel = getViewModel(),
-    lazyListState: LazyListState = rememberLazyListState()
+    lazyListState: LazyListState = rememberLazyListState(),
+    scrollState: TopAppBarScrollState = rememberTopAppBarScrollState()
 ) {
     val pagingItems = viewModel.allNotes.collectAsLazyPagingItems()
     val selectedNotes = remember { mutableStateListOf<NoteDynamicUI>() }
     val deleteNotesFunction = viewModel::deleteNotesById
-    val scrollBehavior = enterAlwaysScrollBehavior { pagingItems.itemCount >= 6 }
+    val scrollBehavior = enterAlwaysScrollBehavior(scrollState) { true }
     val isButtonVisible = remember { mutableStateOf(true) }
     Scaffold(
         modifier = modifier.nestedScroll(scrollBehavior.nestedScrollConnection),
@@ -56,6 +54,7 @@ fun NotesScreen(
         },
         topBar = {
             NoteMediumTopAppBar(
+                scrollState = scrollState,
                 scrollBehavior = scrollBehavior,
                 openAccount = if (viewModel.isUserAuth) openProfile else openAuthPhoneNumber,
                 selectedNotes = selectedNotes

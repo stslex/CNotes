@@ -20,11 +20,12 @@ import com.stslex.core_resources.R
 
 @Composable
 fun NoteMediumTopAppBar(
+    modifier: Modifier = Modifier,
+    scrollState: TopAppBarScrollState,
     scrollBehavior: TopAppBarScrollBehavior,
     openAccount: () -> Unit,
     selectedNotes: SnapshotStateList<NoteDynamicUI>,
     context: Context = LocalContext.current,
-    modifier: Modifier = Modifier
 ) {
     var profileButtonClicked by remember { mutableStateOf(false) }
     MediumTopAppBar(

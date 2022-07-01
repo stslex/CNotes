@@ -2,7 +2,6 @@ package com.stslex.cnotes
 
 import com.android.build.api.dsl.CommonExtension
 import com.android.build.api.dsl.DefaultConfig
-import com.stslex.cnotes.BuildConstants
 import com.stslex.cnotes.BuildConstants.OptionFields.KOTLIN_JVM_OPTIONS
 import com.stslex.cnotes.BuildConstants.Paths.LOCAL_PROPERTIES
 import com.stslex.cnotes.BuildConstants.Paths.SOURCE_DIR
@@ -26,7 +25,7 @@ fun Project.configureKotlinAndroid(
     commonExtension: CommonExtension<*, *, *, *>,
 ) {
     commonExtension.apply {
-        compileSdk = 32
+        compileSdk = 33
 
         defaultConfig {
             minSdk = 26
@@ -35,8 +34,8 @@ fun Project.configureKotlinAndroid(
             }.let(::setUpBuildConstants)
         }
         compileOptions {
-            sourceCompatibility = JavaVersion.VERSION_1_8
-            targetCompatibility = JavaVersion.VERSION_1_8
+            sourceCompatibility = JavaVersion.VERSION_11
+            targetCompatibility = JavaVersion.VERSION_11
             isCoreLibraryDesugaringEnabled = true
         }
         sourceSets.all {
@@ -44,8 +43,8 @@ fun Project.configureKotlinAndroid(
         }
         kotlinOptions {
             freeCompilerArgs = freeCompilerArgs + KOTLIN_JVM_OPTIONS
-            // Set JVM target to 1.8
-            jvmTarget = JavaVersion.VERSION_1_8.toString()
+            // Set JVM target to 11
+            jvmTarget = "11"
 
             sourceSets.all {
                 kotlin.srcDir("build/generated/ksp/$name/kotlin")

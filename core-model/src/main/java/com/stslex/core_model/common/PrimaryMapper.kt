@@ -10,14 +10,14 @@ import kotlin.coroutines.suspendCoroutine
 
 interface PrimaryMapper {
 
-    fun <T> map(data: Flow<T>): Flow<ValueState<T>>
+    fun <T> map(process: () -> Flow<T>): Flow<ValueState<T>>
 
     suspend fun <T> map(process: () -> T): ValueState<T>
 
     class Base : PrimaryMapper {
 
-        override fun <T> map(data: Flow<T>): Flow<ValueState<T>> = try {
-            data.mapNotNull { ValueState.Success(it) }
+        override fun <T> map(process: () -> Flow<T>): Flow<ValueState<T>> = try {
+            process().mapNotNull { ValueState.Success(it) }
         } catch (exception: IOException) {
             flowOf(ValueState.Failure(exception))
         }
