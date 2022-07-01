@@ -10,6 +10,6 @@ android {
 
     defaultConfig {
         @Suppress("UnstableApiUsage")
-        targetSdk = 32
+        targetSdk = 33
     }
 }
