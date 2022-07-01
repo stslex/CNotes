@@ -27,21 +27,21 @@ val transitionContentButtonSpec: AnimatedContentScope<Boolean>.() -> ContentTran
     get() = {
         fadeIn(
             animationSpec = tween(
-                500,
-                150
+                700,
+                200
             )
         ) with fadeOut(
-            animationSpec = tween(500)
+            animationSpec = tween(700)
         ) using SizeTransform { initialSize, targetSize ->
             if (targetState) {
                 keyframes {
                     IntSize(targetSize.width, initialSize.height) at 150
-                    durationMillis = 300
+                    durationMillis = 500
                 }
             } else {
                 keyframes {
                     IntSize(initialSize.width, targetSize.height) at 150
-                    durationMillis = 300
+                    durationMillis = 500
                 }
             }
         }

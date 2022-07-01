@@ -1,7 +1,6 @@
 package com.example.feature_note_list.ui
 
 import androidx.compose.animation.AnimatedVisibility
-import androidx.compose.animation.core.exponentialDecay
 import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.lazy.LazyColumn
 import androidx.compose.foundation.lazy.LazyListState
@@ -10,7 +9,7 @@ import androidx.compose.material3.ExperimentalMaterial3Api
 import androidx.compose.material3.FabPosition
 import androidx.compose.material3.Scaffold
 import androidx.compose.material3.Surface
-import androidx.compose.material3.TopAppBarDefaults.exitUntilCollapsedScrollBehavior
+import androidx.compose.material3.TopAppBarDefaults.enterAlwaysScrollBehavior
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.mutableStateListOf
 import androidx.compose.runtime.mutableStateOf
@@ -40,10 +39,7 @@ fun NotesScreen(
     val pagingItems = viewModel.allNotes.collectAsLazyPagingItems()
     val selectedNotes = remember { mutableStateListOf<NoteDynamicUI>() }
     val deleteNotesFunction = viewModel::deleteNotesById
-    val scrollBehavior = exitUntilCollapsedScrollBehavior(
-        decayAnimationSpec = exponentialDecay(),
-        canScroll = { true }
-    )
+    val scrollBehavior = enterAlwaysScrollBehavior { true }
     val isButtonVisible = remember { mutableStateOf(true) }
     Scaffold(
         modifier = modifier.nestedScroll(scrollBehavior.nestedScrollConnection),

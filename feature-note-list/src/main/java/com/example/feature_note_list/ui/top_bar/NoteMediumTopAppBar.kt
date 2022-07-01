@@ -31,7 +31,9 @@ fun NoteMediumTopAppBar(
             )
         },
         navigationIcon = {
-            AnimatedVisibility(visible = selectedNotes.isEmpty()) {
+            AnimatedVisibility(
+                visible = selectedNotes.isEmpty(),
+            ) {
                 IconButton(onClick = openAccount) {
                     Icon(
                         imageVector = Icons.Default.Person,
