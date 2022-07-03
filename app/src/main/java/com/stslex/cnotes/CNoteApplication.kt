@@ -1,18 +1,17 @@
 package com.stslex.cnotes
 
 import android.app.Application
-import com.example.feature_auth_code.di.authCodeModule
-import com.example.feature_auth_phonenumber.di.authPhoneNumberModule
-import com.example.feature_note_list.di.noteListModule
-import com.stslex.cnotes.di.appModule
+import com.example.feature_auth_code.di.AuthCodeModule
+import com.example.feature_auth_phonenumber.di.AuthPhoneNumberModule
+import com.example.feature_note_list.di.NoteListModule
+import com.stslex.cnotes.di.AppComponent
 import com.stslex.core_coroutines.CoroutinesModule
-import com.stslex.core_data_source.di.roomDatabaseModule
-import com.stslex.core_firebase.firebaseModule
-import com.stslex.core_firebase_auth.di.firebaseAuthModule
-import com.stslex.core_model.di.mapperModule
-import com.stslex.core_remote_data_source.di.remoteDataSourceModule
-import com.stslex.feature_profile.di.profileModule
-import com.stslex.feature_single_note.di.singleNoteModule
+import com.stslex.core_data_source.di.RoomDatabaseModule
+import com.stslex.core_firebase.FirebaseModule
+import com.stslex.core_firebase_auth.di.FirebaseAuthModule
+import com.stslex.core_model.di.MapperModule
+import com.stslex.core_remote_data_source.di.RemoteDataSourceModule
+import com.stslex.feature_profile.di.ProfileModule
 import org.koin.android.ext.koin.androidContext
 import org.koin.android.ext.koin.androidLogger
 import org.koin.core.context.GlobalContext.startKoin
@@ -24,18 +23,17 @@ class CNoteApplication : Application() {
             androidLogger()
             androidContext(this@CNoteApplication)
             modules(
-                appModule,
-                roomDatabaseModule,
+                AppComponent().appModules,
+                RoomDatabaseModule().module,
                 CoroutinesModule().module,
-                mapperModule,
-                singleNoteModule,
-                noteListModule,
-                firebaseModule,
-                authPhoneNumberModule,
-                authCodeModule,
-                profileModule,
-                firebaseAuthModule,
-                remoteDataSourceModule
+                NoteListModule().module,
+                FirebaseModule().module,
+                AuthPhoneNumberModule().module,
+                AuthCodeModule().module,
+                ProfileModule().module,
+                RemoteDataSourceModule().module,
+                MapperModule().module,
+                FirebaseAuthModule().module
             )
         }
         super.onCreate()

@@ -1,10 +1,16 @@
 package com.stslex.cnotes
 
-import com.example.feature_note_list.di.noteListModule
-import com.stslex.core_coroutines.coroutinesModule
-import com.stslex.core_data_source.di.roomDatabaseModule
-import com.stslex.core_model.di.mapperModule
-import com.stslex.feature_single_note.di.singleNoteModule
+import com.example.feature_auth_code.di.AuthCodeModule
+import com.example.feature_auth_phonenumber.di.AuthPhoneNumberModule
+import com.example.feature_note_list.di.NoteListModule
+import com.stslex.cnotes.di.AppComponent
+import com.stslex.core_coroutines.CoroutinesModule
+import com.stslex.core_data_source.di.RoomDatabaseModule
+import com.stslex.core_firebase.FirebaseModule
+import com.stslex.core_firebase_auth.di.FirebaseAuthModule
+import com.stslex.core_model.di.MapperModule
+import com.stslex.core_remote_data_source.di.RemoteDataSourceModule
+import com.stslex.feature_profile.di.ProfileModule
 import org.junit.Rule
 import org.junit.Test
 import org.junit.runner.RunWith
@@ -29,10 +35,16 @@ class CheckModulesTest : KoinTest {
     fun checkAllModules() = startKoin {
         androidContext(RuntimeEnvironment.getApplication())
     }.checkModules {
-        roomDatabaseModule
-        coroutinesModule
-        mapperModule
-        singleNoteModule
-        noteListModule
+        AppComponent().appModules
+        RoomDatabaseModule().module
+        CoroutinesModule().module
+        NoteListModule().module
+        FirebaseModule().module
+        AuthPhoneNumberModule().module
+        AuthCodeModule().module
+        ProfileModule().module
+        RemoteDataSourceModule().module
+        MapperModule().module
+        FirebaseAuthModule().module
     }
 }

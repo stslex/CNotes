@@ -8,7 +8,9 @@ import org.koin.core.module.dsl.bind
 import org.koin.core.module.dsl.singleOf
 import org.koin.dsl.module
 
-val profileModule = module {
-    viewModelOf(::ProfileViewModel)
-    singleOf(::ProfileRepositoryImpl) { bind<ProfileRepository>() }
+class ProfileModule {
+    val module = module {
+        viewModelOf(::ProfileViewModel)
+        singleOf(::ProfileRepositoryImpl) { bind<ProfileRepository>() }
+    }
 }

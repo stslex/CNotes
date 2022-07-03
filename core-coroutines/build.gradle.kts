@@ -9,8 +9,8 @@ dependencies {
     implementation(project(":core-test"))
     implementation(libs.koin.android)
     api(libs.kotlinx.coroutines.android)
-    api(libs.koin.core)
-    api(libs.koin.annotations)
+    implementation(libs.koin.core)
+    implementation(libs.koin.annotations)
     ksp(libs.koin.ksp)
 }
 
