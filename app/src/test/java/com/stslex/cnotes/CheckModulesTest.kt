@@ -11,6 +11,7 @@ import com.stslex.core_firebase_auth.di.FirebaseAuthModule
 import com.stslex.core_model.di.MapperModule
 import com.stslex.core_remote_data_source.di.RemoteDataSourceModule
 import com.stslex.feature_profile.di.ProfileModule
+import com.stslex.feature_single_note.di.SingleNoteModule
 import org.junit.Rule
 import org.junit.Test
 import org.junit.runner.RunWith
@@ -46,5 +47,6 @@ class CheckModulesTest : KoinTest {
         RemoteDataSourceModule().module
         MapperModule().module
         FirebaseAuthModule().module
+        SingleNoteModule().module
     }
 }

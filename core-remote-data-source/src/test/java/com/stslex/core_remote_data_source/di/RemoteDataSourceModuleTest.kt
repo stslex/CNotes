@@ -1,6 +1,5 @@
-package com.stslex.core_model
+package com.stslex.core_remote_data_source.di
 
-import com.stslex.core_model.di.MapperModule
 import org.junit.Rule
 import org.junit.Test
 import org.junit.runner.RunWith
@@ -14,7 +13,7 @@ import org.robolectric.RobolectricTestRunner
 import org.robolectric.RuntimeEnvironment
 
 @RunWith(RobolectricTestRunner::class)
-class MapperModuleTest : KoinTest {
+class RemoteDataSourceModuleTest : KoinTest {
 
     @get:Rule
     val mockProvider = MockProviderRule.create { clazz ->
@@ -25,6 +24,6 @@ class MapperModuleTest : KoinTest {
     fun checkAllModules() = startKoin {
         androidContext(RuntimeEnvironment.getApplication())
     }.checkModules {
-        MapperModule().module
+        RemoteDataSourceModule().module
     }
 }

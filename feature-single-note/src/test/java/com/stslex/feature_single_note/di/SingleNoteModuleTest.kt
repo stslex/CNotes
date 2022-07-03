@@ -1,6 +1,5 @@
-package com.stslex.feature_single_note
+package com.stslex.feature_single_note.di
 
-import com.stslex.feature_single_note.di.singleNoteModule
 import org.junit.Rule
 import org.junit.Test
 import org.junit.runner.RunWith
@@ -14,7 +13,7 @@ import org.robolectric.RobolectricTestRunner
 import org.robolectric.RuntimeEnvironment
 
 @RunWith(RobolectricTestRunner::class)
-class CheckModuleTest : KoinTest {
+class SingleNoteModuleTest : KoinTest {
 
     @get:Rule
     val mockProvider = MockProviderRule.create { clazz ->
@@ -25,6 +24,6 @@ class CheckModuleTest : KoinTest {
     fun checkAllModules() = startKoin {
         androidContext(RuntimeEnvironment.getApplication())
     }.checkModules {
-        singleNoteModule
+        SingleNoteModule().module
     }
 }

@@ -1,5 +1,6 @@
-package com.stslex.core_firebase
+package com.example.feature_note_list
 
+import com.example.feature_note_list.di.NoteListModule
 import org.junit.Rule
 import org.junit.Test
 import org.junit.runner.RunWith
@@ -13,7 +14,7 @@ import org.robolectric.RobolectricTestRunner
 import org.robolectric.RuntimeEnvironment
 
 @RunWith(RobolectricTestRunner::class)
-class FirebaseComponentTest : KoinTest {
+class NoteListModuleTest : KoinTest {
 
     @get:Rule
     val mockProvider = MockProviderRule.create { clazz ->
@@ -24,6 +25,6 @@ class FirebaseComponentTest : KoinTest {
     fun checkAllModules() = startKoin {
         androidContext(RuntimeEnvironment.getApplication())
     }.checkModules {
-        FirebaseModule().module
+        NoteListModule().module
     }
 }

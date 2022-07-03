@@ -12,6 +12,7 @@ import com.stslex.core_firebase_auth.di.FirebaseAuthModule
 import com.stslex.core_model.di.MapperModule
 import com.stslex.core_remote_data_source.di.RemoteDataSourceModule
 import com.stslex.feature_profile.di.ProfileModule
+import com.stslex.feature_single_note.di.SingleNoteModule
 import org.koin.android.ext.koin.androidContext
 import org.koin.android.ext.koin.androidLogger
 import org.koin.core.context.GlobalContext.startKoin
@@ -33,7 +34,8 @@ class CNoteApplication : Application() {
                 ProfileModule().module,
                 RemoteDataSourceModule().module,
                 MapperModule().module,
-                FirebaseAuthModule().module
+                FirebaseAuthModule().module,
+                SingleNoteModule().module
             )
         }
         super.onCreate()

@@ -1,6 +1,6 @@
 package com.stslex.core_data_source
 
-import com.stslex.core_data_source.di.roomDatabaseModule
+import com.stslex.core_data_source.di.RoomDatabaseModule
 import org.junit.Rule
 import org.junit.Test
 import org.junit.runner.RunWith
@@ -14,7 +14,7 @@ import org.robolectric.RobolectricTestRunner
 import org.robolectric.RuntimeEnvironment
 
 @RunWith(RobolectricTestRunner::class)
-class CheckModuleTest : KoinTest {
+class RoomDatabaseModuleTest : KoinTest {
 
     @get:Rule
     val mockProvider = MockProviderRule.create { clazz ->
@@ -25,6 +25,6 @@ class CheckModuleTest : KoinTest {
     fun checkAllModules() = startKoin {
         androidContext(RuntimeEnvironment.getApplication())
     }.checkModules {
-        roomDatabaseModule
+        RoomDatabaseModule().module
     }
 }

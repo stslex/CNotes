@@ -1,6 +1,5 @@
-package com.example.feature_note_list
+package com.stslex.feature_profile.di
 
-import com.example.feature_note_list.di.noteListModule
 import org.junit.Rule
 import org.junit.Test
 import org.junit.runner.RunWith
@@ -14,7 +13,7 @@ import org.robolectric.RobolectricTestRunner
 import org.robolectric.RuntimeEnvironment
 
 @RunWith(RobolectricTestRunner::class)
-class CheckModuleTest : KoinTest {
+class ProfileModuleTest : KoinTest {
 
     @get:Rule
     val mockProvider = MockProviderRule.create { clazz ->
@@ -25,6 +24,6 @@ class CheckModuleTest : KoinTest {
     fun checkAllModules() = startKoin {
         androidContext(RuntimeEnvironment.getApplication())
     }.checkModules {
-        noteListModule
+        ProfileModule().module
     }
 }
