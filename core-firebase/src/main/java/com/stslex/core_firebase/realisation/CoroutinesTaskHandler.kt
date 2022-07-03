@@ -2,7 +2,7 @@ package com.stslex.core_firebase.realisation
 
 import com.google.android.gms.tasks.Task
 import com.stslex.core.ValueState
-import com.stslex.core_coroutines.ICoroutinesTaskHandler
+import com.stslex.core_firebase.abstraction.ICoroutinesTaskHandler
 import kotlin.coroutines.resume
 import kotlin.coroutines.suspendCoroutine
 

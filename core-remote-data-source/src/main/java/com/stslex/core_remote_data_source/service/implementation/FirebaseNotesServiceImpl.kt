@@ -19,16 +19,18 @@ import kotlinx.coroutines.flow.callbackFlow
 class FirebaseNotesServiceImpl(
     private val firebaseDatabase: FirebaseDatabase
 ) : FirebaseNotesService {
+
     override suspend fun uploadNotesToRemoteDatabase(updateMap: Map<String, Any>): ValueState<Void> =
         CoroutinesTaskHandler<Void>(
             reference.updateChildren(updateMap)
         ).invoke()
 
-    override val remoteNotes: Flow<ValueState<List<NoteEntity>>> = callbackFlow {
-        val listener = ListSnapshot(::trySendBlocking).invoke(NoteEntity::class)
-        reference.addValueEventListener(listener)
-        awaitClose { reference.removeEventListener(listener) }
-    }
+    override val remoteNotes: Flow<ValueState<List<NoteEntity>>>
+        get() = callbackFlow {
+            val listener = ListSnapshot(::trySendBlocking).invoke(NoteEntity::class)
+            reference.addValueEventListener(listener)
+            awaitClose { reference.removeEventListener(listener) }
+        }
 
     override suspend fun getRemoteNotes(): ValueState<List<NoteEntity>> =
         CoroutineSnapshotHandler<NoteEntity>().invoke(

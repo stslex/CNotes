@@ -26,6 +26,7 @@ pagingCompose = "1.0.0-alpha15"
 robolectric = "4.8.1"
 room = "2.5.0-alpha02"
 shortcuts = "1.1.0-alpha01"
+jacoco = "0.8.7"
 
 [libraries]
 android-desugarJdkLibs = { module = "com.android.tools:desugar_jdk_libs", version.ref = "androidDesugarJdkLibs" }
