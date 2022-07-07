@@ -1,4 +1,4 @@
-package com.stslex.core_coroutines
+package com.stslex.core_firebase.abstraction
 
 import com.stslex.core.ValueState
 

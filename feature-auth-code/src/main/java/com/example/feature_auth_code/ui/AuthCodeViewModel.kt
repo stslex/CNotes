@@ -3,14 +3,14 @@ package com.example.feature_auth_code.ui
 import android.app.Activity
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
-import com.example.feature_auth_code.domain.AuthCodeInteracor
+import com.example.feature_auth_code.domain.AuthCodeInteractor
 import com.stslex.core.ValueState
 import com.stslex.core_coroutines.AppDispatchers
 import kotlinx.coroutines.flow.*
 import kotlinx.coroutines.launch
 
 class AuthCodeViewModel(
-    private val authCodeInteracor: AuthCodeInteracor,
+    private val authCodeInteracor: AuthCodeInteractor,
     private val dispatchers: AppDispatchers,
     private val verificationId: String
 ) : ViewModel() {

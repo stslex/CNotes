@@ -12,7 +12,7 @@ value class ListSnapshot<in T : Any>(
 ) : AppSnapshotListener<T> {
 
     override fun invoke(type: KClass<out T>): ValueEventListener = AppValueEventListener(
-        cancelled = event,
+        cancelled = event::invoke,
         dataChange = { snapshot ->
             val result: List<T> = snapshot.children.mapNotNull {
                 it.getValue(type.java)

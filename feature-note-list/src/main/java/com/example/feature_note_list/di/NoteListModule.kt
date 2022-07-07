@@ -9,8 +9,10 @@ import org.koin.core.module.dsl.bind
 import org.koin.core.module.dsl.singleOf
 import org.koin.dsl.module
 
-val noteListModule = module {
-    single { PagingConfig(10) }
-    singleOf(::NoteListRepositoryImpl) { bind<NoteListRepository>() }
-    viewModelOf(::NotesViewModel)
+class NoteListModule {
+    val module = module {
+        single { PagingConfig(10) }
+        singleOf(::NoteListRepositoryImpl) { bind<NoteListRepository>() }
+        viewModelOf(::NotesViewModel)
+    }
 }

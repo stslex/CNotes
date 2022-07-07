@@ -7,28 +7,33 @@ import com.google.firebase.ktx.Firebase
 import com.stslex.core_firebase.abstraction.FirebaseAppInitialisationUtil
 import com.stslex.core_firebase.realisation.FirebaseAppInitialisationUtilImpl
 import org.koin.android.ext.koin.androidContext
+import org.koin.core.annotation.Single
 import org.koin.dsl.module
 
-val firebaseModule = module {
+@Single
+class FirebaseModule {
 
-    single {
-        FirebaseOptions.Builder()
-            .setProjectId(BuildConfig.FIREBASE_PROJECT_ID)
-            .setApplicationId(BuildConfig.FIREBASE_APPLICATION_ID)
-            .setApiKey(BuildConfig.FIREBASE_API_KEY)
-            .setDatabaseUrl(BuildConfig.FIREBASE_DATABASE_URL)
-            .build()
-    }
+    val module = module {
 
-    single {
-        Firebase.firestore
-    }
+        single {
+            FirebaseOptions.Builder()
+                .setProjectId(BuildConfig.FIREBASE_PROJECT_ID)
+                .setApplicationId(BuildConfig.FIREBASE_APPLICATION_ID)
+                .setApiKey(BuildConfig.FIREBASE_API_KEY)
+                .setDatabaseUrl(BuildConfig.FIREBASE_DATABASE_URL)
+                .build()
+        }
 
-    single {
-        Firebase.database
-    }
+        factory {
+            Firebase.firestore
+        }
 
-    single<FirebaseAppInitialisationUtil> {
-        FirebaseAppInitialisationUtilImpl(androidContext(), get())
+        factory {
+            Firebase.database
+        }
+
+        factory<FirebaseAppInitialisationUtil> {
+            FirebaseAppInitialisationUtilImpl(androidContext(), get())
+        }
     }
 }

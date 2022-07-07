@@ -8,7 +8,9 @@ import org.koin.core.module.dsl.bind
 import org.koin.core.module.dsl.singleOf
 import org.koin.dsl.module
 
-val singleNoteModule = module {
-    singleOf(::SingleNoteRepositoryImpl) { bind<SingleNoteRepository>() }
-    viewModelOf(::SingleNoteViewModel)
+class SingleNoteModule{
+    val module = module {
+        singleOf(::SingleNoteRepositoryImpl) { bind<SingleNoteRepository>() }
+        viewModelOf(::SingleNoteViewModel)
+    }
 }

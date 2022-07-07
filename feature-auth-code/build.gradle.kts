@@ -12,6 +12,8 @@ dependencies {
     implementation(project(":core-coroutines"))
     implementation(project(":core-firebase"))
     implementation(project(":core-firebase-auth"))
+    testImplementation(project(mapOf("path" to ":core-firebase")))
+    testImplementation(project(mapOf("path" to ":core-firebase")))
 
     with(libs) {
         implementation(koin.core)
