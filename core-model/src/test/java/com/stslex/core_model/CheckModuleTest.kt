@@ -1,30 +1,23 @@
 package com.stslex.core_model
 
 import com.stslex.core_model.di.MapperModule
-import org.junit.Rule
+import org.junit.After
 import org.junit.Test
-import org.junit.runner.RunWith
-import org.koin.android.ext.koin.androidContext
-import org.koin.core.context.startKoin
+import org.koin.core.context.stopKoin
 import org.koin.test.KoinTest
 import org.koin.test.check.checkModules
-import org.koin.test.mock.MockProviderRule
-import org.mockito.Mockito
-import org.robolectric.RobolectricTestRunner
-import org.robolectric.RuntimeEnvironment
 
-@RunWith(RobolectricTestRunner::class)
 class MapperModuleTest : KoinTest {
 
-    @get:Rule
-    val mockProvider = MockProviderRule.create { clazz ->
-        Mockito.mock(clazz.java)
+    @After
+    fun closeKoin() {
+        stopKoin()
     }
 
     @Test
-    fun checkAllModules() = startKoin {
-        androidContext(RuntimeEnvironment.getApplication())
-    }.checkModules {
-        MapperModule().module
+    fun checkAllModules() {
+        checkModules {
+            MapperModule().module
+        }
     }
 }

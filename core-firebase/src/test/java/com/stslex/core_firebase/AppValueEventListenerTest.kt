@@ -26,7 +26,7 @@ class AppValueEventListenerTest {
 
     @Test
     fun onDataChange() {
-        var assertFlag = false;
+        var assertFlag = false
         val listener: ValueEventListener = AppValueEventListener(
             cancelled = {
                 assertFlag = false
@@ -41,7 +41,7 @@ class AppValueEventListenerTest {
 
     @Test
     fun onDataChangeException() {
-        var assertFlag = false;
+        var assertFlag = false
         val listener: ValueEventListener = AppValueEventListener(
             cancelled = {
                 assertFlag = true

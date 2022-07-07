@@ -13,8 +13,13 @@ value class SaveUserCompleteListener(
         val result = if (task.isSuccessful) {
             ValueState.Success(Unit)
         } else {
-            ValueState.Failure(task.exception!!)
+
+            ValueState.Failure(task.exception ?: Exception(CANCELLED_MESSAGE))
         }
         action(result)
+    }
+
+    companion object {
+        private const val CANCELLED_MESSAGE = "Cancelled"
     }
 }

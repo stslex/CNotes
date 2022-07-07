@@ -3,14 +3,17 @@ package com.stslex.core_firebase.realisation
 import com.google.android.gms.tasks.Task
 import com.stslex.core.ValueState
 import com.stslex.core_firebase.abstraction.ICoroutinesTaskHandler
+import java.util.concurrent.Executor
+import java.util.concurrent.Executors
 import kotlin.coroutines.resume
 import kotlin.coroutines.suspendCoroutine
 
 class CoroutinesTaskHandler<out T : Any>(
-    private val task: Task<T>
+    private val task: Task<T>,
+    private val executor: Executor = Executors.newSingleThreadExecutor()
 ) : ICoroutinesTaskHandler<T> {
     override suspend fun invoke(): ValueState<T> = suspendCoroutine { continuation ->
-        task.addOnSuccessListener { continuation.resume(ValueState.Success(it)) }
-        task.addOnFailureListener { continuation.resume(ValueState.Failure(it)) }
+        task.addOnSuccessListener(executor) { continuation.resume(ValueState.Success(it)) }
+        task.addOnFailureListener(executor) { continuation.resume(ValueState.Failure(it)) }
     }
 }

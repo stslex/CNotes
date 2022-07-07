@@ -12,7 +12,7 @@ value class SingleSnapshot<in T : Any>(
 ) : AppSnapshotListener<T> {
 
     override fun invoke(type: KClass<out T>): ValueEventListener = AppValueEventListener(
-        cancelled = event,
+        cancelled = event::invoke,
         dataChange = { snapshot ->
             val result = checkNotNull(snapshot.getValue(type.java))
             event(ValueState.Success(result))
