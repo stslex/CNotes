@@ -1,8 +1,8 @@
 package com.stslex.feature_single_note.data.realisation
 
+import com.stslex.core.Mapper
 import com.stslex.core.ValueState
 import com.stslex.core_data_source.dao.NoteDao
-import com.stslex.core_model.mapper.MapperNoteUIEntity
 import com.stslex.core_model.model.NoteEntity
 import com.stslex.core_model.model.NoteUI
 import com.stslex.feature_single_note.data.abstraction.SingleNoteRepository
@@ -12,7 +12,7 @@ import java.io.IOException
 
 class SingleNoteRepositoryImpl(
     private val noteDao: NoteDao,
-    private val mapper: MapperNoteUIEntity
+    private val mapper: Mapper.Data<NoteUI, NoteEntity>
 ) : SingleNoteRepository {
 
     override fun getNote(id: Int): Flow<ValueState<NoteEntity>> = flow {
