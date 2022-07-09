@@ -5,6 +5,8 @@ import com.stslex.core.Mapper
 import com.stslex.core.ValueState
 import com.stslex.core_model.common.MapperName.*
 import com.stslex.core_model.common.PrimaryMapper
+import com.stslex.core_model.common.TimeUtil
+import com.stslex.core_model.common.TimeUtilImpl
 import com.stslex.core_model.mapper.*
 import com.stslex.core_model.model.NoteDynamicUI
 import com.stslex.core_model.model.NoteEntity
@@ -22,9 +24,11 @@ class MapperModule {
 
     val module = module {
 
+        factoryOf(::TimeUtilImpl) { bind<TimeUtil>() }
+
         factory<Mapper.Data<NoteEntity, NoteDynamicUI>>(
             named(ENTITY_DYNAMIC)
-        ) { MapperEntityDynamicUI() }
+        ) { MapperEntityDynamicUI(get()) }
 
         factory<Mapper.Data<NoteEntity, NoteUI>>(
             named(ENTITY_UI)
