@@ -5,7 +5,7 @@ import com.stslex.core_model.common.TimeUtil
 import com.stslex.core_model.common.TimeUtilImpl
 import com.stslex.core_model.model.NoteDynamicUI
 import com.stslex.core_model.model.NoteEntity
-import org.junit.Assert
+import org.junit.Assert.assertEquals
 import org.junit.Test
 
 class MapperEntityDynamicUITest {
@@ -18,6 +18,10 @@ class MapperEntityDynamicUITest {
         val noteEntity = NoteEntity(2, "title", "content", time)
         val expectedNote = NoteDynamicUI(2, "title", "content", timeUtil.currentHour(time))
         val actualNote = mapper.map(noteEntity)
-        Assert.assertEquals(expectedNote, actualNote)
+        assertEquals(expectedNote.id, actualNote.id)
+        assertEquals(expectedNote.content, actualNote.content)
+        assertEquals(expectedNote.title, actualNote.title)
+        assertEquals(expectedNote.timestamp, actualNote.timestamp)
+        assertEquals(expectedNote.isSelect().value, actualNote.isSelect().value)
     }
 }

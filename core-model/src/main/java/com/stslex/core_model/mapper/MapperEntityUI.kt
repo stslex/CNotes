@@ -10,8 +10,9 @@ internal class MapperEntityUI : Mapper.Data<NoteEntity, NoteUI> {
     override fun map(data: NoteEntity): NoteUI = with(data) {
         NoteUI(
             id = id,
-            title = mutableStateOf(title), mutableStateOf(content),
-            timestamp
+            title = mutableStateOf(title),
+            content = mutableStateOf(content),
+            timestamp = timestamp
         )
     }
 }
