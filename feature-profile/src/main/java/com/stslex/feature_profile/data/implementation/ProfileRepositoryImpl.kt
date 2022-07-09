@@ -2,12 +2,11 @@ package com.stslex.feature_profile.data.implementation
 
 import com.google.firebase.auth.ktx.auth
 import com.google.firebase.ktx.Firebase
+import com.stslex.core.Mapper
 import com.stslex.core.ValueState
 import com.stslex.core_data_source.dao.NoteDao
 import com.stslex.core_firebase.abstraction.FirebaseAppInitialisationUtil
 import com.stslex.core_model.common.PrimaryMapper
-import com.stslex.core_model.mapper.MapperNoteListRemote
-import com.stslex.core_model.mapper.MapperNoteSize
 import com.stslex.core_model.model.NoteEntity
 import com.stslex.core_model.transformer.TransformerEqualTypeValues
 import com.stslex.core_remote_data_source.service.abstraction.FirebaseNotesService
@@ -21,9 +20,9 @@ import java.io.IOException
 class ProfileRepositoryImpl(
     private val remoteNotesService: FirebaseNotesService,
     private val firebaseInitializer: FirebaseAppInitialisationUtil,
-    private val mapperNoteSize: MapperNoteSize,
+    private val mapperNoteSize: Mapper.ToUI<List<NoteEntity>, ValueState<Int>>,
     private val transformerNoteEquals: TransformerEqualTypeValues<List<NoteEntity>, Int>,
-    private val mapperNoteListRemote: MapperNoteListRemote,
+    private val mapperNoteListRemote: Mapper.Data<List<NoteEntity>, Map<String, Any>>,
     private val noteDao: NoteDao,
     private val flowMapper: PrimaryMapper
 ) : ProfileRepository {
