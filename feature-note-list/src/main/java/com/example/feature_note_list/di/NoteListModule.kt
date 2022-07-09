@@ -4,15 +4,24 @@ import androidx.paging.PagingConfig
 import com.example.feature_note_list.data.abstraction.NoteListRepository
 import com.example.feature_note_list.data.realisation.NoteListRepositoryImpl
 import com.example.feature_note_list.ui.NotesViewModel
-import org.koin.androidx.viewmodel.dsl.viewModelOf
+import com.stslex.core_model.common.MapperName
+import org.koin.androidx.viewmodel.dsl.viewModel
 import org.koin.core.module.dsl.bind
-import org.koin.core.module.dsl.singleOf
+import org.koin.core.module.dsl.factoryOf
+import org.koin.core.qualifier.named
 import org.koin.dsl.module
 
 class NoteListModule {
     val module = module {
         single { PagingConfig(10) }
-        singleOf(::NoteListRepositoryImpl) { bind<NoteListRepository>() }
-        viewModelOf(::NotesViewModel)
+        factoryOf(::NoteListRepositoryImpl) { bind<NoteListRepository>() }
+
+        viewModel {
+            NotesViewModel(
+                noteRepository = get(),
+                noteMapper = get(named(MapperName.PAGING_ENTITY_DYNAMIC)),
+                dispatchers = get()
+            )
+        }
     }
 }
