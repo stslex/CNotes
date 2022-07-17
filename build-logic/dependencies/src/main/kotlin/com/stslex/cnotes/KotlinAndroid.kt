@@ -38,11 +38,10 @@ fun Project.configureKotlinAndroid(
 
         kotlinOptions {
             freeCompilerArgs = freeCompilerArgs + listOf(
-                "-Xopt-in=kotlin.RequiresOptIn",
-                "-Xopt-in=kotlinx.coroutines.ExperimentalCoroutinesApi",
-                "-Xopt-in=kotlinx.coroutines.FlowPreview",
-                "-Xopt-in=kotlin.Experimental",
-                "-Xopt-in=kotlinx.serialization.ExperimentalSerializationApi"
+                "-opt-in=kotlin.RequiresOptIn",
+                "-opt-in=kotlinx.coroutines.ExperimentalCoroutinesApi",
+                "-opt-in=kotlinx.coroutines.FlowPreview",
+                "-opt-in=kotlin.Experimental"
             )
             jvmTarget = "11"
             sourceSets.all {
