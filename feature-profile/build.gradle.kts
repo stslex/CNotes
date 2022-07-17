@@ -12,8 +12,6 @@ dependencies {
     implementation(project(":core-navigation"))
     implementation(project(":core-firebase"))
     implementation(project(":core-local-data-source"))
-    implementation(project(":core-remote-data-source"))
-    implementation(project(":core-resources"))
 
     with(libs) {
         implementation(koin.core)

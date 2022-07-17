@@ -13,7 +13,7 @@ import androidx.compose.ui.platform.LocalContext
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
 import com.stslex.core.ValueState
-import com.stslex.core_resources.R.string
+import com.stslex.core_ui.R
 import com.stslex.core_ui.theme.AppTheme
 import com.stslex.feature_profile.ui.components.ButtonLabel
 import com.stslex.feature_profile.ui.components.NotesSizeStateLabel
@@ -69,10 +69,12 @@ fun ProfileScreenContent(
                 modifier = Modifier
                     .padding(32.dp)
             ) {
-                System.out.println("remoteNotesSize::" + remoteNotesSize.value)
-                NotesSizeStateLabel(labelId = string.lb_local_notes, notesState = localNotesSize)
-                NotesSizeStateLabel(labelId = string.lb_remote_notes, notesState = remoteNotesSize)
-                NotesSizeStateLabel(labelId = string.lb_synced_notes, notesState = syncNoteSize)
+                NotesSizeStateLabel(labelId = R.string.lb_local_notes, notesState = localNotesSize)
+                NotesSizeStateLabel(
+                    labelId = R.string.lb_remote_notes,
+                    notesState = remoteNotesSize
+                )
+                NotesSizeStateLabel(labelId = R.string.lb_synced_notes, notesState = syncNoteSize)
 
                 ProfileActionButtons(
                     actionDownload = downloadNotes,
@@ -90,7 +92,7 @@ fun ProfileScreenContent(
                 openAuthPhoneNumber()
             }
         ) {
-            ButtonLabel(label = LocalContext.current.getString(string.b_sign_out))
+            ButtonLabel(label = LocalContext.current.getString(R.string.b_sign_out))
         }
     }
 }

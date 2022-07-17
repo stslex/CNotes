@@ -10,7 +10,6 @@ dependencies {
     implementation(project(":core-test"))
     implementation(project(":core-navigation"))
     implementation(project(":core-firebase"))
-    implementation(project(":core-firebase-auth"))
 
     with(libs) {
         implementation(koin.core)
@@ -23,5 +22,5 @@ dependencies {
 }
 
 android {
-    namespace = "com.example.feature_auth_phonenumber"
+    namespace = "com.stslex.feature_auth_phonenumber"
 }

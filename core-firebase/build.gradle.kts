@@ -6,6 +6,7 @@ plugins {
 dependencies {
     implementation(project(":core"))
     implementation(project(":core-test"))
+    implementation(project(":core-model"))
 
     with(libs) {
         implementation(koin.core)

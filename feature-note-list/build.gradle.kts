@@ -11,7 +11,6 @@ dependencies {
     implementation(project(":core-navigation"))
     implementation(project(":core-model"))
     implementation(project(":core-local-data-source"))
-    implementation(project(":core-resources"))
     implementation(project(":core-firebase"))
 
     with(libs) {
@@ -27,5 +26,5 @@ dependencies {
 }
 
 android {
-    namespace = "com.example.feature_note_list"
+    namespace = "com.stslex.feature_note_list"
 }

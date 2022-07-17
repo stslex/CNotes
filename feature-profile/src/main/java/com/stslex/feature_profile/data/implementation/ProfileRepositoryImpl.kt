@@ -5,11 +5,11 @@ import com.google.firebase.ktx.Firebase
 import com.stslex.core.Mapper
 import com.stslex.core.ValueState
 import com.stslex.core_data_source.dao.NoteDao
-import com.stslex.core_firebase.abstraction.FirebaseAppInitialisationUtil
+import com.stslex.core_firebase.utils.abstraction.FirebaseAppInitialisationUtil
 import com.stslex.core_model.common.PrimaryMapper
 import com.stslex.core_model.model.NoteEntity
 import com.stslex.core_model.transformer.TransformerEqualTypeValues
-import com.stslex.core_remote_data_source.service.abstraction.FirebaseNotesService
+import com.stslex.core_firebase.data.abstraction.FirebaseNotesService
 import com.stslex.feature_profile.data.abstraction.ProfileRepository
 import kotlinx.coroutines.flow.Flow
 import kotlinx.coroutines.flow.combineTransform
