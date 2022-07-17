@@ -3,6 +3,7 @@ package com.stslex.core_firebase
 import com.google.firebase.database.DataSnapshot
 import com.google.firebase.database.DatabaseError
 import com.google.firebase.database.ValueEventListener
+import com.stslex.core_firebase.utils.AppValueEventListener
 import org.junit.Assert
 import org.junit.Test
 import org.mockito.Mockito
@@ -11,7 +12,7 @@ class AppValueEventListenerTest {
 
     @Test
     fun onCancelled() {
-        var assertFlag = false;
+        var assertFlag = false
         val listener: ValueEventListener = AppValueEventListener(
             cancelled = {
                 assertFlag = true

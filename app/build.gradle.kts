@@ -4,6 +4,7 @@ plugins {
     id("com.google.devtools.ksp")
 }
 
+@Suppress("UnstableApiUsage")
 android {
     defaultConfig {
         applicationId = "com.stslex.cnotes"
@@ -25,18 +26,7 @@ android {
             )
         }
     }
-    compileOptions {
-        sourceCompatibility(JavaVersion.VERSION_11)
-        targetCompatibility(JavaVersion.VERSION_11)
-    }
-    kotlinOptions {
-        jvmTarget = "11"
-    }
-    packagingOptions {
-        resources {
-            excludes += "/META-INF/{AL2.0,LGPL2.1}"
-        }
-    }
+
     namespace = "com.stslex.cnotes"
 }
 
@@ -46,12 +36,8 @@ dependencies {
     implementation(project(":core-navigation"))
     implementation(project(":core-test"))
     implementation(project(":core-model"))
-    implementation(project(":core-resources"))
     implementation(project(":core-local-data-source"))
-    implementation(project(":core-remote-data-source"))
     implementation(project(":core-firebase"))
-    implementation(project(":core-firebase-auth"))
-    implementation(project(":core-coroutines"))
     implementation(project(":feature-note-list"))
     implementation(project(":feature-single-note"))
     implementation(project(":feature-todo"))

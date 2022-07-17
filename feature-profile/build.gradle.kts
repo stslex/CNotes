@@ -10,11 +10,8 @@ dependencies {
     implementation(project(":core-test"))
     implementation(project(":core-model"))
     implementation(project(":core-navigation"))
-    implementation(project(":core-coroutines"))
     implementation(project(":core-firebase"))
     implementation(project(":core-local-data-source"))
-    implementation(project(":core-remote-data-source"))
-    implementation(project(":core-resources"))
 
     with(libs) {
         implementation(koin.core)

@@ -1,4 +1,27 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
+    <string name="app_name">CNotes</string>
+
+    <!--Buttons-->
+    <string name="b_sign_out">sign out</string>
+    <string name="b_next">next</string>
+    <string name="b_previous">previous</string>
+
+    <!--Labels-->
+    <string name="lb_local_notes">Local Notes</string>
+    <string name="lb_remote_notes">Remote Notes</string>
+    <string name="lb_synced_notes">Synced Notes</string>
+    <string name="lb_create">create</string>
+    <string name="lb_delete">delete</string>
+    <string name="lb_account">account</string>
+    <string name="lb_share">share</string>
+
+    <!--Labels Shortcut-->
+    <string name="lb_short_shortcut_create">create</string>
+    <string name="lb_long_shortcut_create">create new note</string>
+    <string name="lb_shortcut_disabled_message">shortcut disabled</string>
+    <string name="lb_short_shortcut_profile">profile</string>
+    <string name="lb_long_shortcut_profile">open user profile</string>
+
     <string name="label_save">Save</string>
 </resources>

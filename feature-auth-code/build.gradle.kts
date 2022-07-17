@@ -9,9 +9,7 @@ dependencies {
     implementation(project(":core-ui"))
     implementation(project(":core-test"))
     implementation(project(":core-navigation"))
-    implementation(project(":core-coroutines"))
     implementation(project(":core-firebase"))
-    implementation(project(":core-firebase-auth"))
     testImplementation(project(mapOf("path" to ":core-firebase")))
     testImplementation(project(mapOf("path" to ":core-firebase")))
 
@@ -26,5 +24,5 @@ dependencies {
 }
 
 android {
-    namespace = "com.example.feature_auth_code"
+    namespace = "com.stslex.feature_auth_code"
 }

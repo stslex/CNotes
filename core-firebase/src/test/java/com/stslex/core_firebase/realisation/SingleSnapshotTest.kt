@@ -4,6 +4,7 @@ import com.google.firebase.database.DataSnapshot
 import com.google.firebase.database.DatabaseError
 import com.google.firebase.database.ValueEventListener
 import com.stslex.core.ValueState
+import com.stslex.core_firebase.utils.realisation.SingleSnapshot
 import org.junit.Assert
 import org.junit.Test
 import org.mockito.Mockito
