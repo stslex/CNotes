@@ -6,7 +6,6 @@ import org.koin.dsl.module
 
 @Module
 class CoroutinesModule {
-
     val module = module {
         single<AppDispatchers> { AppDispatchersImpl() }
     }

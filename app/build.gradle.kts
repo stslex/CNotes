@@ -4,6 +4,7 @@ plugins {
     id("com.google.devtools.ksp")
 }
 
+@Suppress("UnstableApiUsage")
 android {
     defaultConfig {
         applicationId = "com.stslex.cnotes"
@@ -25,18 +26,7 @@ android {
             )
         }
     }
-    compileOptions {
-        sourceCompatibility(JavaVersion.VERSION_11)
-        targetCompatibility(JavaVersion.VERSION_11)
-    }
-    kotlinOptions {
-        jvmTarget = "11"
-    }
-    packagingOptions {
-        resources {
-            excludes += "/META-INF/{AL2.0,LGPL2.1}"
-        }
-    }
+
     namespace = "com.stslex.cnotes"
 }
 

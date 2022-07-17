@@ -11,10 +11,9 @@ class AndroidApplicationPlugin : Plugin<Project> {
                 apply("com.android.application")
                 apply("org.jetbrains.kotlin.android")
             }
-
             extensions.configure<BaseAppModuleExtension> {
                 configureKotlinAndroid(this)
-                defaultConfig.targetSdk = 32
+                defaultConfig.targetSdk = 33
             }
         }
     }

@@ -14,7 +14,6 @@ import org.gradle.testing.jacoco.tasks.JacocoReport
 import java.util.*
 
 private val coverageExclusions = listOf(
-    // Android
     "**/R.class",
     "**/R\$*.class",
     "**/BuildConfig.*",

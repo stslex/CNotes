@@ -11,10 +11,9 @@ class AndroidTestPlugin : Plugin<Project> {
                 apply("com.android.test")
                 apply("org.jetbrains.kotlin.android")
             }
-
             extensions.configure<TestExtension> {
                 configureKotlinAndroid(this)
-                defaultConfig.targetSdk = 31
+                defaultConfig.targetSdk = 33
             }
         }
     }
