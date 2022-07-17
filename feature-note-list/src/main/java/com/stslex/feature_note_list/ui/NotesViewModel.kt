@@ -1,12 +1,12 @@
-package com.stslex.feature_note_list.ui
+package com.example.feature_note_list.ui
 
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
 import androidx.paging.PagingData
 import androidx.paging.cachedIn
-import com.stslex.feature_note_list.data.abstraction.NoteListRepository
+import com.example.feature_note_list.data.abstraction.NoteListRepository
 import com.stslex.core.Mapper
-import com.stslex.core.AppDispatchers
+import com.stslex.core_coroutines.AppDispatchers
 import com.stslex.core_model.model.NoteDynamicUI
 import com.stslex.core_model.model.NoteEntity
 import kotlinx.coroutines.flow.*
