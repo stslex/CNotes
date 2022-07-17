@@ -9,7 +9,6 @@ import org.koin.dsl.module
 
 @Module
 class FirebaseAuthModule {
-
     val module = module {
         singleOf(::FirebaseAuthRepositoryImpl) { bind<FirebaseAuthRepository>() }
     }

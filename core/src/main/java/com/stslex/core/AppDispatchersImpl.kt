@@ -1,4 +1,4 @@
-package com.stslex.core_coroutines
+package com.stslex.core
 
 import kotlinx.coroutines.CoroutineDispatcher
 import kotlinx.coroutines.Dispatchers

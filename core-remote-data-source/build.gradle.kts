@@ -16,7 +16,6 @@ dependencies {
     implementation(project(":core"))
     implementation(project(":core-test"))
     implementation(project(":core-model"))
-    implementation(project(":core-coroutines"))
     implementation(project(":core-firebase"))
 
     with(libs) {

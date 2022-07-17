@@ -41,7 +41,6 @@ dependencies {
     implementation(project(":core-remote-data-source"))
     implementation(project(":core-firebase"))
     implementation(project(":core-firebase-auth"))
-    implementation(project(":core-coroutines"))
     implementation(project(":feature-note-list"))
     implementation(project(":feature-single-note"))
     implementation(project(":feature-todo"))

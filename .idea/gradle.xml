@@ -27,7 +27,6 @@
             <option value="$PROJECT_DIR$/build-logic" />
             <option value="$PROJECT_DIR$/build-logic/dependencies" />
             <option value="$PROJECT_DIR$/core" />
-            <option value="$PROJECT_DIR$/core-coroutines" />
             <option value="$PROJECT_DIR$/core-firebase" />
             <option value="$PROJECT_DIR$/core-firebase-auth" />
             <option value="$PROJECT_DIR$/core-local-data-source" />

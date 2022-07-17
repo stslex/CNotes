@@ -3,7 +3,7 @@ package com.stslex.feature_profile.ui
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
 import com.stslex.core.ValueState
-import com.stslex.core_coroutines.AppDispatchers
+import com.stslex.core.AppDispatchers
 import com.stslex.feature_profile.data.abstraction.ProfileRepository
 import kotlinx.coroutines.Job
 import kotlinx.coroutines.flow.*

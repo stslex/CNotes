@@ -5,7 +5,7 @@ import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
 import com.example.feature_auth_phonenumber.core.SignValueState
 import com.example.feature_auth_phonenumber.domain.AuthPhoneNumberInteractor
-import com.stslex.core_coroutines.AppDispatchers
+import com.stslex.core.AppDispatchers
 import kotlinx.coroutines.flow.*
 import kotlinx.coroutines.launch
 

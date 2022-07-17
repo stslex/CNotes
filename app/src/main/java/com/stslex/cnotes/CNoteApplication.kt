@@ -5,7 +5,7 @@ import com.example.feature_auth_code.di.AuthCodeModule
 import com.example.feature_auth_phonenumber.di.AuthPhoneNumberModule
 import com.example.feature_note_list.di.NoteListModule
 import com.stslex.cnotes.di.AppComponent
-import com.stslex.core_coroutines.CoroutinesModule
+import com.stslex.core.CoroutinesModule
 import com.stslex.core_data_source.di.RoomDatabaseModule
 import com.stslex.core_firebase.FirebaseModule
 import com.stslex.core_firebase_auth.di.FirebaseAuthModule

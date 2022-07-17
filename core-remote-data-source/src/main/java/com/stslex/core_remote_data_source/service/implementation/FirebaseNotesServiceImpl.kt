@@ -17,13 +17,12 @@ import kotlinx.coroutines.flow.Flow
 import kotlinx.coroutines.flow.callbackFlow
 
 class FirebaseNotesServiceImpl(
-    private val firebaseDatabase: FirebaseDatabase
+    private val firebaseDatabase: FirebaseDatabase,
+    private val coroutinesTaskHandler: CoroutinesTaskHandler<Void>
 ) : FirebaseNotesService {
 
     override suspend fun uploadNotesToRemoteDatabase(updateMap: Map<String, Any>): ValueState<Void> =
-        CoroutinesTaskHandler<Void>(
-            reference.updateChildren(updateMap)
-        ).invoke()
+        coroutinesTaskHandler(reference.updateChildren(updateMap))
 
     override val remoteNotes: Flow<ValueState<List<NoteEntity>>>
         get() = callbackFlow {
