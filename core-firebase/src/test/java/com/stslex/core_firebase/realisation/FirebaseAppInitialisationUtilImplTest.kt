@@ -3,6 +3,7 @@ package com.stslex.core_firebase.realisation
 import com.google.firebase.FirebaseApp
 import com.google.firebase.FirebaseOptions
 import com.stslex.core_firebase.BuildConfig
+import com.stslex.core_firebase.utils.realisation.FirebaseAppInitialisationUtilImpl
 import org.junit.After
 import org.junit.Assert
 import org.junit.Test

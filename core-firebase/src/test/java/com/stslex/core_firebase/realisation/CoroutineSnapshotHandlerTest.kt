@@ -4,6 +4,7 @@ import com.google.android.gms.tasks.Task
 import com.google.android.gms.tasks.Tasks
 import com.google.firebase.database.DataSnapshot
 import com.stslex.core.ValueState
+import com.stslex.core_firebase.utils.realisation.CoroutineSnapshotHandler
 import kotlinx.coroutines.runBlocking
 import org.junit.Assert
 import org.junit.Test

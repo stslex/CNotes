@@ -13,7 +13,7 @@ import com.google.accompanist.systemuicontroller.SystemUiController
 import com.google.accompanist.systemuicontroller.rememberSystemUiController
 import com.stslex.cnotes.ui.AppCreator
 import com.stslex.cnotes.utils.ShortcutBuilder
-import com.stslex.core_firebase.abstraction.FirebaseAppInitialisationUtil
+import com.stslex.core_firebase.utils.abstraction.FirebaseAppInitialisationUtil
 import org.koin.android.ext.android.inject
 
 class MainActivity : ComponentActivity() {

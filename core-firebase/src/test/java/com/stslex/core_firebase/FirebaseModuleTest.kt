@@ -1,5 +1,6 @@
 package com.stslex.core_firebase
 
+import com.stslex.core_firebase.di.FirebaseModule
 import org.junit.After
 import org.junit.Test
 import org.koin.core.context.stopKoin

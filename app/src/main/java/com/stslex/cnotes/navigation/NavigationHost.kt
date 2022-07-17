@@ -5,9 +5,9 @@ import androidx.compose.runtime.Composable
 import androidx.compose.ui.Modifier
 import androidx.navigation.NavGraph.Companion.findStartDestination
 import androidx.navigation.NavHostController
-import com.example.feature_auth_code.navigation.authCodeGraph
-import com.example.feature_auth_phonenumber.navigation.authPhoneNumberGraph
-import com.example.feature_note_list.navigation.noteListGraph
+import com.stslex.feature_auth_code.navigation.authCodeGraph
+import com.stslex.feature_auth_phonenumber.navigation.authPhoneNumberGraph
+import com.stslex.feature_note_list.navigation.noteListGraph
 import com.google.accompanist.navigation.animation.AnimatedNavHost
 import com.stslex.core_navigation.destinations.*
 import com.stslex.feature_profile.navigation.profileGraph

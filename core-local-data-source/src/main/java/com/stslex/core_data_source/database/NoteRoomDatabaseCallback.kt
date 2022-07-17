@@ -3,7 +3,7 @@ package com.stslex.core_data_source.database
 import android.content.Context
 import androidx.room.RoomDatabase
 import androidx.sqlite.db.SupportSQLiteDatabase
-import com.stslex.core_coroutines.AppDispatchers
+import com.stslex.core.AppDispatchers
 import com.stslex.core_data_source.dao.NoteDao
 import com.stslex.core_local_data_source.R
 import com.stslex.core_model.model.NoteEntity

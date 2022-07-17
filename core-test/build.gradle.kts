@@ -3,9 +3,6 @@ plugins {
 }
 
 dependencies {
-
-    api("org.mockito:mockito-core:4.5.1")
-
     with(libs) {
         api(junit)
         api(androidx.test.junit)
@@ -15,6 +12,7 @@ dependencies {
         api(koin.test.junit4)
         api(robolectric)
         api(kotlinx.coroutines.test)
+        api(mockito.core)
         debugApi(leakcanary)
     }
 }
