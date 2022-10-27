@@ -14,9 +14,6 @@ import com.stslex.core_navigation.TopLevelDestination
 
 @OptIn(ExperimentalAnimationApi::class)
 fun NavGraphBuilder.noteListGraph(
-    openSingleNote: (Int) -> Unit,
-    openProfile: () -> Unit,
-    openAuthPhoneNumber: () -> Unit,
     nestedGraphs: NavGraphBuilder.() -> Unit
 ) {
     navigation(
@@ -30,11 +27,7 @@ fun NavGraphBuilder.noteListGraph(
             popEnterTransition = NoteListTransitions.popEnterTransition,
             popExitTransition = NoteListTransitions.popExitTransition
         ) {
-            NoteListRoute(
-                openSingleNote = openSingleNote,
-                openProfile = openProfile,
-                openAuthPhoneNumber = openAuthPhoneNumber
-            )
+            NoteListRoute()
         }
         nestedGraphs()
     }
