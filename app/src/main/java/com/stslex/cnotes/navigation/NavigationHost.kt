@@ -5,11 +5,14 @@ import androidx.compose.runtime.Composable
 import androidx.compose.ui.Modifier
 import androidx.navigation.NavGraph.Companion.findStartDestination
 import androidx.navigation.NavHostController
+import com.google.accompanist.navigation.animation.AnimatedNavHost
+import com.stslex.core_navigation.destinations.AuthCodeDestination
+import com.stslex.core_navigation.destinations.NoteListDestination
+import com.stslex.core_navigation.destinations.PhoneNumberDestination
+import com.stslex.core_navigation.destinations.ProfileDestination
 import com.stslex.feature_auth_code.navigation.authCodeGraph
 import com.stslex.feature_auth_phonenumber.navigation.authPhoneNumberGraph
 import com.stslex.feature_note_list.navigation.noteListGraph
-import com.google.accompanist.navigation.animation.AnimatedNavHost
-import com.stslex.core_navigation.destinations.*
 import com.stslex.feature_profile.navigation.profileGraph
 import com.stslex.feature_single_note.navigation.singleNoteGraph
 import com.stslex.feature_todo.navigation.todoGraph
@@ -26,11 +29,7 @@ fun NavigationHost(
         navController = navController,
         startDestination = startDestination
     ) {
-        noteListGraph(
-            openSingleNote = { navController.navigate("${SingleNoteDestination.route}/$it") },
-            openProfile = { navController.navigate(ProfileDestination.route) },
-            openAuthPhoneNumber = { navController.navigate(PhoneNumberDestination.route) }
-        ) {
+        noteListGraph {
             singleNoteGraph(popBackStack = { navController.popBackStack() })
         }
         todoGraph()
