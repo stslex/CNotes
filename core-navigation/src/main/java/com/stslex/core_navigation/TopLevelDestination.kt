@@ -5,7 +5,17 @@ import androidx.compose.ui.graphics.vector.ImageVector
 data class TopLevelDestination(
     val destination: String,
     val route: String,
-    val selectedIcon: ImageVector,
-    val unselectedIcon: ImageVector,
+    private val selectedIcon: ImageVector,
+    private val unselectedIcon: ImageVector,
     val iconTextId: Int
-)
+) {
+
+    val icon: (isSelected: Boolean) -> ImageVector
+        get() = { isSelected ->
+            if (isSelected) {
+                selectedIcon
+            } else {
+                unselectedIcon
+            }
+        }
+}

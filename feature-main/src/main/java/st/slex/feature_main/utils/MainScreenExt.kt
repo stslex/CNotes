@@ -37,4 +37,9 @@ object MainScreenExt {
             WindowInsetsSides.Horizontal + WindowInsetsSides.Bottom
         )
     }
+
+    @JvmStatic
+    val mainContentInsets: @Composable () -> WindowInsets = {
+        WindowInsets.safeDrawing.only(WindowInsetsSides.Horizontal)
+    }
 }

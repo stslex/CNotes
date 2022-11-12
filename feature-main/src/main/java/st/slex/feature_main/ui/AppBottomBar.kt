@@ -1,5 +1,6 @@
 package st.slex.feature_main.ui
 
+import androidx.compose.foundation.layout.RowScope
 import androidx.compose.foundation.layout.windowInsetsPadding
 import androidx.compose.material.ripple.LocalRippleTheme
 import androidx.compose.material3.Icon
@@ -32,25 +33,34 @@ fun AppBottomBar(
                 tonalElevation = 0.dp
             ) {
                 topLevelDestinationList.forEach { destination ->
-                    val selected = currentDestination.isSelected(destination)
-                    NavigationBarItem(
-                        selected = selected,
-                        onClick = { onNavigateToTopLevelDestination(destination) },
-                        icon = {
-                            Icon(
-                                if (selected) {
-                                    destination.selectedIcon
-                                } else {
-                                    destination.unselectedIcon
-                                },
-                                contentDescription = null
-                            )
-                        },
-                        label = { Text(stringResource(destination.iconTextId)) },
-                        alwaysShowLabel = false
+                    AppBarBottomItem(
+                        onNavigateToTopLevelDestination = onNavigateToTopLevelDestination,
+                        currentDestination = currentDestination,
+                        destination = destination
                     )
                 }
             }
         }
     }
+}
+
+@Composable
+private fun RowScope.AppBarBottomItem(
+    onNavigateToTopLevelDestination: (TopLevelDestination) -> Unit,
+    currentDestination: NavDestination?,
+    destination: TopLevelDestination,
+) {
+    val selected = currentDestination.isSelected(destination)
+    NavigationBarItem(
+        selected = selected,
+        onClick = { onNavigateToTopLevelDestination(destination) },
+        icon = {
+            Icon(
+                imageVector = destination.icon(selected),
+                contentDescription = null
+            )
+        },
+        label = { Text(stringResource(destination.iconTextId)) },
+        alwaysShowLabel = false
+    )
 }

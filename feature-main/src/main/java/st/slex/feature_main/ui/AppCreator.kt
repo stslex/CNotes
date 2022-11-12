@@ -4,13 +4,9 @@ import android.os.Build
 import androidx.compose.animation.AnimatedVisibility
 import androidx.compose.foundation.layout.ExperimentalLayoutApi
 import androidx.compose.foundation.layout.Row
-import androidx.compose.foundation.layout.WindowInsets
-import androidx.compose.foundation.layout.WindowInsetsSides
 import androidx.compose.foundation.layout.consumedWindowInsets
 import androidx.compose.foundation.layout.fillMaxSize
-import androidx.compose.foundation.layout.only
 import androidx.compose.foundation.layout.padding
-import androidx.compose.foundation.layout.safeDrawing
 import androidx.compose.foundation.layout.safeDrawingPadding
 import androidx.compose.foundation.layout.windowInsetsPadding
 import androidx.compose.material3.ExperimentalMaterial3Api
@@ -24,8 +20,10 @@ import androidx.navigation.NavHostController
 import androidx.navigation.compose.currentBackStackEntryAsState
 import com.stslex.core_ui.theme.AppTheme
 import st.slex.feature_main.navigation.AppTopLevelNavigation
+import st.slex.feature_main.navigation.NavigationHost
 import st.slex.feature_main.utils.MainScreenExt.isCompact
 import st.slex.feature_main.utils.MainScreenExt.isTopLevel
+import st.slex.feature_main.utils.MainScreenExt.mainContentInsets
 
 @OptIn(
     ExperimentalMaterial3Api::class,
@@ -58,7 +56,7 @@ fun AppCreator(
             Row(
                 Modifier
                     .fillMaxSize()
-                    .windowInsetsPadding(WindowInsets.safeDrawing.only(WindowInsetsSides.Horizontal))
+                    .windowInsetsPadding(mainContentInsets())
             ) {
                 AnimatedVisibility(visible = !windowSizeClass.isCompact) {
                     AppNavRail(
@@ -67,7 +65,7 @@ fun AppCreator(
                         modifier = Modifier.safeDrawingPadding()
                     )
                 }
-                st.slex.feature_main.navigation.NavigationHost(
+                NavigationHost(
                     navController = navController,
                     modifier = Modifier
                         .padding(paddingValues)
