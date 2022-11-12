@@ -1,5 +1,6 @@
 package com.stslex.cnotes.di
 
+import com.stslex.cnotes.AppComponent
 import org.junit.After
 import org.junit.Test
 import org.koin.core.context.stopKoin

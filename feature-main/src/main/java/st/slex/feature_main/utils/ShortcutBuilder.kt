@@ -1,4 +1,4 @@
-package com.stslex.cnotes.utils
+package st.slex.feature_main.utils
 
 import android.content.Context
 import android.content.Intent
@@ -6,11 +6,11 @@ import android.net.Uri
 import androidx.core.content.pm.ShortcutInfoCompat
 import androidx.core.content.pm.ShortcutManagerCompat
 import androidx.core.graphics.drawable.IconCompat
-import com.stslex.cnotes.MainActivity
-import com.stslex.cnotes.R.drawable
 import com.stslex.core_navigation.destinations.ProfileDestination
 import com.stslex.core_navigation.destinations.SingleNoteDestination
 import com.stslex.core_ui.R
+import com.stslex.feature_main.R.drawable
+import st.slex.feature_main.ui.MainActivity
 
 fun interface ShortcutBuilder {
 

@@ -1,39 +1,35 @@
-package com.stslex.cnotes.ui
+package st.slex.feature_main.ui
 
 import android.os.Build
 import androidx.compose.animation.AnimatedVisibility
-import androidx.compose.animation.ExperimentalAnimationApi
-import androidx.compose.foundation.layout.*
+import androidx.compose.foundation.layout.ExperimentalLayoutApi
+import androidx.compose.foundation.layout.Row
+import androidx.compose.foundation.layout.WindowInsets
+import androidx.compose.foundation.layout.WindowInsetsSides
+import androidx.compose.foundation.layout.consumedWindowInsets
+import androidx.compose.foundation.layout.fillMaxSize
+import androidx.compose.foundation.layout.only
+import androidx.compose.foundation.layout.padding
+import androidx.compose.foundation.layout.safeDrawing
+import androidx.compose.foundation.layout.safeDrawingPadding
+import androidx.compose.foundation.layout.windowInsetsPadding
 import androidx.compose.material3.ExperimentalMaterial3Api
 import androidx.compose.material3.Scaffold
 import androidx.compose.material3.windowsizeclass.WindowSizeClass
-import androidx.compose.material3.windowsizeclass.WindowWidthSizeClass
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.getValue
 import androidx.compose.runtime.remember
 import androidx.compose.ui.Modifier
-import androidx.navigation.NavController
 import androidx.navigation.NavHostController
 import androidx.navigation.compose.currentBackStackEntryAsState
-import com.stslex.feature_note_list.navigation.noteListTopLevelDestination
-import com.google.accompanist.navigation.animation.rememberAnimatedNavController
-import com.stslex.cnotes.navigation.AppTopLevelNavigation
-import com.stslex.cnotes.navigation.NavigationHost
-import com.stslex.core_navigation.destinations.NoteListDestination
-import com.stslex.core_navigation.destinations.TodoDestination
 import com.stslex.core_ui.theme.AppTheme
-import com.stslex.feature_todo.navigation.todoTopLevelDestination
-
-val topLevelDestinationList = listOf(noteListTopLevelDestination, todoTopLevelDestination)
-private val listOfDestinations = listOf(
-    NoteListDestination.destination,
-    TodoDestination.route
-)
+import st.slex.feature_main.navigation.AppTopLevelNavigation
+import st.slex.feature_main.utils.MainScreenExt.isCompact
+import st.slex.feature_main.utils.MainScreenExt.isTopLevel
 
 @OptIn(
     ExperimentalMaterial3Api::class,
-    ExperimentalLayoutApi::class,
-    ExperimentalAnimationApi::class
+    ExperimentalLayoutApi::class
 )
 @Composable
 fun AppCreator(
@@ -50,9 +46,7 @@ fun AppCreator(
             modifier = Modifier.fillMaxSize(),
             bottomBar = {
                 AnimatedVisibility(
-                    visible = windowSizeClass.widthSizeClass == WindowWidthSizeClass.Compact && listOfDestinations.contains(
-                        currentDestination?.route
-                    )
+                    visible = windowSizeClass.isCompact && currentDestination.isTopLevel
                 ) {
                     AppBottomBar(
                         onNavigateToTopLevelDestination = niaTopLevelNavigation::navigateTo,
@@ -66,14 +60,14 @@ fun AppCreator(
                     .fillMaxSize()
                     .windowInsetsPadding(WindowInsets.safeDrawing.only(WindowInsetsSides.Horizontal))
             ) {
-                AnimatedVisibility(visible = windowSizeClass.widthSizeClass != WindowWidthSizeClass.Compact) {
+                AnimatedVisibility(visible = !windowSizeClass.isCompact) {
                     AppNavRail(
                         onNavigateToTopLevelDestination = niaTopLevelNavigation::navigateTo,
                         currentDestination = currentDestination,
                         modifier = Modifier.safeDrawingPadding()
                     )
                 }
-                NavigationHost(
+                st.slex.feature_main.navigation.NavigationHost(
                     navController = navController,
                     modifier = Modifier
                         .padding(paddingValues)

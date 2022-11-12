@@ -35,6 +35,7 @@
             <option value="$PROJECT_DIR$/core-ui" />
             <option value="$PROJECT_DIR$/feature-auth-code" />
             <option value="$PROJECT_DIR$/feature-auth-phonenumber" />
+            <option value="$PROJECT_DIR$/feature-main" />
             <option value="$PROJECT_DIR$/feature-note-list" />
             <option value="$PROJECT_DIR$/feature-profile" />
             <option value="$PROJECT_DIR$/feature-single-note" />

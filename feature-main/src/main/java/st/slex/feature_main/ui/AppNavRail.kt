@@ -1,4 +1,4 @@
-package com.stslex.cnotes.ui
+package st.slex.feature_main.ui
 
 import androidx.compose.material3.Icon
 import androidx.compose.material3.NavigationRail
