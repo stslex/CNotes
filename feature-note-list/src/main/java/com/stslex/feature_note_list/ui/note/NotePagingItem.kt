@@ -17,15 +17,14 @@ import androidx.compose.runtime.snapshots.SnapshotStateList
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.unit.dp
 import com.stslex.core_model.model.NoteDynamicUI
+import com.stslex.feature_note_list.ui.NotesViewModel
 
 
 @OptIn(ExperimentalMaterial3Api::class, ExperimentalFoundationApi::class)
 @Composable
 fun NotePagingItem(
     note: NoteDynamicUI,
-    selectedNotes: SnapshotStateList<NoteDynamicUI>,
-    openSingleNote: (Int) -> Unit,
-    isButtonVisible: MutableState<Boolean>
+    viewModel: NotesViewModel
 ) {
     val colorUnselect = MaterialTheme.colorScheme.surface
     val colorSelect = MaterialTheme.colorScheme.primaryContainer
@@ -42,13 +41,13 @@ fun NotePagingItem(
             .combinedClickable(
                 onClick = noteItemClick(
                     note = note,
-                    openSingleNote = openSingleNote,
-                    selectedNotes = selectedNotes,
-                    isButtonVisible = isButtonVisible
+                    openSingleNote = viewModel.openSingleNote,
+                    selectedNotes = viewModel.selectedNotes,
+                    isButtonVisible = viewModel.isCreateButtonVisible
                 ),
                 onLongClick = noteItemLongClick(
                     note = note,
-                    selectedNotes = selectedNotes
+                    selectedNotes = viewModel.selectedNotes
                 )
             )
             .fillMaxWidth()

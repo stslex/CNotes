@@ -12,6 +12,8 @@ import androidx.compose.runtime.Composable
 import androidx.compose.runtime.getValue
 import androidx.compose.runtime.remember
 import androidx.compose.ui.Modifier
+import androidx.navigation.NavController
+import androidx.navigation.NavHostController
 import androidx.navigation.compose.currentBackStackEntryAsState
 import com.stslex.feature_note_list.navigation.noteListTopLevelDestination
 import com.google.accompanist.navigation.animation.rememberAnimatedNavController
@@ -34,9 +36,11 @@ private val listOfDestinations = listOf(
     ExperimentalAnimationApi::class
 )
 @Composable
-fun AppCreator(windowSizeClass: WindowSizeClass) {
+fun AppCreator(
+    windowSizeClass: WindowSizeClass,
+    navController: NavHostController
+) {
     AppTheme(dynamicColor = Build.VERSION.SDK_INT > 30) {
-        val navController = rememberAnimatedNavController()
         val niaTopLevelNavigation = remember(navController) {
             AppTopLevelNavigation(navController)
         }
