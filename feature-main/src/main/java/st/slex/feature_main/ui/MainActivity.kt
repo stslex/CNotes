@@ -19,7 +19,7 @@ import com.stslex.core_firebase.utils.abstraction.FirebaseAppInitialisationUtil
 import org.koin.android.ext.android.inject
 import st.slex.feature_main.di.ActivityComponent
 import st.slex.feature_main.di.ActivityDependencies
-import st.slex.feature_main.utils.ShortcutBuilder
+import st.slex.feature_main.ui.components.AppCreator
 
 class MainActivity : ComponentActivity() {
 
@@ -30,6 +30,7 @@ class MainActivity : ComponentActivity() {
     @OptIn(ExperimentalMaterial3WindowSizeClassApi::class, ExperimentalAnimationApi::class)
     override fun onCreate(savedInstanceState: Bundle?) {
         firebaseAppInitialisationUtil()
+        shortcutBuilder()
         super.onCreate(savedInstanceState)
         WindowCompat.setDecorFitsSystemWindows(window, false)
         setContent {
@@ -41,7 +42,6 @@ class MainActivity : ComponentActivity() {
                 navController = navController
             )
         }
-        shortcutBuilder()
     }
 
     private fun setUpDependencies(navController: NavHostController) {

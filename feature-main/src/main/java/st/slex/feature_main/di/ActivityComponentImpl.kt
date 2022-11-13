@@ -4,7 +4,6 @@ import org.koin.core.context.loadKoinModules
 import org.koin.dsl.module
 
 class ActivityComponentImpl : ActivityComponent {
-
     override fun invoke(dependencies: ActivityDependencies) {
         loadKoinModules(
             module {

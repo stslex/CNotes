@@ -5,6 +5,8 @@ plugins {
 
 dependencies {
     implementation(project(":core-test"))
+    implementation(project(":core"))
+
     with(libs) {
         implementation(androidx.core.kts)
 
@@ -16,6 +18,8 @@ dependencies {
         api(androidx.activity.compose)
         api(androidx.compose.constraintlayout)
         debugApi(androidx.compose.ui.tooling)
+
+        implementation(androidx.paging.runtime)
     }
 }
 
