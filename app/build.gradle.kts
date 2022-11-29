@@ -44,6 +44,7 @@ dependencies {
     implementation(project(":feature-profile"))
     implementation(project(":feature-auth-phonenumber"))
     implementation(project(":feature-auth-code"))
+    implementation(project(":feature-main"))
 
     with(libs) {
         implementation(koin.core)
@@ -51,10 +52,6 @@ dependencies {
         implementation(koin.androidx.compose)
         implementation(koin.annotations)
         ksp(koin.ksp)
-        implementation(androidx.paging.runtime)
-        implementation(androidx.paging.compose)
         implementation(androidx.core.kts)
-        implementation(androidx.core.google.shortcuts)
-        implementation(google.accompanist.systemuicontroller)
     }
 }

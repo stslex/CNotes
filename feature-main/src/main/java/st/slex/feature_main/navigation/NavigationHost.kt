@@ -1,4 +1,4 @@
-package com.stslex.cnotes.navigation
+package st.slex.feature_main.navigation
 
 import androidx.compose.animation.ExperimentalAnimationApi
 import androidx.compose.runtime.Composable
