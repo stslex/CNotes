@@ -13,6 +13,7 @@ import androidx.compose.material3.TopAppBarDefaults.enterAlwaysScrollBehavior
 import androidx.compose.material3.TopAppBarScrollState
 import androidx.compose.material3.rememberTopAppBarScrollState
 import androidx.compose.runtime.Composable
+import androidx.compose.runtime.collectAsState
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.input.nestedscroll.nestedScroll
 import androidx.compose.ui.tooling.preview.Preview
@@ -34,6 +35,8 @@ fun NotesScreen(
 ) {
     val pagingItems = viewModel.allNotes.collectAsLazyPagingItems()
     val scrollBehavior = enterAlwaysScrollBehavior(scrollState) { pagingItems.itemCount >= 6 }
+    //TODO Add Error drawing
+    val errorState = viewModel.errorState.collectAsState()
     Scaffold(
         modifier = modifier.nestedScroll(scrollBehavior.nestedScrollConnection),
         floatingActionButton = {
@@ -52,6 +55,7 @@ fun NotesScreen(
         },
         floatingActionButtonPosition = FabPosition.End
     ) { paddingValues ->
+
         Surface(
             modifier = Modifier.padding(paddingValues)
         ) {

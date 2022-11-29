@@ -1,4 +1,4 @@
-package com.stslex.cnotes.navigation
+package st.slex.feature_main.navigation
 
 import androidx.navigation.NavGraph.Companion.findStartDestination
 import androidx.navigation.NavHostController

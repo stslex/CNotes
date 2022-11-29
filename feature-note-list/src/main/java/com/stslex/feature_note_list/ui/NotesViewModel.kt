@@ -4,23 +4,19 @@ import androidx.compose.runtime.MutableState
 import androidx.compose.runtime.mutableStateListOf
 import androidx.compose.runtime.mutableStateOf
 import androidx.compose.runtime.snapshots.SnapshotStateList
-import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
 import androidx.paging.PagingData
-import androidx.paging.cachedIn
 import com.stslex.core.AppDispatchers
 import com.stslex.core.Mapper
 import com.stslex.core_model.model.NoteDynamicUI
 import com.stslex.core_model.model.NoteEntity
+import com.stslex.core_ui.base.BaseViewModel
 import com.stslex.feature_note_list.data.abstraction.NoteListRepository
 import com.stslex.feature_note_list.navigation.NoteListRouter
 import com.stslex.feature_note_list.ui.core.UIObjectsExt.clearSelection
 import kotlinx.coroutines.Job
-import kotlinx.coroutines.flow.SharingStarted
 import kotlinx.coroutines.flow.StateFlow
-import kotlinx.coroutines.flow.flowOn
 import kotlinx.coroutines.flow.mapLatest
-import kotlinx.coroutines.flow.stateIn
 import kotlinx.coroutines.launch
 
 class NotesViewModel(
@@ -28,7 +24,7 @@ class NotesViewModel(
     private val noteMapper: Mapper.Data<PagingData<NoteEntity>, PagingData<NoteDynamicUI>>,
     private val dispatchers: AppDispatchers,
     private val router: NoteListRouter
-) : ViewModel() {
+) : BaseViewModel(dispatchers = dispatchers) {
 
     private var deleteNotesJob: Job? = null
 
@@ -36,16 +32,10 @@ class NotesViewModel(
 
     val isCreateButtonVisible: MutableState<Boolean> = mutableStateOf(true)
 
-    val allNotes: StateFlow<PagingData<NoteDynamicUI>> = noteRepository.allNotes
-        .mapLatest(noteMapper::map)
-        .cachedIn(viewModelScope)
-        .flowOn(dispatchers.io)
-        .stateIn(
-            scope = viewModelScope,
-            started =
-            SharingStarted.Lazily,
-            initialValue = PagingData.empty()
-        )
+    val allNotes: StateFlow<PagingData<NoteDynamicUI>>
+        get() = noteRepository.allNotes
+            .mapLatest(noteMapper::map)
+            .pagingStateFlow
 
     fun onCreateButtonClicked() {
         selectedNotes.apply {
@@ -61,7 +51,9 @@ class NotesViewModel(
 
     private fun deleteNotesById(ids: List<Int>) {
         deleteNotesJob?.cancel()
-        deleteNotesJob = viewModelScope.launch(context = dispatchers.io) {
+        deleteNotesJob = viewModelScope.launch(
+            context = dispatchers.io + coroutineExceptionHandler
+        ) {
             noteRepository.deleteNotesById(ids)
         }
     }
