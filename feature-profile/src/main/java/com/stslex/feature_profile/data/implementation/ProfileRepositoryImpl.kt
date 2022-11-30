@@ -32,7 +32,7 @@ class ProfileRepositoryImpl(
     }
 
     override fun initFirebaseApp() {
-        firebaseInitializer.invoke()
+        firebaseInitializer()
     }
 
     override suspend fun downloadNotes(): ValueState<Unit> =

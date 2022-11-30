@@ -12,13 +12,7 @@ import androidx.compose.foundation.lazy.LazyRow
 import androidx.compose.material.icons.Icons
 import androidx.compose.material.icons.filled.Person
 import androidx.compose.material.icons.filled.Share
-import androidx.compose.material3.Button
-import androidx.compose.material3.Icon
-import androidx.compose.material3.IconButton
-import androidx.compose.material3.MaterialTheme
-import androidx.compose.material3.MediumTopAppBar
-import androidx.compose.material3.Text
-import androidx.compose.material3.TopAppBarScrollBehavior
+import androidx.compose.material3.*
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.getValue
 import androidx.compose.runtime.mutableStateOf
@@ -33,6 +27,7 @@ import com.stslex.core_ui.R
 import com.stslex.feature_note_list.ui.NotesViewModel
 import com.stslex.feature_note_list.ui.core.UIObjectsExt.clearSelection
 
+@OptIn(ExperimentalMaterial3Api::class)
 @Composable
 fun NoteMediumTopAppBar(
     modifier: Modifier = Modifier,
@@ -53,7 +48,7 @@ fun NoteMediumTopAppBar(
             AnimatedVisibility(
                 visible = viewModel.selectedNotes.isEmpty(),
             ) {
-                Row() {
+                Row {
                     IconButton(onClick = { profileButtonClicked = !profileButtonClicked }) {
                         Icon(
                             imageVector = Icons.Default.Person,
