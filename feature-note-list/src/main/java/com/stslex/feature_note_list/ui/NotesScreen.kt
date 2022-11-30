@@ -44,32 +44,38 @@ fun NotesScreen(
             ) {
                 NotesFab(
                     lazyListState = lazyListState,
-                    viewModel = viewModel
+                    selectedNotes = viewModel.selectedNotes,
+                    onCreateButtonClicked = viewModel::onCreateButtonClicked
                 )
             }
         },
         topBar = {
             NoteMediumTopAppBar(
                 scrollBehavior = scrollBehavior,
-                viewModel = viewModel
+                selectedNotes = viewModel.selectedNotes,
+                onProfileButtonClicked = viewModel::onProfileButtonClicked
             )
         },
         floatingActionButtonPosition = FabPosition.End
     ) { paddingValues ->
-
-        Surface(
-            modifier = Modifier.padding(paddingValues)
+        LazyColumn(
+            modifier = Modifier.padding(paddingValues),
+            state = lazyListState
         ) {
-            LazyColumn(
-                state = lazyListState
-            ) {
-                items(pagingItems, key = { it.id }) { item ->
-                    item?.let {
-                        NotePagingItem(
-                            note = item,
-                            viewModel = viewModel
-                        )
-                    }
+            items(
+                items = pagingItems,
+                key = { it.id }
+            ) { item ->
+                item?.let {
+                    NotePagingItem(
+                        note = item,
+                        onNoteClick = {
+                            viewModel.onSingleNoteClick(item)
+                        },
+                        onNoteLongClick = {
+                            viewModel.onNotesSelect(item)
+                        }
+                    )
                 }
             }
         }

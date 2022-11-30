@@ -44,7 +44,7 @@ class NotesViewModel(
                 clearSelection()
             } else {
                 isCreateButtonVisible.value = false
-                openSingleNote(-1)
+                router.openSingleNote(-1)
             }
         }
     }
@@ -58,15 +58,27 @@ class NotesViewModel(
         }
     }
 
-    val isUserAuth: Boolean
-        get() = noteRepository.isUserAuth
+    fun onSingleNoteClick(note: NoteDynamicUI) {
+        if (selectedNotes.isNotEmpty()) {
+            onNotesSelect(note)
+        } else {
+            isCreateButtonVisible.value = false
+            router.openSingleNote(note.id)
+        }
+    }
 
-    val openSingleNote: (noteId: Int) -> Unit
-        get() = router.openSingleNote
+    fun onNotesSelect(note: NoteDynamicUI) {
+        note.setSelect(!note.isSelect().value)
+        if (selectedNotes.contains(note)) {
+            selectedNotes.remove(note)
+        } else selectedNotes.add(note)
+    }
 
-    val openProfile: () -> Unit
-        get() = router.openProfile
-
-    val openAuthPhoneNumber: () -> Unit
-        get() = router.openAuthPhoneNumber
+    fun onProfileButtonClicked() {
+        if (noteRepository.isUserAuth) {
+            router.openProfile()
+        } else {
+            router.openAuthPhoneNumber()
+        }
+    }
 }

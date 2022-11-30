@@ -4,28 +4,30 @@ import androidx.compose.foundation.lazy.LazyListState
 import androidx.compose.material3.Icon
 import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
+import androidx.compose.runtime.snapshots.SnapshotStateList
 import androidx.compose.ui.platform.LocalContext
+import com.stslex.core_model.model.NoteDynamicUI
 import com.stslex.core_ui.components.fabs.ExtendableFloatingActionButton
-import com.stslex.feature_note_list.ui.NotesViewModel
 
 @Composable
 fun NotesFab(
     lazyListState: LazyListState,
-    viewModel: NotesViewModel
+    selectedNotes: SnapshotStateList<NoteDynamicUI>,
+    onCreateButtonClicked: () -> Unit,
 ) {
     ExtendableFloatingActionButton(
         extended = !lazyListState.isScrollInProgress,
         text = animatedButtonContent(
-            snapshotStateList = viewModel.selectedNotes,
+            snapshotStateList = selectedNotes,
             targetContent = fabTestField(NotesFabResources.Delete),
             content = fabTestField(NotesFabResources.Create)
         ),
         icon = animatedButtonContent(
-            snapshotStateList = viewModel.selectedNotes,
+            snapshotStateList = selectedNotes,
             targetContent = fabIcon(NotesFabResources.Delete),
             content = fabIcon(NotesFabResources.Create)
         ),
-        onClick = viewModel::onCreateButtonClicked
+        onClick = onCreateButtonClicked
     )
 }
 
