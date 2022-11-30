@@ -5,13 +5,8 @@ import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.lazy.LazyColumn
 import androidx.compose.foundation.lazy.LazyListState
 import androidx.compose.foundation.lazy.rememberLazyListState
-import androidx.compose.material3.ExperimentalMaterial3Api
-import androidx.compose.material3.FabPosition
-import androidx.compose.material3.Scaffold
-import androidx.compose.material3.Surface
+import androidx.compose.material3.*
 import androidx.compose.material3.TopAppBarDefaults.enterAlwaysScrollBehavior
-import androidx.compose.material3.TopAppBarScrollState
-import androidx.compose.material3.rememberTopAppBarScrollState
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.collectAsState
 import androidx.compose.ui.Modifier
@@ -31,44 +26,56 @@ fun NotesScreen(
     modifier: Modifier = Modifier,
     viewModel: NotesViewModel = getViewModel(),
     lazyListState: LazyListState = rememberLazyListState(),
-    scrollState: TopAppBarScrollState = rememberTopAppBarScrollState()
+    scrollState: TopAppBarState = rememberTopAppBarState()
 ) {
+    viewModel.isCreateButtonVisible.value = true
     val pagingItems = viewModel.allNotes.collectAsLazyPagingItems()
-    val scrollBehavior = enterAlwaysScrollBehavior(scrollState) { pagingItems.itemCount >= 6 }
+    val scrollBehavior = enterAlwaysScrollBehavior(
+        state = scrollState,
+        canScroll = { pagingItems.itemCount >= 6 }
+    )
     //TODO Add Error drawing
     val errorState = viewModel.errorState.collectAsState()
     Scaffold(
         modifier = modifier.nestedScroll(scrollBehavior.nestedScrollConnection),
         floatingActionButton = {
-            AnimatedVisibility(visible = viewModel.isCreateButtonVisible.value) {
+            AnimatedVisibility(
+                visible = viewModel.isCreateButtonVisible.value
+            ) {
                 NotesFab(
                     lazyListState = lazyListState,
-                    viewModel = viewModel
+                    selectedNotes = viewModel.selectedNotes,
+                    onCreateButtonClicked = viewModel::onCreateButtonClicked
                 )
             }
         },
         topBar = {
             NoteMediumTopAppBar(
                 scrollBehavior = scrollBehavior,
-                viewModel = viewModel
+                selectedNotes = viewModel.selectedNotes,
+                onProfileButtonClicked = viewModel::onProfileButtonClicked
             )
         },
         floatingActionButtonPosition = FabPosition.End
     ) { paddingValues ->
-
-        Surface(
-            modifier = Modifier.padding(paddingValues)
+        LazyColumn(
+            modifier = Modifier.padding(paddingValues),
+            state = lazyListState
         ) {
-            LazyColumn(
-                state = lazyListState
-            ) {
-                items(pagingItems, key = { it.id }) { item ->
-                    item?.let {
-                        NotePagingItem(
-                            note = item,
-                            viewModel = viewModel
-                        )
-                    }
+            items(
+                items = pagingItems,
+                key = { it.id }
+            ) { item ->
+                item?.let {
+                    NotePagingItem(
+                        note = item,
+                        onNoteClick = {
+                            viewModel.onSingleNoteClick(item)
+                        },
+                        onNoteLongClick = {
+                            viewModel.onNotesSelect(item)
+                        }
+                    )
                 }
             }
         }
@@ -76,6 +83,7 @@ fun NotesScreen(
 }
 
 
+@OptIn(ExperimentalMaterial3Api::class)
 @Preview
 @Composable
 fun NotesPreview() {

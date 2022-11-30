@@ -7,6 +7,7 @@ import androidx.compose.foundation.layout.windowInsetsPadding
 import androidx.compose.material.icons.Icons
 import androidx.compose.material.icons.filled.List
 import androidx.compose.material.icons.outlined.List
+import androidx.compose.material3.ExperimentalMaterial3Api
 import androidx.compose.ui.Modifier
 import androidx.navigation.NavGraphBuilder
 import com.google.accompanist.navigation.animation.composable
@@ -16,7 +17,7 @@ import com.stslex.core_navigation.destinations.NoteListDestination
 import com.stslex.feature_note_list.R
 import com.stslex.feature_note_list.ui.NotesScreen
 
-@OptIn(ExperimentalAnimationApi::class)
+@OptIn(ExperimentalAnimationApi::class, ExperimentalMaterial3Api::class)
 fun NavGraphBuilder.noteListGraph(
     nestedGraphs: NavGraphBuilder.() -> Unit
 ) {

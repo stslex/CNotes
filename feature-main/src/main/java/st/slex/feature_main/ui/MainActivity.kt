@@ -23,13 +23,11 @@ import st.slex.feature_main.ui.components.AppCreator
 
 class MainActivity : ComponentActivity() {
 
-    private val firebaseAppInitialisationUtil: FirebaseAppInitialisationUtil by inject()
     private val shortcutBuilder: ShortcutBuilder by inject()
     private val activityComponent: ActivityComponent by inject()
 
     @OptIn(ExperimentalMaterial3WindowSizeClassApi::class, ExperimentalAnimationApi::class)
     override fun onCreate(savedInstanceState: Bundle?) {
-        firebaseAppInitialisationUtil()
         shortcutBuilder()
         super.onCreate(savedInstanceState)
         WindowCompat.setDecorFitsSystemWindows(window, false)

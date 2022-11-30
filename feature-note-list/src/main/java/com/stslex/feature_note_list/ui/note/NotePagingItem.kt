@@ -1,54 +1,35 @@
 package com.stslex.feature_note_list.ui.note
 
-import androidx.compose.animation.animateColorAsState
-import androidx.compose.animation.core.LinearOutSlowInEasing
-import androidx.compose.animation.core.tween
 import androidx.compose.foundation.ExperimentalFoundationApi
 import androidx.compose.foundation.combinedClickable
 import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.padding
 import androidx.compose.material3.CardDefaults
-import androidx.compose.material3.ExperimentalMaterial3Api
 import androidx.compose.material3.MaterialTheme
 import androidx.compose.material3.OutlinedCard
 import androidx.compose.runtime.Composable
-import androidx.compose.runtime.MutableState
-import androidx.compose.runtime.snapshots.SnapshotStateList
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.unit.dp
 import com.stslex.core_model.model.NoteDynamicUI
-import com.stslex.feature_note_list.ui.NotesViewModel
+import com.stslex.feature_note_list.ui.utils.ColorExt.surfaceColor
 
-
-@OptIn(ExperimentalMaterial3Api::class, ExperimentalFoundationApi::class)
+@OptIn(ExperimentalFoundationApi::class)
 @Composable
 fun NotePagingItem(
     note: NoteDynamicUI,
-    viewModel: NotesViewModel
+    onNoteClick: () -> Unit,
+    onNoteLongClick: () -> Unit
 ) {
-    val colorUnselect = MaterialTheme.colorScheme.surface
-    val colorSelect = MaterialTheme.colorScheme.primaryContainer
-    val color = animateColorAsState(
-        targetValue = if (note.isSelect().value) colorSelect else colorUnselect,
-        animationSpec = tween(
-            durationMillis = 1000,
-            delayMillis = 50,
-            easing = LinearOutSlowInEasing
-        )
-    )
+    val color = note.surfaceColor()
     OutlinedCard(
         modifier = Modifier
             .combinedClickable(
-                onClick = noteItemClick(
-                    note = note,
-                    openSingleNote = viewModel.openSingleNote,
-                    selectedNotes = viewModel.selectedNotes,
-                    isButtonVisible = viewModel.isCreateButtonVisible
-                ),
-                onLongClick = noteItemLongClick(
-                    note = note,
-                    selectedNotes = viewModel.selectedNotes
-                )
+                onClick = {
+                    onNoteClick()
+                },
+                onLongClick = {
+                    onNoteLongClick()
+                }
             )
             .fillMaxWidth()
             .padding(16.dp),
@@ -58,37 +39,11 @@ fun NotePagingItem(
             containerColor = color.value,
             disabledContainerColor = color.value
         ),
-        content = { NoteItemContent(note = note) }
+        content = {
+            NoteItemContent(
+                modifier = Modifier,
+                note = note
+            )
+        }
     )
-}
-
-fun noteItemClick(
-    note: NoteDynamicUI,
-    selectedNotes: SnapshotStateList<NoteDynamicUI>,
-    openSingleNote: (Int) -> Unit,
-    isButtonVisible: MutableState<Boolean>
-): () -> Unit = {
-    if (selectedNotes.isNotEmpty()) {
-        selectItem(note, selectedNotes)
-    } else {
-        isButtonVisible.value = false
-        openSingleNote(note.id)
-    }
-}
-
-fun noteItemLongClick(
-    note: NoteDynamicUI,
-    selectedNotes: SnapshotStateList<NoteDynamicUI>
-): () -> Unit = {
-    selectItem(note, selectedNotes)
-}
-
-private fun selectItem(
-    note: NoteDynamicUI,
-    selectedNotes: SnapshotStateList<NoteDynamicUI>
-) {
-    note.setSelect(!note.isSelect().value)
-    if (selectedNotes.contains(note)) {
-        selectedNotes.remove(note)
-    } else selectedNotes.add(note)
 }
