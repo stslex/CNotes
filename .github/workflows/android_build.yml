@@ -14,7 +14,7 @@ concurrency:
 jobs:
   unitTest:
     name: Unit tests
-    runs-on: ubuntu-latest
+    runs-on: self-hosted
     timeout-minutes: 60
 
     steps:
@@ -43,6 +43,7 @@ jobs:
           key: ${{ runner.os }}-gradle-${{ hashFiles('**/*.gradle*', '**/gradle-wrapper.properties') }}
           restore-keys: |
             ${{ runner.os }}-gradle
+            
       - name: Set up Local properties keys
         run: |
           echo FIREBASE_API_KEY=\"${{ secrets.FIREBASE_API_KEY }}\" >> ./local.properties
@@ -50,7 +51,8 @@ jobs:
           echo FIREBASE_CLIENT_ID=\"${{ secrets.FIREBASE_CLIENT_ID }}\" >> ./local.properties
           echo FIREBASE_DATABASE_URL=\"${{ secrets.FIREBASE_DATABASE_URL }}\" >> ./local.properties
           echo FIREBASE_PROJECT_ID=\"${{ secrets.FIREBASE_PROJECT_ID }}\" >> ./local.properties
-
+          echo sdk.dir=~\/actions-runner\/_work\/android-sdk >> ./local.properties
+        
       - name: Run local tests
         run: ./gradlew testDebug --stacktrace
 
